@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html>
     <head>
-<meta charset="utf-8">
-<style>
+        <meta charset="utf-8">
 
-    html body {
-        padding: 0;
-    }
+        <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="//d3js.org/topojson.v1.min.js"></script>
+        <script src="vendor/leaflet.js"></script>
+        <style>
 
-    #map {
-        width: 800px;
-        height: 800px;
-    }
+            html body {
+                padding: 0;
+            }
 
-    .flex{
-        display: flex;
-    }
+            #map {
+                width: 800px;
+                height: 800px;
+            }
 
-    .wahlbezirk, .district {
-        opacity: 0.5;
-    }
+            .flex{
+                display: flex;
+            }
 
-    .wahlbezirk:hover, .district:hover
-    {
-        opacity: 1;
-    }
+            .wahlbezirk, .district {
+                opacity: 0.5;
+            }
 
-    #info-panel{
-        position: relative;
-        width: 250px;
-        height: 100%;
-        background-color: red;
-        right:-250px;
-        -webkit-transition: 1s;
-        -moz-transition: 1s;
-        -ms-transition: 1s;
-        -o-transition: 1s;
-        transition: 1s;
-    }
-    .isOpen{
-        right: 0px !important;;
-    }
-</style>
- <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
+            .wahlbezirk:hover, .district:hover
+            {
+                opacity: 1;
+            }
+
+            #info-panel{
+                position: relative;
+                width: 250px;
+                height: 100%;
+                background-color: red;
+                right:-250px;
+                -webkit-transition: 1s;
+                -moz-transition: 1s;
+                -ms-transition: 1s;
+                -o-transition: 1s;
+                transition: 1s;
+            }
+            .isOpen{
+                right: 0px !important;;
+            }
+        </style>
+        <link rel="stylesheet" href="vendor/leaflet.css"/>
     </head>
 <body>
 
@@ -55,10 +59,6 @@
         </div>
     </div>
 </div>
-
-<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
-<script src="//cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 
 <script>
 
@@ -106,7 +106,7 @@
 var KA_LAT = 49.00921;
 var KA_LNG = 8.403951;
 
-var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+var TILES_URL = '//a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
 var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
     .addLayer(new L.TileLayer(TILES_URL));
@@ -141,7 +141,7 @@ var stadtteile = g.append('g')
 
             var feature = group.selectAll("path")
                 .data(collection.features)
-                .enter().append("path")
+                .enter().append("path");
 
             map.on("viewreset", reset);
             reset();
