@@ -2,19 +2,38 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
         <script src="vendor/leaflet.js"></script>
+
+        <link rel="stylesheet" href="vendor/leaflet.css"/>
+        <link rel="stylesheet" href="vendor/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="src/tooltip/tooltip.css">
+
         <style>
 
-            html body {
+            html {
                 padding: 0;
+                overflow: hidden;
+            }
+
+            body {
+              padding: 50px 0 0 0;
             }
 
             #map {
-                width: 800px;
-                height: 800px;
+                width: 100%;
+                height: calc(100vh - 50px);
+            }
+
+            .map-column {
+              padding: 0;
+            }
+
+            .text-column {
+              padding: 15px;
             }
 
             .flex{
@@ -31,45 +50,58 @@
             }
 
             #info-panel{
-                position: relative;
+                position: absolute;
+                display: none;
                 width: 250px;
-                height: 100%;
+                height: 250px;
                 background-color: #1abc9c;
                 color: #fff;
                 padding: 20px;
-                right:-250px;
+                right: 20px;
+                bottom: 20px;
                 -webkit-transition: 1s;
                 -moz-transition: 1s;
                 -ms-transition: 1s;
                 -o-transition: 1s;
                 transition: 1s;
+                z-index: 100;
             }
-            .isOpen{
-                right: 0px !important;;
+            #info-panel.isOpen{
+                display: block;
             }
         </style>
-        <link rel="stylesheet" href="vendor/leaflet.css"/>
-        <link rel="stylesheet" href="vendor/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="src/tooltip/tooltip.css">
     </head>
 <body>
-
-<div class="flex">
-    <div id="map"></div>
-    <div id="info-panel">
-        <div class="flex" style="justify-content: space-between">
-            <span id="info-panel-district-name"> </span>
-            <span onclick="closeInfoPanel()">X</span>
-        </div>
+  <nav class="navbar fixed-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">Fixed top</a>
+  </nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3 text-column">
+      <p>Hallo Welt</p>
+    </div>
+    <div class="map-column col-9">
+      <div class="flex">
+          <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="info-panel">
+    <div class="flex" style="justify-content: space-between">
+        <span id="info-panel-district-name"> </span>
+        <span onclick="closeInfoPanel()">X</span>
     </div>
     <button onclick="color()">Color</button>
 </div>
 
-<div id="tool-tip"></div>
+<div id="tool-tip">
+    Wahlbezirksnummer: <span id="constituency-number"></span>
+</div>
 
-<script src="wahlkarte.js"></script>
+
 <script type="application/javascript" src="src/tooltip/tooltip.js"></script>
+<script src="wahlkarte.js"></script>
 
 </body>
 </html>

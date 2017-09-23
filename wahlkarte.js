@@ -17,13 +17,9 @@ var lastSelectetDistrictName = '',
  */
 function selectDistrict(featureData) {
 
-    // Setzen den aktullen wert in die Globalen Variabeln
-    lastSelectetDistrictName = featureData.properties.Stadtteilname;
-    lastSelectetDistrictId = featureData.properties.Stadtteilnummer;
-
+    var props = featureData.properties;
     // In das HTML schreiben
     infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
-    console.log('District wurde geklickt', featureData);
 
     infoPanel.classList.add('isOpen');
 } // end function
@@ -51,11 +47,12 @@ var svg = d3.select(map.getPanes().overlayPane).append("svg"),
 // SVG ID
 svg.attr("id", "karte")
 
+var stadtteile = g.append('g')
+    .classed('stadtteile', true);
+
 var wahlbezirke = g.append('g')
     .classed('wahlbezirke', true);
 
-var stadtteile = g.append('g')
-    .classed('stadtteile', true);
 
 /**
  * Adapter to use Leaflet's projection in D3.
@@ -76,7 +73,6 @@ function pathsFromGeoJSON(filename, group, setGeoJson, callback) {
     d3.json(filename, function (error, collection) {
         if (error) return callback(error, null);
 
-        console.log("COllection", collection)
         if (GEOJSON === null && setGeoJson){
             GEOJSON = collection
         }
@@ -91,7 +87,6 @@ function pathsFromGeoJSON(filename, group, setGeoJson, callback) {
 
         // Reposition the SVG to cover the features.
         function reset() {
-            console.log("Reset")
             var bounds = path.bounds(collection);
             var topLeft = bounds[0];
             var bottomRight = bounds[1];
@@ -111,7 +106,6 @@ function pathsFromGeoJSON(filename, group, setGeoJson, callback) {
 pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, paths) {
     paths
         .attr('class', 'district')
-        .on('click', selectDistrict)
         .style('fill', 'rgba(255, 255, 255, 0.7)')
         .style('stroke', '#000')
         .style('stroke-width', 2);
@@ -121,9 +115,12 @@ pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, true, function 
     paths
         .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
         .attr('class', 'wahlbezirk')
+        .on('mousemove', onMouseOverWahlbezirk)
+        .on('mouseleave', onMouseLeaveWahlbezirk)
         .style('fill', '#fff')
         .style('stroke', '#000')
-        .style('stroke-width', 1);
+        .style('stroke-width', 1)
+        .on('click', selectDistrict);
 });
 
 function color() {
@@ -131,7 +128,6 @@ function color() {
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = "yellow"
-            console.log(item)
         }
     } else {
         console.error("GEOJSON null!")
