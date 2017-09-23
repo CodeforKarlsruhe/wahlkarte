@@ -30,7 +30,10 @@
         position: relative;
         width: 250px;
         height: 100%;
-        background-color: red;
+        background-color: #1abc9c;
+        color: #fff;
+        padding: 20px;
+        border-radius: 5px;
         right:-250px;
         -webkit-transition: 1s;
         -moz-transition: 1s;
@@ -85,7 +88,7 @@
         lastSelectetDistrictId      = featureData.properties.Stadtteilnummer;
 
         // In das HTML schreiben
-        infoPanelDistrictName.innerHTML = lastSelectetDistrictName;
+        infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
         console.log('District wurde geklickt',featureData);
 
         infoPanel.classList.add('isOpen');
