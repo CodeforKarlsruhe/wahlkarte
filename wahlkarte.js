@@ -37,7 +37,7 @@ function closeInfoPanel() {
 
 
 var KA_LAT = 49.00921;
-var KA_LNG = 8.403951;
+var KA_LNG = 8.45003951;
 
 var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
@@ -115,4 +115,3 @@ pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, function(error,
         .style('stroke', '#000')
         .style('stroke-width', 1);
 });
-
