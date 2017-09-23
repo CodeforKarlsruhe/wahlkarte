@@ -1,16 +1,19 @@
 
 /**
- * Diese Funktion händelt die Funktion für das ToolTip
+ * Diese Datei händelt die Funktionen für das ToolTip
  */
 
 var toolTip = document.getElementById('tool-tip'),
     currentConstituencyNumber = null,
     constituencyNumberElement = document.getElementById('constituency-number');
 
+/**
+ * Listener der schaut wo der User gerade mit der Maus ist
+ */
 document.addEventListener('mousemove',function(event){
 
     // Position von der Maus dem Div übergeben
-    toolTip.style.top   = event.screenY+'px';
+    toolTip.style.top   = (event.screenY - toolTip.offsetHeight)+'px';
     toolTip.style.left  = (event.screenX + 25)+'px';
 },false);
 
@@ -20,7 +23,7 @@ document.addEventListener('mousemove',function(event){
  * @param data Daten vom Wahlbezik
  */
 function onMouseOverWahlbezirk(data){
-    console.log(data);
+
     constituencyNumberElement.innerHTML = currentConstituencyNumber = data.properties.Wahlbezirksnummer;
     toolTip.style.display = 'block';
 } // end function
