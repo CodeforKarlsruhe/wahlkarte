@@ -1,31 +1,80 @@
 <!DOCTYPE html>
 <html>
     <head>
-<meta charset="utf-8">
-<style>
+        <meta charset="utf-8">
 
-    html body {
-        padding: 0;
-    }
+        <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="https://d3js.org/topojson.v1.min.js"></script>
+        <style>
 
-    .region:hover
-    {
-        opacity: 0.5;
-    }
+            html body {
+                padding: 0;
+                height: 100%;
+                width: 100%;
+            }
+
+            .region:hover
+            {
+                opacity: 0.5;
+            }
 
 
-    .map-layer {
-  fill: #00f;
-  stroke: #0f0;
-}
+            .map-layer {
+              fill: #00f;
+              stroke: #0f0;
+            }
 
-</style>
+            .flex{
+                display: flex;
+            }
+
+            #info-panel{
+                position: relative;
+                width: 250px;
+                height: 100%;
+                background-color: red;
+            }
+
+        </style>
     </head>
 <body>
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://d3js.org/topojson.v1.min.js"></script>
+
+<div class="flex">
+    <div id="map-contener">
+
+    </div>
+    <div id="info-panel">
+        <span id="info-panel-district-name"> </span>
+    </div>
+</div>
 
 <script>
+
+    /**
+     * Globale Felder
+     */
+    var infoPanelDistrictName = document.getElementById('info-panel-district-name');
+
+    /**
+     * Globale Variabeln
+     */
+    var lastSelectetDistrictName    = '',
+        lastSelectetDistrictId      = null;
+
+    /**
+     * Wird aufgerufen wenn der User auf eine Region klickt
+     * @param featureData das aktuelle "feature"
+     */
+    function selectDistrict(featureData){
+
+        // Setzen den aktullen wert in die Globalen Variabeln
+        lastSelectetDistrictName    = featureData.properties.Stadtteilname;
+        lastSelectetDistrictId      = featureData.properties.Stadtteilnummer;
+
+        // In das HTML schreiben
+        infoPanelDistrictName.innerHTML = lastSelectetDistrictName;
+        console.log('District wurde geklickt',featureData);
+    } // end function
 
 d3.json("ka_stadtteile.geojson", function(error, wb) {
   if (error) return console.error(error);
@@ -37,6 +86,7 @@ d3.json("ka_stadtteile.geojson", function(error, wb) {
   .enter().append('path')
     .attr('d', path)
     .attr('class', 'region')
+    .on('click', selectDistrict)
     .style('fill', '#f00')
     .style('stroke', '#0f0')
     .style('stroke-width', 1);
@@ -46,7 +96,7 @@ d3.json("ka_stadtteile.geojson", function(error, wb) {
 var width = 900,
     height = 800;
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map-contener").append("svg")
     .attr("width", width)
     .attr("height", height);
 
