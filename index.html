@@ -68,6 +68,10 @@
             }
 
             .flex{
+                display: -webkit-box;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: -webkit-flex;
                 display: flex;
             }
 
@@ -189,7 +193,7 @@
   </div>
 </div>
 <div id="info-panel">
-    <div class="flex" style="justify-content: space-between">
+    <div class="flex" style="-webkit-justify-content: space-around;justify-content: space-between">
         <span id="info-panel-district-name"> </span>
         <span onclick="closeInfoPanel()">X</span>
     </div>
