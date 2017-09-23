@@ -1,6 +1,9 @@
 #tool-tip{
     width: 250px;
     height: 150px;
+    top: 0;
+    left: 0;
+    display: none;
     background-color: gray;
     position: absolute;
     z-index: 1;

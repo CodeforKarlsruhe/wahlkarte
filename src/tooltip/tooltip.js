@@ -5,16 +5,27 @@
 
 var toolTip = document.getElementById('tool-tip'),
     currentConstituencyNumber = null,
-    constituencyNumberElement = document.getElementById('constituency-number');
+    xpos = 0,
+    ypos = 0;
 
 /**
  * Listener der schaut wo der User gerade mit der Maus ist
  */
-document.addEventListener('mousemove',function(event){
+document.body.addEventListener('mousemove',function(mouseEvent){
+
+    // Prüfen ob der Brwoser das Objekt untersützt
+    if (mouseEvent) {
+        xpos = mouseEvent.clientX;
+        ypos = mouseEvent.clientY;
+    } else {
+        //IE
+        xpos = window.event.clientX;
+        ypos = window.event.clientY;
+    } // end if else
 
     // Position von der Maus dem Div übergeben
-    toolTip.style.top   = (event.screenY - toolTip.offsetHeight)+'px';
-    toolTip.style.left  = (event.screenX + 25)+'px';
+    toolTip.style.top   = (ypos - (toolTip.offsetHeight / 2))+'px';
+    toolTip.style.left  = (xpos + 25)+'px';
 },false);
 
 
@@ -24,7 +35,13 @@ document.addEventListener('mousemove',function(event){
  */
 function onMouseOverWahlbezirk(data){
 
-    constituencyNumberElement.innerHTML = currentConstituencyNumber = data.properties.Wahlbezirksnummer;
+    // Nur ausführen, wenn wirklich der Bezirk geändert wurde
+    if(currentConstituencyNumber !== data.properties.Wahlbezirksnummer){
+        currentConstituencyNumber = data.properties.Wahlbezirksnummer;
+
+        toolTip.innerHTML = 'Wahlbezirksnummer: '+currentConstituencyNumber+'<br>';
+    } // end if
+
     toolTip.style.display = 'block';
 } // end function
 
@@ -33,6 +50,6 @@ function onMouseOverWahlbezirk(data){
  */
 function onMouseLeaveWahlbezirk() {
 
-    constituencyNumberElement.innerHTML = 'Keine auswahl';
+    toolTip.innerHTML = 'Keine auswahl';
     toolTip.style.display = 'none';
 } // end function
