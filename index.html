@@ -18,12 +18,6 @@
                 opacity: 0.5;
             }
 
-
-            .map-layer {
-              fill: #00f;
-              stroke: #0f0;
-            }
-
             .flex{
                 display: flex;
             }
@@ -76,20 +70,35 @@
         console.log('District wurde geklickt',featureData);
     } // end function
 
+d3.json("bundestagswahl_2013_wahlbezirke.geojson", function(error, wb) {
+  if (error) return console.error(error);
+
+  var features = wb.features;
+
+  wahlbezirke.selectAll('path')
+    .data(features)
+    .enter().append('path')
+      .attr('d', path)
+      .attr('class', 'wahlbezirk')
+      .style('fill', '#f00')
+      .style('stroke', '#0f0')
+      .style('stroke-width', 1);
+});
+
 d3.json("ka_stadtteile.geojson", function(error, wb) {
   if (error) return console.error(error);
 
   var features = wb.features;
 
-  mapLayer.selectAll('path')
+  stadtteile.selectAll('path')
     .data(features)
-  .enter().append('path')
-    .attr('d', path)
-    .attr('class', 'region')
-    .on('click', selectDistrict)
-    .style('fill', '#f00')
-    .style('stroke', '#0f0')
-    .style('stroke-width', 1);
+    .enter().append('path')
+      .attr('d', path)
+      .attr('class', 'region')
+      .on('click', selectDistrict)
+      .style('fill', 'rgba(0, 128, 0, 0.7)')
+      .style('stroke', '#000')
+      .style('stroke-width', 2);
 });
 
 
@@ -102,8 +111,11 @@ var svg = d3.select("#map-contener").append("svg")
 
 var g = svg.append('g');
 
-var mapLayer = g.append('g')
-  .classed('map-layer', true);
+var wahlbezirke = g.append('g')
+  .classed('wahlbezirke', true);
+
+var stadtteile = g.append('g')
+  .classed('stadtteile', true);
 
 var projection = d3.geo.mercator()
   .center([8.41, 49.015])
@@ -116,4 +128,3 @@ var path = d3.geo.path()
 </script>
 </body>
 </html>
-
