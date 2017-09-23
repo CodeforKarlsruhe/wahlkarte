@@ -47,11 +47,12 @@ var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
+var stadtteile = g.append('g')
+    .classed('stadtteile', true);
+
 var wahlbezirke = g.append('g')
     .classed('wahlbezirke', true);
 
-var stadtteile = g.append('g')
-    .classed('stadtteile', true);
 
 /**
  * Adapter to use Leaflet's projection in D3.
