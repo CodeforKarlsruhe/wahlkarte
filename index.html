@@ -29,8 +29,17 @@
 
             #map {
                 width: 100%;
-                height: calc(100vh - 50px);
-                position: fixed;
+            }
+            @media (max-width: 991px) {
+                #map {
+                    height: 75vh;
+                }
+            }
+            @media (min-width: 992px) {
+                #map {
+                    height: calc(100vh - 50px);
+                    position: fixed;
+                }
             }
 
             .map-column {
@@ -48,6 +57,12 @@
 
             .carousel-item {
               padding: 20px 50px 30px 50px;
+            }
+            .carousel-control-next,
+            .carousel-control-prev {
+                /* Overwrite Bootstrap's standard 15% with the
+                   padding of .carousel-item */
+                width: 50px;
             }
 
             .wahl-carousel-control {
@@ -114,12 +129,10 @@
   </nav>
 <div class="container-fluid">
   <div class="row">
-    <div class="map-column col-9">
-      <div class="flex">
-          <div id="map"></div>
-      </div>
+    <div class="map-column col-12 col-lg-9">
+      <div id="map"></div>
     </div>
-    <div class="col-3 text-column">
+    <div class="text-column col-12 col-lg-3">
       <div id="szenarien-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
         <ol class="carousel-indicators">
           <li data-target="#szenarien-carousel" data-slide-to="0" class="active"></li>
@@ -128,7 +141,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <div class="wahl-carousel-caption d-none d-md-block">
+            <div class="wahl-carousel-caption d-block">
               <h3>Allgemeine Wahlergebnisse</h3>
               <h6>Hier siehst du etwas über die allgemeinen Wahlergebnisse</h6>
               <button onclick="color()">Karte faerben</button>
@@ -138,7 +151,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <div class="wahl-carousel-caption d-none d-md-block">
+            <div class="wahl-carousel-caption d-block">
               <h3>Allgemeine Wahlergebnisse B</h3>
               <h6>Hier siehst du etwas über die allgemeinen Wahlergebnisse</h6>
               <p>
