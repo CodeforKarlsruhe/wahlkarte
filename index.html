@@ -7,15 +7,14 @@
         <script src="https://d3js.org/topojson.v1.min.js"></script>
         <style>
 
-            html, body {
+            html body {
                 padding: 0;
-                margin: 0;
                 height: 100%;
                 width: 100%;
-                overflow: hidden;
             }
 
-            .district:hover {
+            .region:hover
+            {
                 opacity: 0.5;
             }
 
@@ -23,27 +22,11 @@
                 display: flex;
             }
 
-            #map-container{
-                width: 100%;
-            }
-
             #info-panel{
                 position: relative;
                 width: 250px;
                 height: 100%;
                 background-color: red;
-
-                right:-250px;
-
-                -webkit-transition: 1s;
-                -moz-transition: 1s;
-                -ms-transition: 1s;
-                -o-transition: 1s;
-                transition: 1s;
-            }
-
-            .isOpen{
-                right: 0px !important;;
             }
 
         </style>
@@ -51,14 +34,11 @@
 <body>
 
 <div class="flex">
-    <div id="map-container">
-        <!-- hier wird die SVG MAP generiert -->
+    <div id="map-contener">
+
     </div>
     <div id="info-panel">
-        <div class="flex" style="justify-content: space-between">
-            <span id="info-panel-district-name"> </span>
-            <span onclick="closeInfoPanel()">X</span>
-        </div>
+        <span id="info-panel-district-name"> </span>
     </div>
 </div>
 
@@ -67,8 +47,7 @@
     /**
      * Globale Felder
      */
-    var infoPanelDistrictName = document.getElementById('info-panel-district-name'),
-        infoPanel = document.getElementById('info-panel');
+    var infoPanelDistrictName = document.getElementById('info-panel-district-name');
 
     /**
      * Globale Variabeln
@@ -89,16 +68,7 @@
         // In das HTML schreiben
         infoPanelDistrictName.innerHTML = lastSelectetDistrictName;
         console.log('District wurde geklickt',featureData);
-
-        infoPanel.classList.add('isOpen');
     } // end function
-
-    /**
-     * Schließt das Infopanel
-     */
-    function closeInfoPanel() {
-        infoPanel.classList.remove('isOpen');
-    }
 
 d3.json("bundestagswahl_2013_wahlbezirke.geojson", function(error, wb) {
   if (error) return console.error(error);
@@ -110,8 +80,8 @@ d3.json("bundestagswahl_2013_wahlbezirke.geojson", function(error, wb) {
     .enter().append('path')
       .attr('d', path)
       .attr('class', 'wahlbezirk')
-      .style('fill', '#f00')
-      .style('stroke', '#0f0')
+      .style('fill', '#fff')
+      .style('stroke', '#000')
       .style('stroke-width', 1);
 });
 
@@ -124,9 +94,9 @@ d3.json("ka_stadtteile.geojson", function(error, wb) {
     .data(features)
     .enter().append('path')
       .attr('d', path)
-      .attr('class', 'district')
+      .attr('class', 'region')
       .on('click', selectDistrict)
-      .style('fill', 'rgba(0, 128, 0, 0.7)')
+      .style('fill', 'rgba(255, 255, 255, 0.7)')
       .style('stroke', '#000')
       .style('stroke-width', 2);
 });
@@ -135,7 +105,7 @@ d3.json("ka_stadtteile.geojson", function(error, wb) {
 var width = 900,
     height = 800;
 
-var svg = d3.select("#map-container").append("svg")
+var svg = d3.select("#map-contener").append("svg")
     .attr("width", width)
     .attr("height", height);
 
