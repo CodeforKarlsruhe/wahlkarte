@@ -35,6 +35,9 @@ function closeInfoPanel() {
 var KA_LAT = 49.00921;
 var KA_LNG = 8.403951;
 var GEOJSON = null;
+var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tierschutzpartei","ÖDP","PBC","Volksabstimmung","MLPD ","BüSo","AfD","BIG","pro Deutschland","FREIE WÄHLER","PARTEI DER VERNUNFT","RENTNER"];
+
+const PartyColors = ["000","f40502","feed01","42a62a","8b1b62","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","009de0","ffffff","ffffff","ffffff","ffffff","ffffff"];
 
 var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
@@ -111,7 +114,8 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, pat
         .style('stroke-width', 2);
 });
 
-pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
+// pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
+pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
     paths
         .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
         .attr('class', 'wahlbezirk')
@@ -127,9 +131,42 @@ function color() {
     var elemSvg = document.getElementById("karte")
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = "yellow"
+            var win = maxPartie(item)
+            var color = winnerColor(win[0])
+            // console.log("Data", item)
+            // console.log("Party ", win)
+            if (color !== undefined){
+                elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
+            }
         }
     } else {
         console.error("GEOJSON null!")
+    }
+}
+
+function winnerColor(partyName){
+    var index = Party.indexOf(partyName)
+    if (index >= 0 && PartyColors.length >= index){
+        return PartyColors[index]
+    } else {
+        console.error("Party not found! ", partyName)
+    }
+}
+
+function maxPartie(data){
+    if (data !== 'undefined'){
+        var max = 0;
+        var partyName = null;
+        Object.keys(data.properties).forEach(function(k, v){
+            var value = data.properties[k]
+           if (max < value && Party.indexOf(k) >= 0) {
+               max = value;
+               partyName = k;
+           }
+        })
+
+        return [partyName, max]
+    } else {
+        console.error("No data")
     }
 }
