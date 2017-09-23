@@ -15,7 +15,7 @@
                 overflow: hidden;
             }
 
-            .district:hover {
+            .wahlbezirk:hover, .district:hover {
                 opacity: 0.5;
             }
 
@@ -62,7 +62,7 @@
     </div>
 </div>
 
-<script>
+<script type="application/javascript">
 
     /**
      * Globale Felder
@@ -98,7 +98,7 @@
      */
     function closeInfoPanel() {
         infoPanel.classList.remove('isOpen');
-    }
+    } // end function
 
 d3.json("bundestagswahl_2013_wahlbezirke.geojson", function(error, wb) {
   if (error) return console.error(error);
