@@ -102,6 +102,8 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile, function(error, paths) {
 pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, function(error, paths) {
     paths
         .attr('class', 'wahlbezirk')
+        .on('mousemove', onMouseOverWahlbezirk)
+        .on('mouseleave', onMouseLeaveWahlbezirk)
         .style('fill', '#fff')
         .style('stroke', '#000')
         .style('stroke-width', 1)
