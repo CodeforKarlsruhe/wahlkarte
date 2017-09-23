@@ -59,7 +59,8 @@ function onMouseOverWahlbezirk(data){
             } // end if
         });
 
-        template += '</div>';
+        template += '</div>' +
+            'Summe Stimme: '+summe;
 
         // HTML hinzufügen
         toolTip.innerHTML = template;
