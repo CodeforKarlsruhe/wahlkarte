@@ -6,24 +6,15 @@ var infoPanelDistrictName = document.getElementById('info-panel-district-name'),
     infoPanel = document.getElementById('info-panel');
 
 /**
- * Globale Variabeln
- */
-var lastSelectetDistrictName    = '',
-    lastSelectetDistrictId      = null;
-
-/**
  * Wird aufgerufen wenn der User auf eine Region klickt
  * @param featureData das aktuelle "feature"
  */
-function selectDistrict(featureData){
+function selectDistrict(feature){
 
-    // Setzen den aktullen wert in die Globalen Variabeln
-    lastSelectetDistrictName    = featureData.properties.Stadtteilname;
-    lastSelectetDistrictId      = featureData.properties.Stadtteilnummer;
+    var props = feature.properties;
 
     // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
-    console.log('District wurde geklickt',featureData);
+    infoPanelDistrictName.innerHTML = "Wahlbezirk: " + props.Wahlbezirksnummer;
 
     infoPanel.classList.add('isOpen');
 } // end function
@@ -103,7 +94,6 @@ function pathsFromGeoJSON(filename, group, callback) {
 pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile, function(error, paths) {
     paths
         .attr('class', 'district')
-        .on('click', selectDistrict)
         .style('fill', 'rgba(255, 255, 255, 0.7)')
         .style('stroke', '#000')
         .style('stroke-width', 2);
@@ -114,6 +104,7 @@ pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, function(error,
         .attr('class', 'wahlbezirk')
         .style('fill', '#fff')
         .style('stroke', '#000')
-        .style('stroke-width', 1);
+        .style('stroke-width', 1)
+        .on('click', selectDistrict);
 });
 
