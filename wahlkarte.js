@@ -8,22 +8,22 @@ var infoPanelDistrictName = document.getElementById('info-panel-district-name'),
 /**
  * Globale Variabeln
  */
-var lastSelectetDistrictName    = '',
-    lastSelectetDistrictId      = null;
+var lastSelectetDistrictName = '',
+    lastSelectetDistrictId = null;
 
 /**
  * Wird aufgerufen wenn der User auf eine Region klickt
  * @param featureData das aktuelle "feature"
  */
-function selectDistrict(featureData){
+function selectDistrict(featureData) {
 
     // Setzen den aktullen wert in die Globalen Variabeln
-    lastSelectetDistrictName    = featureData.properties.Stadtteilname;
-    lastSelectetDistrictId      = featureData.properties.Stadtteilnummer;
+    lastSelectetDistrictName = featureData.properties.Stadtteilname;
+    lastSelectetDistrictId = featureData.properties.Stadtteilnummer;
 
     // In das HTML schreiben
     infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
-    console.log('District wurde geklickt',featureData);
+    console.log('District wurde geklickt', featureData);
 
     infoPanel.classList.add('isOpen');
 } // end function
@@ -38,14 +38,18 @@ function closeInfoPanel() {
 
 var KA_LAT = 49.00921;
 var KA_LNG = 8.403951;
+var GEOJSON = null;
 
 var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
-var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
+var map = new L.Map("map", { center: [KA_LAT, KA_LNG], zoom: 12 })
     .addLayer(new L.TileLayer(TILES_URL));
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+// SVG ID
+svg.attr("id", "karte")
 
 var wahlbezirke = g.append('g')
     .classed('wahlbezirke', true);
@@ -60,18 +64,22 @@ function projectPoint(x, y) {
     var point = map.latLngToLayerPoint(new L.LatLng(y, x));
     this.stream.point(point.x, point.y);
 }
-var transform = d3.geo.transform({point: projectPoint}),
+var transform = d3.geo.transform({ point: projectPoint }),
     path = d3.geo.path().projection(transform);
 
 
 /**
  * Create SVG paths from a GeoJSON file.
  */
-function pathsFromGeoJSON(filename, group, callback) {
+function pathsFromGeoJSON(filename, group, setGeoJson, callback) {
 
-    d3.json(filename, function(error, collection) {
+    d3.json(filename, function (error, collection) {
         if (error) return callback(error, null);
 
+        console.log("COllection", collection)
+        if (GEOJSON === null && setGeoJson){
+            GEOJSON = collection
+        }
         var feature = group.selectAll("path")
             .data(collection.features)
             .enter().append("path");
@@ -83,6 +91,7 @@ function pathsFromGeoJSON(filename, group, callback) {
 
         // Reposition the SVG to cover the features.
         function reset() {
+            console.log("Reset")
             var bounds = path.bounds(collection);
             var topLeft = bounds[0];
             var bottomRight = bounds[1];
@@ -99,7 +108,7 @@ function pathsFromGeoJSON(filename, group, callback) {
     });
 }
 
-pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile, function(error, paths) {
+pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, paths) {
     paths
         .attr('class', 'district')
         .on('click', selectDistrict)
@@ -108,11 +117,23 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile, function(error, paths) {
         .style('stroke-width', 2);
 });
 
-pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, function(error, paths) {
+pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
     paths
+        .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
         .attr('class', 'wahlbezirk')
         .style('fill', '#fff')
         .style('stroke', '#000')
         .style('stroke-width', 1);
 });
 
+function color() {
+    var elemSvg = document.getElementById("karte")
+    if (GEOJSON !== null){
+        for(var item of GEOJSON.features){
+            elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = "yellow"
+            console.log(item)
+        }
+    } else {
+        console.error("GEOJSON null!")
+    }
+}
