@@ -19,7 +19,9 @@ function selectDistrict(featureData) {
 
     var props = featureData.properties;
     // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
+    infoPanelDistrictName.innerHTML = "Stadtteil: " + props.Stadtteilname + "\n" +
+    "Stadtteilnummer: " + props.Stadtteilnummer;
+    ;
 
     infoPanel.classList.add('isOpen');
 } // end function
