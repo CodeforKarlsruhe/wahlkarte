@@ -47,6 +47,7 @@
             }
         </style>
         <link rel="stylesheet" href="vendor/leaflet.css"/>
+        <link rel="stylesheet" href="vendor/bootstrap-4.0.0-beta/dist/css/bootstrap.min.css">
     </head>
 <body>
 
@@ -106,7 +107,7 @@
 var KA_LAT = 49.00921;
 var KA_LNG = 8.403951;
 
-var TILES_URL = '//a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
 var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
     .addLayer(new L.TileLayer(TILES_URL));
