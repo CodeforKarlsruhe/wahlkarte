@@ -38,8 +38,12 @@ var GEOJSON = null;
 
 var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
-var map = new L.Map("map", { center: [KA_LAT, KA_LNG], zoom: 12 })
-    .addLayer(new L.TileLayer(TILES_URL));
+var MAP_ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">' +
+                      'OpenStreetMap</a> contributors | Tiles &copy; ' +
+                      '<a href="http://carto.com/attribution">Carto</a>';
+
+var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
+    .addLayer(new L.TileLayer(TILES_URL, {attribution: MAP_ATTRIBUTION}));
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
