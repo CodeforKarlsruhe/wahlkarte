@@ -34,7 +34,9 @@
                 position: relative;
                 width: 250px;
                 height: 100%;
-                background-color: red;
+                background-color: #1abc9c;
+                color: #fff;
+                padding: 20px;
                 right:-250px;
                 -webkit-transition: 1s;
                 -moz-transition: 1s;
@@ -86,7 +88,7 @@
         lastSelectetDistrictId      = featureData.properties.Stadtteilnummer;
 
         // In das HTML schreiben
-        infoPanelDistrictName.innerHTML = lastSelectetDistrictName;
+        infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
         console.log('District wurde geklickt',featureData);
 
         infoPanel.classList.add('isOpen');
@@ -171,16 +173,16 @@ var stadtteile = g.append('g')
         paths
             .attr('class', 'district')
             .on('click', selectDistrict)
-            .style('fill', 'rgba(0, 128, 0, 0.7)')
+            .style('fill', 'rgba(255, 255, 255, 0.7)')
             .style('stroke', '#000')
             .style('stroke-width', 2);
     });
 
-    pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, function(error, paths) {
+    pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, function(error, paths) {
         paths
             .attr('class', 'wahlbezirk')
-            .style('fill', '#f00')
-            .style('stroke', '#0f0')
+            .style('fill', '#fff')
+            .style('stroke', '#000')
             .style('stroke-width', 1);
     });
 
@@ -188,4 +190,3 @@ var stadtteile = g.append('g')
 </script>
 </body>
 </html>
-
