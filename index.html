@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta charset="utf-8">
+<style>
+
+.map-layer {
+  fill: #00f;
+  stroke: #0f0;
+}
+
+</style>
+    </head>
+<body>
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+
+<script>
+
+d3.json("ka_stadtteile.geojson", function(error, wb) {
+  if (error) return console.error(error);
+
+  var features = wb.features;
+
+  mapLayer.selectAll('path')
+    .data(features)
+  .enter().append('path')
+    .attr('d', path)
+    .style('fill', '#f00')
+    .style('stroke', '#0f0')
+    .style('stroke-width', 1);
+});
+
+
+var width = 900,
+    height = 800;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var g = svg.append('g');
+
+var mapLayer = g.append('g')
+  .classed('map-layer', true);
+
+var projection = d3.geo.mercator()
+  .center([8.41, 49.015])
+  .translate([width / 2, height / 2])
+  .scale(170000);
+
+var path = d3.geo.path()
+  .projection(projection);
+
+</script>
+</body>
+</html>
+
