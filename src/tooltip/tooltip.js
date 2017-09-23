@@ -74,6 +74,7 @@ function onMouseOverWahlbezirk(data){
  */
 function onMouseLeaveWahlbezirk() {
 
+    currentConstituencyNumber = null;
     toolTip.innerHTML = 'Keine auswahl';
     toolTip.style.display = 'none';
 } // end function
