@@ -37,9 +37,32 @@ function onMouseOverWahlbezirk(data){
 
     // Nur ausführen, wenn wirklich der Bezirk geändert wurde
     if(currentConstituencyNumber !== data.properties.Wahlbezirksnummer){
+
         currentConstituencyNumber = data.properties.Wahlbezirksnummer;
 
-        toolTip.innerHTML = 'Wahlbezirksnummer: '+currentConstituencyNumber+'<br>';
+        var template = 'Wahlbezirksnummer: '+currentConstituencyNumber+' <div class="flex">';
+        var summe = 0;
+        // Stimme von diesem Wahlkreis zusammen rechnen
+        Object.keys(data.properties).forEach(function(k, v){
+
+            var index = Party.indexOf(k);
+            if (index >= 0) {
+                summe += data.properties[k];
+            } // end if
+        });
+
+        // Verhältnis ermitteln
+        Object.keys(data.properties).forEach(function(k, v){
+            var index = Party.indexOf(k);
+            if (index >= 0 && v > 0) {
+                template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
+            } // end if
+        });
+
+        template += '</div>';
+
+        // HTML hinzufügen
+        toolTip.innerHTML = template;
     } // end if
 
     toolTip.style.display = 'block';
