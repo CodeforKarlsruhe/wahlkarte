@@ -33,7 +33,8 @@ function closeInfoPanel() {
 
 
 var KA_LAT = 49.00921;
-var KA_LNG = 8.403951;
+var KA_LNG = 8.45003951;
+
 var GEOJSON = null;
 var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tierschutzpartei","ÖDP","PBC","Volksabstimmung","MLPD ","BüSo","AfD","BIG","pro Deutschland","FREIE WÄHLER","PARTEI DER VERNUNFT","RENTNER"];
 
