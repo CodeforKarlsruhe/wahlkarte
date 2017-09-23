@@ -5,16 +5,29 @@
 
 var toolTip = document.getElementById('tool-tip'),
     currentConstituencyNumber = null,
-    constituencyNumberElement = document.getElementById('constituency-number');
+    constituencyNumberElement = document.getElementById('constituency-number'),
+    xpos = 0,
+    ypos = 0;
 
 /**
  * Listener der schaut wo der User gerade mit der Maus ist
  */
-document.addEventListener('mousemove',function(event){
+document.body.addEventListener('mousemove',function(mouseEvent){
+
+    // Prüfen ob der Brwoser das Objekt untersützt
+    if (mouseEvent) {
+        //FireFox
+        xpos = mouseEvent.clientX;
+        ypos = mouseEvent.clientY;
+    } else {
+        //IE
+        xpos = window.event.clientX;
+        ypos = window.event.clientY;
+    } // end if else
 
     // Position von der Maus dem Div übergeben
-    toolTip.style.top   = (event.screenY - toolTip.offsetHeight)+'px';
-    toolTip.style.left  = (event.screenX + 25)+'px';
+    toolTip.style.top   = (ypos - (toolTip.offsetHeight / 2))+'px';
+    toolTip.style.left  = (xpos + 25)+'px';
 },false);
 
 
