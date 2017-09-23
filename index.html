@@ -8,62 +8,90 @@
         padding: 0;
     }
 
-    .region:hover
-    {
+    #map {
+        width: 800px;
+        height: 800px;
+    }
+
+    .region {
         opacity: 0.5;
     }
 
-
-    .map-layer {
-  fill: #00f;
-  stroke: #0f0;
-}
+    .region:hover
+    {
+        opacity: 1;
+    }
 
 </style>
+ <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
     </head>
 <body>
+
+<div id="map"></div>
+
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
 
 <script>
 
-d3.json("ka_stadtteile.geojson", function(error, wb) {
-  if (error) return console.error(error);
+// Adapted from https://bost.ocks.org/mike/leaflet/
 
-  var features = wb.features;
+var KA_LAT = 49.00921;
+var KA_LNG = 8.403951;
 
-  mapLayer.selectAll('path')
-    .data(features)
-  .enter().append('path')
-    .attr('d', path)
-    .attr('class', 'region')
-    .style('fill', '#f00')
-    .style('stroke', '#0f0')
-    .style('stroke-width', 1);
+var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+
+var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
+    .addLayer(new L.TileLayer(TILES_URL));
+
+var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+    g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+d3.json("ka_stadtteile.geojson", function(error, collection) {
+  if (error) throw error;
+
+  var transform = d3.geo.transform({point: projectPoint}),
+      path = d3.geo.path().projection(transform);
+
+  var feature = g.selectAll("path")
+      .data(collection.features)
+    .enter().append("path")
+      .attr("class", "region")
+      .style("fill", "#f00")
+      .style("stroke", "#0f0")
+      .style("stroke-width", 1);
+
+  map.on("viewreset", reset);
+  reset();
+
+  // Reposition the SVG to cover the features.
+  function reset() {
+    var bounds = path.bounds(collection);
+    var topLeft = bounds[0];
+    var bottomRight = bounds[1];
+
+    svg.attr("width", bottomRight[0] - topLeft[0])
+       .attr("height", bottomRight[1] - topLeft[1])
+       .style("left", topLeft[0] + "px")
+       .style("top", topLeft[1] + "px");
+
+    g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+    feature.attr("d", path);
+  }
+
+  // Use Leaflet to implement a D3 geometric transformation.
+  function projectPoint(x, y) {
+    var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+    this.stream.point(point.x, point.y);
+  }
 });
 
-
-var width = 900,
-    height = 800;
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-var g = svg.append('g');
-
-var mapLayer = g.append('g')
-  .classed('map-layer', true);
-
-var projection = d3.geo.mercator()
-  .center([8.41, 49.015])
-  .translate([width / 2, height / 2])
-  .scale(170000);
-
-var path = d3.geo.path()
-  .projection(projection);
-
 </script>
+
+
+
 </body>
 </html>
 
