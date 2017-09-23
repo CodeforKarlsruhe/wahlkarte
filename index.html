@@ -4,7 +4,17 @@
 <meta charset="utf-8">
 <style>
 
-.map-layer {
+    html body {
+        padding: 0;
+    }
+
+    .region:hover
+    {
+        opacity: 0.5;
+    }
+
+
+    .map-layer {
   fill: #00f;
   stroke: #0f0;
 }
@@ -26,6 +36,7 @@ d3.json("ka_stadtteile.geojson", function(error, wb) {
     .data(features)
   .enter().append('path')
     .attr('d', path)
+    .attr('class', 'region')
     .style('fill', '#f00')
     .style('stroke', '#0f0')
     .style('stroke-width', 1);
