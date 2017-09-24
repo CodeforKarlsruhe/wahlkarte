@@ -42,6 +42,74 @@ var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tiers
 
 const PartyColors = ["000","f40502","feed01","42a62a","8b1b62","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","009de0","ffffff","ffffff","ffffff","ffffff","ffffff"];
 
+
+const PARTIES = {
+    CDU: {
+        "name": "CDU",
+        "color": "#000",
+    },
+    SPD:{
+        "color": "#f40502",
+        "name": "SPD"
+    },
+    
+    AFD:{
+        "color": "#f40502",
+        "name": "AfD"
+    },
+    FDP:{
+        "color": "#feed01",
+        "name": "FDP"
+    },
+    GRUENE:{
+        "color": "#42a62a",
+        "name": "Grüne"
+    },
+    LINKE:{
+        "color": "#8b1b62",
+        "name": "Die Linke"
+    },
+    PIRATEN:{
+        "color": "#ff8800",
+        "name": "Piraten"
+    },
+    NPD:{
+        "name": "NPD"
+    },
+    REP:{
+        "name": "Die Republikaner"
+    },
+    TIERSCHUTZPARTEI:{
+        "name": "Tierschutzpartei"
+    },
+    OEDP:{
+        "name": "ÖDP"
+    },
+    VOLKSABSTIMMUNG:{
+        "name": "Volksabstimmung"
+    },
+    MLPD:{
+        "name": "MLPD"
+    },
+    BUESO:{
+        "name": "BüSo"
+    },
+    BIG:{
+        "name": "BIG"
+    },
+    PRODEUTSCHLAND:{
+        "name": "pro Deutschland"
+    },
+    FREIEWAEHLER:{
+        "name": "Freie Wähler"
+    },
+    PARTEIDERVERNUNFT:{
+        "name": "Partei der Vernunft"
+    },
+    RENTNER:{
+        "name": "Rentner"
+    }
+}
 var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
 
 var MAP_ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">' +
@@ -174,3 +242,23 @@ function maxPartie(data){
         console.error("No data")
     }
 }
+var erststimmen = [
+    {
+        "firstName": "Ingo",
+        "lastName": "Muster",
+        "party": "CDU",
+        "votes": 123
+    }
+]
+
+var partie= [{
+    "name": "CDU",
+    "votes": 1234,
+    "color": "#890123"
+},{
+    "name": "FDP",
+    "votes": 1234,
+    "color": "#123"
+}
+
+]
