@@ -117,6 +117,8 @@ function closeInfoPanel() {
 
     if (lastSelectedConstituencyNumber) {
         elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.stroke = '#000';
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.strokeWidth = '1px';
     }
 
     lastSelectetDistrictId = null;
