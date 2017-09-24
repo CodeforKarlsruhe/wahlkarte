@@ -17,9 +17,30 @@ var lastSelectetDistrictName = '',
 function selectDistrict(featureData) {
 
     var props = featureData.properties;
-    // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = "Stadtteil: " + props.Stadtteilname + "\n" +
-        "Stadtteilnummer: " + props.Stadtteilnummer;
+
+    // Karte Reference setzten wenn nicht vorhanden
+    if(elemSvg === null){
+        getSVGMap();
+    } // end if
+
+    if(lastSelectetDistrictId !== props.Stadtteilnummer){
+
+        if(lastSelectetDistrictId !== null) {
+            // Letzer Stadtteil wieder zurück setzen
+            elemSvg.getElementById(lastSelectetDistrictId).style.fill = '#fff';
+        } // end if
+
+        // Neuer Stadtteil färben
+        elemSvg.getElementById(props.Stadtteilnummer).style.fill = '#000';
+
+        // letzte ausgewählter Stadtteil speichern
+        lastSelectetDistrictId = props.Stadtteilnummer;
+
+        // In das HTML schreiben
+        infoPanelDistrictName.innerHTML = "Stadtteil: " + props.Stadtteilname + "\n" +
+            "Stadtteilnummer: " + props.Stadtteilnummer;
+
+    } // end if
 
     infoPanel.classList.add('isOpen');
 } // end function
