@@ -35,3 +35,6 @@
 .extended-tooltip-close-button:hover {
     color: rgba(255,255,255,1);
 }
+
+.nav-pills .nav-link {color: #fff;}
+.nav-pills .nav-link.active {background-color: #fff; color: #000;}
