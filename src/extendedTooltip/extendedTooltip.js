@@ -108,6 +108,10 @@ function closeInfoPanel() {
         elemSvg.getElementById(lastSelectetDistrictId).style.fill = '#fff';
     } // end if
 
+    if (lastSelectedConstituencyNumber) {
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
+    }
+
     lastSelectetDistrictId = null;
     infoPanel.classList.remove('isOpen');
 } // end function
