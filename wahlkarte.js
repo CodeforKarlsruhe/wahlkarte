@@ -1,39 +1,3 @@
-
-/**
- * Globale Felder
- */
-var infoPanelDistrictName = document.getElementById('info-panel-district-name'),
-    infoPanel = document.getElementById('info-panel');
-
-/**
- * Globale Variabeln
- */
-var lastSelectetDistrictName = '',
-    lastSelectetDistrictId = null;
-
-/**
- * Wird aufgerufen wenn der User auf eine Region klickt
- * @param featureData das aktuelle "feature"
- */
-function selectDistrict(featureData) {
-
-    var props = featureData.properties;
-    // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = "Stadtteil: " + props.Stadtteilname + "\n" +
-    "Stadtteilnummer: " + props.Stadtteilnummer;
-    ;
-
-    infoPanel.classList.add('isOpen');
-} // end function
-
-/**
- * Schließt das Infopanel
- */
-function closeInfoPanel() {
-    infoPanel.classList.remove('isOpen');
-}
-
-
 var KA_LAT = 49.00921;
 var KA_LNG = 8.45003951;
 
