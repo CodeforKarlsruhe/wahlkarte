@@ -1,13 +1,13 @@
 /**
  * Globale Felder
  */
-var infoPanelDistrictName = document.getElementById('extended-tooltip-district-name'),
-    infoPanel = document.getElementById('extended-tooltip'),
-    extendedTooltipDetailDistrictInfo = document.getElementById('extended-tooltip-detail-district-info'),
-    extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme'),
-    extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme'),
-    lastSelectedConstituencyNumber = null,
-    lastSelectetDistrictColor = '';
+var infoPanelDistrictName;
+var infoPanel;
+var extendedTooltipDetailDistrictInfo;
+var extendedTooltipDetailDistrictInfoErststimme;
+var extendedTooltipDetailDistrictInfoZweitstimme;
+var lastSelectedConstituencyNumber = null;
+var lastSelectetDistrictColor = '';
 
 /**
  * Globale Variabeln

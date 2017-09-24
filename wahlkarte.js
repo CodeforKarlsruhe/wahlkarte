@@ -212,6 +212,13 @@ $(function() {
     },false);
 
 
+    infoPanelDistrictName = document.getElementById('extended-tooltip-district-name');
+    infoPanel = document.getElementById('extended-tooltip');
+    extendedTooltipDetailDistrictInfo = document.getElementById('extended-tooltip-detail-district-info');
+    extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme');
+    extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme');
+
+
     Promise.all([stadtteilePromise, wahlbezirkePromise])
         .then(function() {
             function onHashChange(e) {
