@@ -56,20 +56,23 @@ function onMouseOverWahlbezirk(data){
 
         // Verhältnis ermitteln
         for(var index in data.properties.btw2013.zweitstimme){
+            // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind
+            if(data.properties.btw2013.zweitstimme[index].stimmen > 0) {
 
-            var partyItem = PARTY[(data.properties.btw2013.zweitstimme[index].partei).toUpperCase()];
+                var partyItem = PARTY[(data.properties.btw2013.zweitstimme[index].partei).toUpperCase()];
 
-            if( typeof partyItem === 'undefined'){
-                partyItem = {
-                    color: '#808080'
-                }
+                if (typeof partyItem === 'undefined') {
+                    partyItem = {
+                        color: '#808080'
+                    }
+                } // end if
+
+                template += '<div style="' +
+                    'height: 25px;' +
+                    'width: ' + (100 * data.properties.btw2013.zweitstimme[index].stimmen) / summe + '%;' +
+                    'background-color: ' + partyItem.color + '"' +
+                    '></div>';
             } // end if
-
-            template += '<div style="' +
-                'height: 25px;' +
-                'width: '+(100 * data.properties.btw2013.zweitstimme[index].stimmen) / summe+'%;' +
-                'background-color: '+partyItem.color+'"' +
-                '></div>';
         } // end for
 
         template += '</div>' +
