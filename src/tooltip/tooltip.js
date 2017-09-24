@@ -64,6 +64,25 @@ function onMouseOverWahlbezirk(data){
 
         template += '<small>Summe der Stimmen: '+summe+'</small>';
 
+        template += '<hr>';
+
+        if(typeof currentAnalysis[currentConstituencyNumber] !== 'undefined'){
+            console.log(data.properties, currentAnalysis[currentConstituencyNumber]);
+
+            if(typeof currentAnalysis[currentConstituencyNumber].tooltipShowValue !== 'undefined'){
+                template += currentAnalysis[currentConstituencyNumber].tooltipShowValue;
+            } // end if
+            template += '<br>';
+            if(
+                typeof currentAnalysis[currentConstituencyNumber].tooltipShowKey !== 'undefined'
+                &&
+                typeof data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey] !== 'undefined'
+            ){
+                template += data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
+            } // end if
+
+        } // end if
+
         // HTML hinzufügen
         toolTip.innerHTML = template;
 
