@@ -49,12 +49,12 @@ function getParteiMitMeistenStimmen(zweitstimmen) {
 function getAnalyseForUngueltigeErststimmen(properties) {
     if (properties.btw2017_dummy.erststimme !== 'undefined') {
       var erststimmen = properties.btw2017_dummy.erststimme;
-      var gesamtstimmen = properties.btw2017_dummy["wähler/-innen"];
+      var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
 
       var tooltip = "Kein Wechsel";
       var gueltigeStimmen = 0;
-      erststimmen.forEach(function(party) {
-           gueltigeStimmen += party.stimmen;
+      erststimmen.forEach(function(kandidat) {
+           gueltigeStimmen += kandidat.stimmen;
       });
       var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
       var opacity = ungueltigeStimmen / gesamtstimmen * 50;
@@ -75,7 +75,7 @@ function getAnalyseForUngueltigeErststimmen(properties) {
 function getAnalyseForUngueltigeZweitstimmen(properties) {
     if (properties.btw2017_dummy.zweitstimme !== 'undefined') {
       var zweitstimmen = properties.btw2017_dummy.zweitstimme;
-      var gesamtstimmen = properties.btw2017_dummy["wähler/-innen"];
+      var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
 
       var tooltip = "Kein Wechsel";
       var gueltigeStimmen = 0;
