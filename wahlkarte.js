@@ -100,7 +100,7 @@ pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true, function (error, path
 });
 
 $('#szenarien-carousel').bind('slide.bs.carousel', function (e) {
-    colorMap();
+    colorMapWinDistrict();
 });
 
 function colorMapNeutrally() {
@@ -117,8 +117,11 @@ function colorMapNeutrally() {
     }
 }
 
-function colorMap() {
-
+/**
+ * Faerbt die Karte nach dem Gewinner fuer jeden Wahlbezirk. Falls keine
+ * Farbe fuer die Partei gesetzt, so wird eine 'DefaultColor' gewaehlt.
+ */
+function colorMapWinDistrict() {
     // Karte Reference setzten wenn nicht vorhanden
     if(elemSvg === null){
         getSVGMap();
@@ -127,7 +130,7 @@ function colorMap() {
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var win = maxPartie(item.properties.btw2013.zweitstimme)
-            var color = winnerColor(win[0])
+            var color = winnerColor(win)
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
             }
@@ -169,7 +172,7 @@ function maxPartie(bezirkZweitstimmen){
         });
 
         if (max >= 0 && partyName !== null)
-        return [partyName.partei, max]
+        return partyName.partei;
     } else {
         console.error("No data")
     }
