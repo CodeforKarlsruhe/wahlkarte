@@ -61,7 +61,7 @@ function getAnalyseForErststimmen(properties) {
         var color = getColorForParty(sieger.partei);
         return {
           "color": color,
-          "tooltipShowValue": "Sieger: " + sieger.name + " mit " + max + " Stimmen",
+          "tooltipShowValue": "Sieger: " + sieger.name + " (" + sieger.partei + ")"+ " mit " + max + " Stimmen",
         }
       }
     } else {
@@ -100,7 +100,7 @@ function getAnalyseForErstVsZweit(properties) {
       if (erststimme_partyName != zweitstimme_partyName) {
         return {
           "color": color,
-          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Partei der Erstimme: " + erststimme_partyName + "<br/>Zweitstimmen: " + zweitstimme_max + "<br/>Partei der Zweistimmen: " + zweitstimme_partyName,
+          "tooltipShowValue": "Sieger der Erststimmen: " + erststimme_partyName + " mit " + erststimme_max + " Stimmen</br>Sieger der Zweitstimmen: " + zweitstimme_partyName + " mit " + zweitstimme_max + " Stimmen",
         }
       } else {
         return {
