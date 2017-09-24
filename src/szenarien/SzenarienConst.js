@@ -36,7 +36,7 @@ const SZENARIEN = [
   },
   {
     "id": "migration",
-    "titel": "Migrationshintergrund",
+    "titel": "Migrations<wbr>hintergrund",
     "untertitel": "Wird in Wahlbezirken mit mehr Menschen mit Migrationshintergrund anders gewählt?",
     "beschreibung": "Hervorgehoben sind die Wahlbezirke, in denen mehr Menschen mit Migrationshintergrund leben.",
     "getAnalyse": dummyAnalyse,
