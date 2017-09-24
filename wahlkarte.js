@@ -99,6 +99,24 @@ pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, f
         .on('click', selectDistrict);
 });
 
+$('#szenarien-carousel').bind('slide.bs.carousel', function (e) {
+    colorMap();
+});
+
+function colorMapNeutrally() {
+
+    // Karte Reference setzten wenn nicht vorhanden
+    if(elemSvg === null){
+        getSVGMap();
+    } // end if
+
+    if (GEOJSON !== null) {
+        elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = '#fff';
+    } else {
+        console.error("GEOJSON null!")
+    }
+}
+
 function colorMap() {
 
     // Karte Reference setzten wenn nicht vorhanden
