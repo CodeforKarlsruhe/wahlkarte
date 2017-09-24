@@ -159,28 +159,8 @@ function colorMapWinDistrict(szenario) {
 }
 
 /**
-<<<<<<< HEAD
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
- * @param {String} name 
-=======
-<<<<<<< HEAD
- *  Ermittelt die Farbe fuer gegeben Parteinamen
- * @param {String} partyName
- */
-function winnerColor(partyName){
-    let winner = findParty(partyName)
-
-    if (winner !== null){
-        return winner.color;
-    } else {
-        console.error("Party not found!")
-    }
-}
-
-/**
  * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
  * @param {String} name
->>>>>>> 4391a85baf9feaadd496281bb354700b9e1ef5d4
  */
 function findParty(name){
     let winner = null
