@@ -99,9 +99,30 @@ pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true, function (error, path
         .on('click', selectDistrict);
 });
 
-$('#szenarien-carousel').bind('slide.bs.carousel', function (e) {
-    colorMap();
+$('#szenarien-carousel').bind('slid.bs.carousel', function (e) {
+    setScenario(e.relatedTarget.id);
 });
+
+
+/**
+ * Springt zum Szenario mit der angegebenen ID.
+ */
+function setScenario(scenarioId) {
+    if (window.location.hash.slice(1) !== scenarioId) {
+        window.location.hash = scenarioId;
+        return;  // Function will be called a second time from onHashChange
+    }
+    var currentSlideIndex = $('#szenarien-carousel div.active').index();
+    for (var i = 0; i < SZENARIEN.length; i++) {
+        if (SZENARIEN[i].id === scenarioId) {
+            if (i !== currentSlideIndex) {
+                $("#szenarien-carousel").carousel(i);
+            }
+            break;
+        }
+    }
+    colorMap();
+}
 
 function colorMapNeutrally() {
 
@@ -143,9 +164,9 @@ function winnerColor(partyName){
         found = PARTY[p]
         if (found.name.toLowerCase() === partyName.toLowerCase()){
             winner = found
-        } 
+        }
     });
-    
+
     if (winner !== null){
         return winner.color;
     } else {
@@ -178,3 +199,38 @@ function maxPartie(bezirkZweitstimmen){
 function getSVGMap() {
     return elemSvg = document.getElementById("karte");
 }
+
+/**
+ * Initialisierung wenn die Seite vollständig geladen ist.
+ */
+$(function() {
+    createSzenarien();
+
+    // FIXME: Warten bis GeoJSON vollständig geladen ist.
+
+    function onHashChange(e) {
+        setScenario(getScenarioIdFromUrl());
+    }
+    $(window).on('hashchange', onHashChange);
+    onHashChange();
+});
+
+
+/**
+ * Liefert die aktuelle Szenarien-ID aus der Browser-URL zurück.
+ *
+ * Wenn keine oder eine ungültige Szenarien-ID gesetzt ist wird die ID
+ * des ersten Szenarios zurückgeliefert.
+ */
+function getScenarioIdFromUrl() {
+    if (window.location.hash) {
+        var hash = window.location.hash.slice(1);
+        for(var i = 0; i < SZENARIEN.length; i++) {
+            if (SZENARIEN[i].id === hash) {
+                return hash;
+            }
+        }
+    }
+    return SZENARIEN[0].id;
+}
+
