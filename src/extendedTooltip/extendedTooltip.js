@@ -25,7 +25,7 @@ function selectDistrict(featureData) {
         getSVGMap();
     } // end if
 
-    if(lastSelectetDistrictId !== props.Stadtteilnummer){
+    if(lastSelectetDistrictId !== props.stadtteilnummer){
 
         if(lastSelectetDistrictId !== null) {
             // Letzer Stadtteil wieder zurück setzen
@@ -33,30 +33,31 @@ function selectDistrict(featureData) {
         } // end if
 
         // Neuer Stadtteil färben
-        elemSvg.getElementById(props.Stadtteilnummer).style.fill = '#bbe3fa';
+        elemSvg.getElementById(props.stadtteilnummer).style.fill = '#bbe3fa';
 
         // letzte ausgewählter Stadtteil speichern
-        lastSelectetDistrictId = props.Stadtteilnummer;
+        lastSelectetDistrictId = props.stadtteilnummer;
 
 
     } // end if
 
     // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = currentConstituencyObject.properties.Wahlbezirksname+"<small> (" + props.Stadtteilname + ")</small>";
+    infoPanelDistrictName.innerHTML = currentConstituencyObject.properties.wahlbezirksname+"<small> (" + props.stadtteilname + ")</small>";
 
     // Hat sich der Wahlbezirk begeändert?
-    if(lastSelectedConstituencyNumber !== currentConstituencyObject.properties.Wahlbezirksnummer){
+    if(lastSelectedConstituencyNumber !== currentConstituencyObject.properties.wahlbezirksnummer){
 
         if(lastSelectedConstituencyNumber !== null) {
             elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#fff';
         } // end if
 
-        lastSelectedConstituencyNumber = currentConstituencyNumber;
-        elemSvg.getElementById(currentConstituencyNumber).style.fill = '#57bdeb';
+        lastSelectedConstituencyNumber = currentConstituencyObject.properties.wahlbezirksnummer;
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#57bdeb';
     } // end if
 
     // Info vom aktullen ausgewählen Wahlbezirk weiter an das ExtendedToolTip geben.
     // currentConstituencyObject wird in der Funktion onMouseOverWahlbezirk gefüllt.
+
     addDetailDistrictInfo(currentConstituencyObject);
     infoPanel.classList.add('isOpen');
 } // end function

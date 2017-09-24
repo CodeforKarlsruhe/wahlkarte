@@ -89,7 +89,7 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, pat
 
 pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
     paths
-        .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
+        .attr("id", function (d) { return d.properties.wahlbezirksnummer })
         .attr('class', 'wahlbezirk')
         .on('mousemove', onMouseOverWahlbezirk)
         .on('mouseleave', onMouseLeaveWahlbezirk)
@@ -111,7 +111,7 @@ function colorMapNeutrally() {
     } // end if
 
     if (GEOJSON !== null) {
-        elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = '#fff';
+        elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = '#fff';
     } else {
         console.error("GEOJSON null!")
     }
@@ -126,10 +126,10 @@ function colorMap() {
 
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            var win = maxPartie(item)
+            var win = maxPartie(item.properties.btw2013.zweitstimme)
             var color = winnerColor(win[0])
             if (typeof color !== 'undefined'){
-                elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
+                elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
             }
         }
     } else {
@@ -153,18 +153,23 @@ function winnerColor(partyName){
     }
 }
 
-function maxPartie(data){
-    if (data !== 'undefined'){
+/**
+ *  Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
+ * @param {Object} bezirkZweitstimmen 
+ */
+function maxPartie(bezirkZweitstimmen){
+    if (bezirkZweitstimmen !== 'undefined'){
         var max = 0;
         var partyName = null;
-        Object.keys(data.properties).forEach(function(k, v){
-            var value = data.properties[k]
-           if (max < value && Party.indexOf(k) >= 0) {
-               max = value;
-               partyName = k;
+        bezirkZweitstimmen.forEach(function(par){
+           if (max < par.stimmen) {
+               max = par.stimmen;
+               partyName = par;
            }
-        })
-        return [partyName, max]
+        });
+
+        if (max >= 0 && partyName !== null)
+        return [partyName.partei, max]
     } else {
         console.error("No data")
     }
