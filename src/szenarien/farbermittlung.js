@@ -129,7 +129,7 @@ function getAnalyseForErstVsZweit(properties) {
 function getAnalyseGroessteAenderung(properties) {
   if (properties.btw2013.zweitstimme && properties.btw2017.zweitstimme) {
     var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
-    var btw2017_zweitstimmen = properties.btw2013.zweitstimme;
+    var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
     var winner_loser = {};
     btw2017_zweitstimmen.forEach(function(partei) {
       winner_loser[partei.partei] = partei.stimmen;
@@ -141,8 +141,7 @@ function getAnalyseGroessteAenderung(properties) {
         delete winner_loser[partei.partei];
       }
     });
-
-    var max, parteiname_winner;
+    var max = -1, parteiname_winner = '';
     Object.keys(winner_loser).forEach(function(parteiname){
       if (Math.abs(winner_loser[parteiname]) > max) {
         max = winner_loser[parteiname];
