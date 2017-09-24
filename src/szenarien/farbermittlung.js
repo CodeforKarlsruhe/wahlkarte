@@ -163,7 +163,7 @@ function getAnalyseGroessteAenderung(properties) {
  * @param {String} col 
  * @param {Number} amt 
  */
-function LightenDarkenColor(col, amt) {
+function lightenDarkenColor(col, amt) {
   
     var usePound = false;
   
@@ -192,4 +192,3 @@ function LightenDarkenColor(col, amt) {
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
   
 }
-

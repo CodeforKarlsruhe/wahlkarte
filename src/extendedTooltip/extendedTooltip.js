@@ -36,7 +36,8 @@ function selectDistrict(featureData) {
         } // end if
 
         // Neuer Stadtteil färben
-        elemSvg.getElementById(props.stadtteilnummer).style.fill = '#bbe3fa';
+        let oldColor = rgb2hex(elemSvg.getElementById(props.stadtteilnummer).style.fill)
+        elemSvg.getElementById(props.stadtteilnummer).style.fill = lightenDarkenColor(oldColor, -20);
 
         // letzte ausgewählter Stadtteil speichern
         lastSelectetDistrictId = props.stadtteilnummer;
