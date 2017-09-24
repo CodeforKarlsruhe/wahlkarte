@@ -5,9 +5,9 @@
 function getAnalyseForWechselwaehler(properties) {
     // FIXME Ergebnisse von 2017 einbauen
     if (properties.btw2013.zweitstimme !== 'undefined'
-        && properties.btw2013.zweitstimme !== 'undefined') {
+        && properties.btw2017_dummy.zweitstimme !== 'undefined') {
       var zweitstimmen2013 = properties.btw2013.zweitstimme;
-      var zweitstimmen2017 = properties.btw2013.zweitstimme;
+      var zweitstimmen2017 = properties.btw2017_dummy.zweitstimme;
       var sieger2013 = getParteiMitMeistenStimmen(zweitstimmen2013);
       var sieger2017 = getParteiMitMeistenStimmen(zweitstimmen2017);
 
@@ -47,9 +47,9 @@ function getParteiMitMeistenStimmen(zweitstimmen) {
  * @param {Object} properties
  */
 function getAnalyseForUngueltigeErststimmen(properties) {
-    if (properties.btw2013.erststimme !== 'undefined') {
-      var erststimmen = properties.btw2013.erststimme;
-      var gesamtstimmen = properties.btw2013["wähler/-innen"];
+    if (properties.btw2017_dummy.erststimme !== 'undefined') {
+      var erststimmen = properties.btw2017_dummy.erststimme;
+      var gesamtstimmen = properties.btw2017_dummy["wähler/-innen"];
 
       var tooltip = "Kein Wechsel";
       var gueltigeStimmen = 0;
@@ -73,9 +73,9 @@ function getAnalyseForUngueltigeErststimmen(properties) {
  * @param {Object} properties
  */
 function getAnalyseForUngueltigeZweitstimmen(properties) {
-    if (properties.btw2013.zweitstimme !== 'undefined') {
-      var zweitstimmen = properties.btw2013.zweitstimme;
-      var gesamtstimmen = properties.btw2013["wähler/-innen"];
+    if (properties.btw2017_dummy.zweitstimme !== 'undefined') {
+      var zweitstimmen = properties.btw2017_dummy.zweitstimme;
+      var gesamtstimmen = properties.btw2017_dummy["wähler/-innen"];
 
       var tooltip = "Kein Wechsel";
       var gueltigeStimmen = 0;
