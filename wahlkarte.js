@@ -89,7 +89,7 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, pat
 
 pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
     paths
-        .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
+        .attr("id", function (d) { return d.properties.wahlbezirksnummer })
         .attr('class', 'wahlbezirk')
         .on('mousemove', onMouseOverWahlbezirk)
         .on('mouseleave', onMouseLeaveWahlbezirk)
@@ -111,7 +111,7 @@ function colorMapNeutrally() {
     } // end if
 
     if (GEOJSON !== null) {
-        elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = '#fff';
+        elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = '#fff';
     } else {
         console.error("GEOJSON null!")
     }
@@ -130,7 +130,7 @@ function colorMap() {
             var color = winnerColor(win[0])
             if (typeof color !== 'undefined'){
                 color = "#" + color;
-                elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
+                elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
             }
         }
     } else {

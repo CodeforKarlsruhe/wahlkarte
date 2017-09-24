@@ -37,9 +37,9 @@ document.body.addEventListener('mousemove',function(mouseEvent){
 function onMouseOverWahlbezirk(data){
 
     // Nur ausführen, wenn wirklich der Bezirk geändert wurde
-    if(currentConstituencyNumber !== data.properties.Wahlbezirksnummer){
+    if(currentConstituencyNumber !== data.properties.wahlbezirksnummer){
 
-        currentConstituencyNumber = data.properties.Wahlbezirksnummer;
+        currentConstituencyNumber = data.properties.wahlbezirksnummer;
 
         var template = 'Wahlbezirksnummer: '+currentConstituencyNumber+' <div class="flex">';
         var summe = 0;
