@@ -172,7 +172,7 @@ function getAnalyseNichtWaehlerWin(properties) {
     if (properties.btw2017_dummy.wahlbeteiligung < 50) {
       return {
         "color": "#1abc9c",
-        "tooltipShowValue": "In diesem Wahlkreis hätten die Nichtwähler das Ergebnis ändern können"
+        "tooltipShowValue": "In diesem Wahlkreis haben die Nichtwähler die absolute Mehrheit"
       }
     } else {
       return getAnalyseForErststimmen(properties);
