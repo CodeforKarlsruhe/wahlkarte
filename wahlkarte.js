@@ -19,7 +19,9 @@ function selectDistrict(featureData) {
 
     var props = featureData.properties;
     // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = "Stadtteil: " + lastSelectetDistrictName;
+    infoPanelDistrictName.innerHTML = "Stadtteil: " + props.Stadtteilname + "\n" +
+    "Stadtteilnummer: " + props.Stadtteilnummer;
+    ;
 
     infoPanel.classList.add('isOpen');
 } // end function
@@ -140,7 +142,8 @@ function color() {
             var color = winnerColor(win[0])
             // console.log("Data", item)
             // console.log("Party ", win)
-            if (color !== undefined){
+            if (typeof color !== 'undefined'){
+                color = "#" + color;
                 elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
             }
         }

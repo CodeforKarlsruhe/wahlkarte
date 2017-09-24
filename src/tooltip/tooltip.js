@@ -62,7 +62,7 @@ function onMouseOverWahlbezirk(data){
         });
 
         template += '</div>' +
-            'Summe Stimme: '+summe;
+            'Summe der Stimmen: '+summe;
 
         // HTML hinzufügen
         toolTip.innerHTML = template;
@@ -77,6 +77,6 @@ function onMouseOverWahlbezirk(data){
 function onMouseLeaveWahlbezirk() {
 
     currentConstituencyNumber = null;
-    toolTip.innerHTML = 'Keine auswahl';
+    toolTip.innerHTML = 'Keine Auswahl';
     toolTip.style.display = 'none';
 } // end function
