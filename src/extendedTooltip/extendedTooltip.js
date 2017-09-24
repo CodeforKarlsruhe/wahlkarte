@@ -103,22 +103,24 @@ function addDetailDistrictInfo(districtInfo) {
     // Verhältnis ermitteln
     for(var index in data2013.zweitstimme){
 
-        var partyItem = PARTY[(data2013.zweitstimme[index].partei).toUpperCase()];
+        // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind
+        if( data2013.zweitstimme[index].stimmen > 0) {
+            var partyItem = PARTY[(data2013.zweitstimme[index].partei).toUpperCase()];
 
-        if( typeof partyItem === 'undefined'){
-            partyItem = {
-                color: '#808080'
-            }
-        } // end if
+            if (typeof partyItem === 'undefined') {
+                partyItem = {
+                    color: '#808080'
+                }
+            } // end if
 
-        template += '<tr>';
-        //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-        template += '<td>'+data2013.zweitstimme[index].partei+'</td>';
-        template += '<td align="right">'+((100 * data2013.zweitstimme[index].stimmen) / sumDistrict).toFixed(1)+'%</td>';
-        template += '<td align="right">'+data2013.zweitstimme[index].stimmen+' <small>Stimmen</small></td>';
+            template += '<tr>';
+            //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
+            template += '<td>' + data2013.zweitstimme[index].partei + '</td>';
+            template += '<td align="right">' + ((100 * data2013.zweitstimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
+            template += '<td align="right">' + data2013.zweitstimme[index].stimmen + ' <small>Stimmen</small></td>';
 
-        template += '</tr>';
-
+            template += '</tr>';
+        }
     } // end for
 
     template += '</tbody>';
@@ -144,22 +146,24 @@ function addDetailDistrictInfo(districtInfo) {
     // Verhältnis ermitteln
     for(var index in data2013.erststimme){
 
-        var partyItem = PARTY[(data2013.erststimme[index].partei).toUpperCase()];
+        // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind
+        if( data2013.erststimme[index].stimmen > 0) {
+            var partyItem = PARTY[(data2013.erststimme[index].partei).toUpperCase()];
 
-        if( typeof partyItem === 'undefined'){
-            partyItem = {
-                color: '#808080'
-            }
+            if (typeof partyItem === 'undefined') {
+                partyItem = {
+                    color: '#808080'
+                }
+            } // end if
+
+            template += '<tr>';
+            //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
+            template += '<td>' + data2013.erststimme[index].name + ' <small>(' + data2013.erststimme[index].partei + ')</small></td>';
+            template += '<td align="right">' + ((100 * data2013.erststimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
+            template += '<td align="right">' + data2013.erststimme[index].stimmen + ' <small>Stimmen</small></td>';
+
+            template += '</tr>';
         } // end if
-
-        template += '<tr>';
-        //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-        template += '<td>'+data2013.erststimme[index].name+' <small>('+data2013.erststimme[index].partei+')</small></td>';
-        template += '<td align="right">'+((100 * data2013.erststimme[index].stimmen) / sumDistrict).toFixed(1)+'%</td>';
-        template += '<td align="right">'+data2013.erststimme[index].stimmen+' <small>Stimmen</small></td>';
-
-        template += '</tr>';
-
     } // end for
 
     template += '</tbody>';
