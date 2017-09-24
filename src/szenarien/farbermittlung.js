@@ -117,7 +117,7 @@ function getAnalyseForErstVsZweit(properties) {
       }
     });
 
-    var zweitstimmen = properties.btw2013.erststimme;
+    var zweitstimmen = properties.btw2013.zweitstimme;
     var zweitstimme_max = 0;
     var zweitstimme_partyName = null;
     zweitstimmen.forEach(function(kandidat) {
@@ -128,7 +128,6 @@ function getAnalyseForErstVsZweit(properties) {
     });
 
     if (erststimme_max >= 0 && erststimme_partyName !== null && zweitstimme_max >= 0 && zweitstimme_partyName !== null) {
-
       var color = getColorForParty(erststimme_partyName);
       if (erststimme_partyName != zweitstimme_partyName) {
         return {
