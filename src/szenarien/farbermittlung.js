@@ -13,26 +13,6 @@ function getColorForParty(partyName) {
 }
 
 /**
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
- * @param {String} name
- */
-function findParty(name) {
-    let winner = null
-    Object.keys(PARTY).forEach(function(p){
-        found = PARTY[p]
-        if (found.name.toLowerCase() === name.toLowerCase()){
-            winner = found
-        }
-    });
-
-    if (winner !== null){
-        return winner;
-    } else {
-        console.error("Can't find party ", name)
-    }
-}
-
-/**
  *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
  * @param {Object} properties
  */
