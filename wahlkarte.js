@@ -101,6 +101,16 @@ $('#szenarien-carousel').bind('slid.bs.carousel', function (e) {
 
 
 /**
+ * Aktualisiert die Twitter und Facebook Links.
+ */
+function updateSharingLinks() {
+    var param = encodeURIComponent(window.location.href);
+    $('#facebookButton').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + param);
+    $('#twitterButton').attr('href', 'https://twitter.com/home?status=' + param);
+}
+
+
+/**
  * Springt zum Szenario mit der angegebenen ID.
  */
 function setScenario(scenarioId) {
@@ -118,6 +128,7 @@ function setScenario(scenarioId) {
         }
     }
     colorMapWinDistrict();
+    updateSharingLinks();
 }
 
 function colorMapNeutrally() {

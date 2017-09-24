@@ -99,20 +99,60 @@
                 height: 200px;
                 float: left;
             }
+
+            #navbar .container {
+                padding-left: 0;
+                padding-right: 0;
+                max-width: none;
+            }
+
+            #navbar .nav-item {
+                margin-left: 15px;
+            }
+            #aboutButton {
+                margin-left: 15px;
+            }
+            @media (max-width: 575px) {
+                #navbar .navbar-brand {
+                    font-size: 15px;
+                }
+                #navbar .nav-item {
+                    margin-left: 5px;
+                }
+                #aboutButton {
+                    margin-left: 0;
+                }
+            }
         </style>
     </head>
 <body>
-  <nav class="navbar fixed-top navbar-light bg-light">
-    <span class="navbar-brand">Bundestagswahl 2017 in Karlsruhe</span>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a id="aboutButton" class="nav-link" data-toggle="modal" href="#aboutModal">
-          <span class="fa fa-lg fa-info-circle" aria-hidden="true"></span>
-          <span class="sr-only">Info</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+
+<nav id="navbar" class="navbar navbar-light bg-light fixed-top justify-content-between flex-nowrap flex-row">
+    <div class="container">
+        <span class="navbar-brand">Bundestagswahl 2017 in Karlsruhe</span>
+        <ul class="nav navbar-nav flex-row float-right">
+            <li class="nav-item">
+                <a id="twitterButton" class="nav-link" href="#" target="_blank" title="Auf Twitter teilen">
+                  <span class="fa fa-lg fa-twitter" aria-hidden="true"></span>
+                  <span class="sr-only">Auf Twitter teilen</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="facebookButton" class="nav-link" href="#" target="_blank" title="Auf Facebook teilen">
+                  <span class="fa fa-lg fa-facebook" aria-hidden="true"></span>
+                  <span class="sr-only">Auf Facebook teilen</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="aboutButton" class="nav-link" data-toggle="modal" href="#aboutModal" title="Über diese Seite">
+                  <span class="fa fa-lg fa-info-circle" aria-hidden="true"></span>
+                  <span class="sr-only">Info</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container-fluid">
   <div class="row">
     <div class="map-column col-12 col-lg-9">
