@@ -121,7 +121,6 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, pat
         .style('stroke-width', 2);
 });
 
-// pathsFromGeoJSON("statistiken-wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
 pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
     paths
         .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
@@ -134,14 +133,12 @@ pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, f
         .on('click', selectDistrict);
 });
 
-function color() {
+function colorMap() {
     var elemSvg = document.getElementById("karte")
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var win = maxPartie(item)
             var color = winnerColor(win[0])
-            // console.log("Data", item)
-            // console.log("Party ", win)
             if (typeof color !== 'undefined'){
                 color = "#" + color;
                 elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
@@ -172,7 +169,6 @@ function maxPartie(data){
                partyName = k;
            }
         })
-
         return [partyName, max]
     } else {
         console.error("No data")
