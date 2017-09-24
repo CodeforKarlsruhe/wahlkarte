@@ -92,6 +92,11 @@ function addDetailDistrictInfo(districtInfo) {
         '   <col style="width: 60px">' +
         '</colgroup>';
 
+    // Array Sortieren
+    districtInfo.properties.btw2013.zweitstimme = districtInfo.properties.btw2013.zweitstimme.sort(function (a, b) {
+        return b.stimmen - a.stimmen;
+    });
+
     // Verhältnis ermitteln
     for(var index in districtInfo.properties.btw2013.zweitstimme){
 
@@ -127,6 +132,11 @@ function addDetailDistrictInfo(districtInfo) {
         '   <col style="width: 25px">' +
         '   <col style="width: 60px">' +
         '</colgroup>';
+
+    // Array Sortieren
+    districtInfo.properties.btw2013.erststimme = districtInfo.properties.btw2013.erststimme.sort(function (a, b) {
+        return b.stimmen - a.stimmen;
+    });
 
     // Verhältnis ermitteln
     for(var index in districtInfo.properties.btw2013.erststimme){
