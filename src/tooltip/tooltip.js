@@ -55,6 +55,11 @@ function onMouseOverWahlbezirk(data){
         });
 
         template += buildBar(data.properties.btw2013.zweitstimme, summe);
+        data.properties.btw2013.zweitstimme.slice(0,3).forEach(function(element) {
+           template += element.partei;
+           template += " mit " + element.stimmen + " Stimmen";
+           template += '<br \>'
+        }, this);
 
         template += '<small>Summe der Stimmen: '+summe+'</small>';
 
