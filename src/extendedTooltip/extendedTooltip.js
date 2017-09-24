@@ -82,7 +82,8 @@ function closeInfoPanel() {
  */
 function addDetailDistrictInfo(districtInfo) {
 
-    var template = '<table class="table-sm">' +
+    var template = 'Zweitstimmen (Parteien)' +
+        '<table class="table-sm">' +
         '<tbody>' +
         '<colgroup>' +
         '   <col style="width: 100px">' +

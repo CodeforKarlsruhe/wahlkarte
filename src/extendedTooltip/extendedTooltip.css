@@ -22,4 +22,6 @@
 
 #extended-tooltip-detail-district-info{
     font-size: 10px;
+    overflow-y: scroll;
+    height: 198px;
 }

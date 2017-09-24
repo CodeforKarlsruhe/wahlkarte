@@ -87,7 +87,7 @@ pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, pat
         .style('stroke-width', 2);
 });
 
-pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
+pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
     paths
         .attr("id", function (d) { return d.properties.Wahlbezirksnummer })
         .attr('class', 'wahlbezirk')
