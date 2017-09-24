@@ -5,9 +5,11 @@
 var innerCarousel = document.getElementById('innerCarousel');
 var indicators = document.getElementById('indicators');
 
-for(var i = 0; i < SZENARIEN.length; i++) {
-  createSzenario(i);
-  createIndicator(i);
+function createSzenarien() {
+    for(var i = 0; i < SZENARIEN.length; i++) {
+      createSzenario(i);
+      createIndicator(i);
+    }
 }
 
 function createSzenario(index) {
