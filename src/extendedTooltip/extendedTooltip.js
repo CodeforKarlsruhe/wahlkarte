@@ -49,5 +49,12 @@ function selectDistrict(featureData) {
  * Schließt das Infopanel
  */
 function closeInfoPanel() {
+
+    if(lastSelectetDistrictId !== null) {
+        // Letzer Stadtteil wieder zurück setzen
+        elemSvg.getElementById(lastSelectetDistrictId).style.fill = '#fff';
+    } // end if
+
+    lastSelectetDistrictId = null;
     infoPanel.classList.remove('isOpen');
-}
+} // end function
