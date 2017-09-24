@@ -82,5 +82,9 @@ const PARTY = {
     RENTNER:{
         "name": "Rentner",
         "color": "#C0C0C0"
+    },
+    SONSTIGE:{
+        "name": "Sonstige",
+        "color": "#C0C0C0"
     }
 }
