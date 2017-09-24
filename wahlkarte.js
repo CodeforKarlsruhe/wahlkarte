@@ -147,7 +147,7 @@ function colorMapWinDistrict(szenario) {
 
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            var analyse = szenario.colorMap(item.properties);
+            var analyse = szenario.getAnalyse(item.properties);
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
@@ -160,12 +160,12 @@ function colorMapWinDistrict(szenario) {
 
 /**
 <<<<<<< HEAD
- *  Ermittelt die Farbe fuer gegeben Parteinamen 
- * @param {String} partyName 
+ *  Ermittelt die Farbe fuer gegeben Parteinamen
+ * @param {String} partyName
  */
 function winnerColor(partyName){
     let winner = findParty(partyName)
-    
+
     if (winner !== null){
         return winner.color;
     } else {
@@ -174,8 +174,8 @@ function winnerColor(partyName){
 }
 
 /**
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
- * @param {String} name 
+ * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
+ * @param {String} name
  */
 function findParty(name){
     let winner = null
@@ -194,8 +194,8 @@ function findParty(name){
 }
 
 /**
- * Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
- * @param {Object} bezirkZweitstimmen 
+ * Ermittelt die Parite mit den meisten Stimmen im Wahlkreist
+ * @param {Object} bezirkZweitstimmen
  */
 function maxPartie(bezirkZweitstimmen){
     if (bezirkZweitstimmen !== 'undefined'){
