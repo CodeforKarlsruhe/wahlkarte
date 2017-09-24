@@ -159,21 +159,6 @@ function colorMapWinDistrict(szenario) {
 }
 
 /**
-<<<<<<< HEAD
- *  Ermittelt die Farbe fuer gegeben Parteinamen 
- * @param {String} partyName 
- */
-function winnerColor(partyName){
-    let winner = findParty(partyName)
-    
-    if (winner !== null){
-        return winner.color;
-    } else {
-        console.error("Party not found!")
-    }
-}
-
-/**
  * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
  * @param {String} name 
  */
@@ -193,35 +178,11 @@ function findParty(name){
     }
 }
 
-/**
- * Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
- * @param {Object} bezirkZweitstimmen 
- */
-function maxPartie(bezirkZweitstimmen){
-    if (bezirkZweitstimmen !== 'undefined'){
-        var max = 0;
-        var partyName = null;
-        bezirkZweitstimmen.forEach(function(par){
-           if (max < par.stimmen) {
-               max = par.stimmen;
-               partyName = par;
-           }
-        });
-
-        if (max >= 0 && partyName !== null)
-        return partyName.partei;
-    } else {
-        console.error("No data")
-    }
-}
-
 function getSVGMap() {
     return elemSvg = document.getElementById("karte");
 }
 
 /**
-=======
->>>>>>> 5f020eb7b96b081e34036c4cfe5efed42135c691
  * Initialisierung wenn die Seite vollständig geladen ist.
  */
 $(function() {
