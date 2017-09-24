@@ -112,11 +112,11 @@ function getAnalyseForErstVsZweit(properties) {
       if (erststimme_partyName != zweitstimme_partyName) {
         return {
           "color": color,
-          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Zweitstimmen: " + zweitstimme_max,
+          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Partei der Erstimme: " + erststimme_partyName + "<br/>Zweitstimmen: " + zweitstimme_max + "<br/>Partei der Zweistimmen: " + zweitstimme_partyName,
         }
       } else {
         return {
-          "color": color,
+          "color": "#FFF",
           "tooltipShowValue": "Die Partei '" + erststimme_partyName + "' hat sowohl die Erststimme als auch die Zweitstimme gewonnen.",
         }
       }
@@ -124,6 +124,37 @@ function getAnalyseForErstVsZweit(properties) {
   } else {
     console.error("Error in analysis");
   }
+}
+
+function getAnalyseGroessteAenderung(properties) {
+  if (properties.btw2013.zweitstimme && properties.btw2017.zweitstimme) {
+    var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
+    var btw2017_zweitstimmen = properties.btw2013.zweitstimme;
+    var winner_loser = {};
+    btw2017_zweitstimmen.forEach(function(partei) {
+      winner_loser[partei.partei] = partei.stimmen;
+    });
+    btw2013_zweitstimmen.forEach(function(partei) {
+      if (winner_loser[partei.partei]) {
+        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen
+      } else {
+        delete winner_loser[partei.partei];
+      }
+    });
+
+    var max, parteiname_winner;
+    Object.keys(winner_loser).forEach(function(parteiname){
+      if (Math.abs(winner_loser[parteiname]) > max) {
+        max = winner_loser[parteiname];
+        parteiname_winner = parteiname;
+      }
+    });
+    var color = getColorForParty(parteiname_winner);
+    return {
+      "color": color,
+      "tooltipShowValue" : "#TODO"
+    }
+  } 
 }
 
 /** 

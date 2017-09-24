@@ -46,7 +46,7 @@ const SZENARIEN = [
     "titel": "Größte Änderung",
     "untertitel": "Welche Partei hat am meisten zugelegt?",
     "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl absolut betrachtet die größten Stimmgewinne hat.",
-    "getAnalyse": dummyAnalyse,
+    "getAnalyse": getAnalyseGroessteAenderung,
   },
   {
     "id": "ungueltig-erst",
