@@ -1,0 +1,21 @@
+#extended-tooltip{
+    position: fixed;
+    display: none;
+    width: 250px;
+    height: 250px;
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 20px;
+    left: 20px;
+    bottom: 20px;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    z-index: 100;
+}
+
+#extended-tooltip.isOpen{
+    display: block;
+}

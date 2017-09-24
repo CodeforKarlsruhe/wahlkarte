@@ -1,41 +1,6 @@
-
-/**
- * Globale Felder
- */
-var infoPanelDistrictName = document.getElementById('info-panel-district-name'),
-    infoPanel = document.getElementById('info-panel');
-
-/**
- * Globale Variabeln
- */
-var lastSelectetDistrictName = '',
-    lastSelectetDistrictId = null;
-
-/**
- * Wird aufgerufen wenn der User auf eine Region klickt
- * @param featureData das aktuelle "feature"
- */
-function selectDistrict(featureData) {
-
-    var props = featureData.properties;
-    // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = "Stadtteil: " + props.Stadtteilname + "\n" +
-    "Stadtteilnummer: " + props.Stadtteilnummer;
-    ;
-
-    infoPanel.classList.add('isOpen');
-} // end function
-
-/**
- * Schließt das Infopanel
- */
-function closeInfoPanel() {
-    infoPanel.classList.remove('isOpen');
-}
-
-
-var KA_LAT = 49.00921;
-var KA_LNG = 8.45003951;
+var KA_LAT  = 49.00921;
+var KA_LNG  = 8.45003951;
+var elemSvg = null;
 
 var GEOJSON = null;
 var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tierschutzpartei","ÖDP","PBC","Volksabstimmung","MLPD ","BüSo","AfD","BIG","pro Deutschland","FREIE WÄHLER","PARTEI DER VERNUNFT","RENTNER"];
@@ -183,6 +148,7 @@ function pathsFromGeoJSON(filename, group, setGeoJson, callback) {
 
 pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, paths) {
     paths
+        .attr("id", function (d) { return d.properties.Stadtteilnummer })
         .attr('class', 'district')
         .style('fill', 'rgba(255, 255, 255, 0.7)')
         .style('stroke', '#000')
@@ -202,7 +168,12 @@ pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, f
 });
 
 function colorMap() {
-    var elemSvg = document.getElementById("karte")
+
+    // Karte Reference setzten wenn nicht vorhanden
+    if(elemSvg === null){
+        getSVGMap();
+    } // end if
+
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var win = maxPartie(item)
@@ -242,23 +213,7 @@ function maxPartie(data){
         console.error("No data")
     }
 }
-var erststimmen = [
-    {
-        "firstName": "Ingo",
-        "lastName": "Muster",
-        "party": "CDU",
-        "votes": 123
-    }
-]
 
-var partie= [{
-    "name": "CDU",
-    "votes": 1234,
-    "color": "#890123"
-},{
-    "name": "FDP",
-    "votes": 1234,
-    "color": "#123"
+function getSVGMap() {
+    return elemSvg = document.getElementById("karte");
 }
-
-]
