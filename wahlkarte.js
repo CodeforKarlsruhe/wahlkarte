@@ -9,20 +9,10 @@ var MAP_ATTRIBUTION = 'Map data &copy; <a href="//openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
                       '<a href="//carto.com/attribution">Carto</a>';
 
-var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
-    .addLayer(new L.TileLayer(TILES_URL, {attribution: MAP_ATTRIBUTION}));
-
-var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-    g = svg.append("g").attr("class", "leaflet-zoom-hide");
-
-// SVG ID
-svg.attr("id", "karte")
-
-var stadtteile = g.append('g')
-    .classed('stadtteile', true);
-
-var wahlbezirke = g.append('g')
-    .classed('wahlbezirke', true);
+var map;
+var svg;
+var wahlbezirke;
+var stadtteile;
 
 
 /**
@@ -38,66 +28,44 @@ var transform = d3.geo.transform({ point: projectPoint }),
 
 /**
  * Create SVG paths from a GeoJSON file.
+ *
+ * Returns a promise that resolves to a D3 selection of the created
+ * paths.
  */
-function pathsFromGeoJSON(filename, group, setGeoJson, callback) {
+function pathsFromGeoJSON(filename, group, setGeoJson) {
 
-    d3.json(filename, function (error, collection) {
-        if (error) return callback(error, null);
+    var loadJson = Promise.promisify(d3.json);
 
-        if (GEOJSON === null && setGeoJson){
-            GEOJSON = collection
-        }
-        var feature = group.selectAll("path")
-            .data(collection.features)
-            .enter().append("path");
+    return loadJson(filename)
+        .then(function(collection) {
 
-        map.on("viewreset", reset);
-        reset();
+            if (GEOJSON === null && setGeoJson){
+                GEOJSON = collection
+            }
+            var feature = group.selectAll("path")
+                .data(collection.features)
+                .enter().append("path");
 
-        return callback(null, feature);
+            map.on("viewreset", reset);
+            reset();
 
-        // Reposition the SVG to cover the features.
-        function reset() {
-            var bounds = path.bounds(collection);
-            var topLeft = bounds[0];
-            var bottomRight = bounds[1];
+            return feature;
 
-            svg.attr("width", bottomRight[0] - topLeft[0])
-                .attr("height", bottomRight[1] - topLeft[1])
-                .style("left", topLeft[0] + "px")
-                .style("top", topLeft[1] + "px");
-
-            group.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
-
-            feature.attr("d", path);
-        }
-    });
+            // Reposition the SVG to cover the features.
+            function reset() {
+                var bounds = path.bounds(collection);
+                var topLeft = bounds[0];
+                var bottomRight = bounds[1];
+                svg.attr("width", bottomRight[0] - topLeft[0])
+                    .attr("height", bottomRight[1] - topLeft[1])
+                    .style("left", topLeft[0] + "px")
+                    .style("top", topLeft[1] + "px");
+                group.attr("transform", "translate(" + -topLeft[0] + "," +
+                           -topLeft[1] + ")");
+                feature.attr("d", path);
+            }
+        });
 }
-
-pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile,false, function (error, paths) {
-    paths
-        .attr("id", function (d) { return d.properties.Stadtteilnummer })
-        .attr('class', 'district')
-        .style('fill', 'rgba(255, 255, 255, 0.7)')
-        .style('stroke', '#000')
-        .style('stroke-width', 2);
-});
-
-pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true, function (error, paths) {
-    paths
-        .attr("id", function (d) { return d.properties.wahlbezirksnummer })
-        .attr('class', 'wahlbezirk')
-        .on('mousemove', onMouseOverWahlbezirk)
-        .on('mouseleave', onMouseLeaveWahlbezirk)
-        .style('fill', '#fff')
-        .style('stroke', '#000')
-        .style('stroke-width', 1)
-        .on('click', selectDistrict);
-});
-
-$('#szenarien-carousel').bind('slid.bs.carousel', function (e) {
-    setScenario(e.relatedTarget.id);
-});
 
 
 /**
@@ -175,13 +143,54 @@ function colorMapWinDistrict(szenario) {
  * Initialisierung wenn die Seite vollständig geladen ist.
  */
 $(function() {
+
+    map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
+        .addLayer(new L.TileLayer(TILES_URL, {attribution: MAP_ATTRIBUTION}));
+    svg = d3.select(map.getPanes().overlayPane).append("svg");
+    var g = svg.append("g").attr("class", "leaflet-zoom-hide");
+    svg.attr("id", "karte")
+    stadtteile = g.append('g')
+        .classed('stadtteile', true);
+    wahlbezirke = g.append('g')
+        .classed('wahlbezirke', true);
+
+    var stadtteilePromise = pathsFromGeoJSON("ka_stadtteile.geojson", stadtteile, false)
+        .then(function (paths) {
+            paths
+                .attr("id", function (d) { return d.properties.Stadtteilnummer })
+                .attr('class', 'district')
+                .style('fill', 'rgba(255, 255, 255, 0.7)')
+                .style('stroke', '#000')
+                .style('stroke-width', 2);
+        });
+
+    var wahlbezirkePromise = pathsFromGeoJSON("wahlbezirke.geojson", wahlbezirke, true)
+        .then(function (paths) {
+            paths
+                .attr("id", function (d) { return d.properties.wahlbezirksnummer })
+                .attr('class', 'wahlbezirk')
+                .on('mousemove', onMouseOverWahlbezirk)
+                .on('mouseleave', onMouseLeaveWahlbezirk)
+                .style('fill', '#fff')
+                .style('stroke', '#000')
+                .style('stroke-width', 1)
+                .on('click', selectDistrict);
+        });
+
     createSzenarien();
 
-    // FIXME: Warten bis GeoJSON vollständig geladen ist.
+    $('#szenarien-carousel').bind('slid.bs.carousel', function (e) {
+        setScenario(e.relatedTarget.id);
+    });
 
-    function onHashChange(e) {
-        setScenario(getScenarioIdFromUrl());
-    }
-    $(window).on('hashchange', onHashChange);
-    onHashChange();
+    Promise.all([stadtteilePromise, wahlbezirkePromise])
+        .then(function() {
+            function onHashChange(e) {
+                setScenario(getScenarioIdFromUrl());
+            }
+            $(window).on('hashchange', onHashChange);
+            onHashChange();
+        });
+
 });
+
