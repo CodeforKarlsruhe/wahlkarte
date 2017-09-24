@@ -2,8 +2,8 @@
  * Hier werden die Szenario-Elemente für das Carousel erzeugt.
  */
 
-var innerCarousel = document.getElementById('innerCarousel');
-var indicators = document.getElementById('indicators');
+var innerCarousel;
+var indicators;
 
 function createSzenarien() {
     for(var i = 0; i < SZENARIEN.length; i++) {
