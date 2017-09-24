@@ -36,7 +36,7 @@ const SZENARIEN = [
   },
   {
     "id": "migration",
-    "titel": "Migrationshintergrund",
+    "titel": "Migrations<wbr>hintergrund",
     "untertitel": "Wird in Wahlbezirken mit mehr Menschen mit Migrationshintergrund anders gewählt?",
     "beschreibung": "Hervorgehoben sind die Wahlbezirke, in denen mehr Menschen mit Migrationshintergrund leben.",
     "getAnalyse": dummyAnalyse,
@@ -53,13 +53,20 @@ const SZENARIEN = [
     "titel": "Ungültige Erststimmen",
     "untertitel": "Wie viele ungültige Erststimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Erststimmen gab es.",
-    "getAnalyse": dummyAnalyse,
+    "getAnalyse": getAnalyseForUngueltigeErststimmen,
   },
   {
     "id": "ungueltig-zweit",
     "titel": "Ungültige Zweitstimme",
     "untertitel": "Wie viele ungültige Zweitstimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Zweitstimmen gab es.",
-    "getAnalyse": dummyAnalyse,
+    "getAnalyse": getAnalyseForUngueltigeZweitstimmen,
   },
+  {
+    "id": "nichtwaehler-win",
+    "titel": "Wahlbezirke in denen Nichtwähler gewonnen hätten",
+    "untertitel": "Hätten Nichtwähler das Ergebnis des Wahlbezirks ändern können?",
+    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler als der Ergebnis verändern können.",
+    "getAnalyse": getAnalyseNichtWaehlerWin,
+  }
 ]

@@ -157,6 +157,19 @@ function getAnalyseGroessteAenderung(properties) {
   } 
 }
 
+function getNichtWaehlerWin(properties) {
+  if (properties.btw2017_dummy && properties.btw2017_dummy.wahlbeteiligung) {
+    if (properties.btw2017_dummy.wahlbeteiligung > 50) {
+      return {
+        "color": "#1abc9c",
+        "tooltipShowValue": "In diesem Wahlkreis hätten die Nichtwähler das Ergebnis ändern können"
+      }
+    } else {
+      return getAnalyseForErststimmen(properties);
+    }
+  }
+}
+
 /** 
  * Farbe heller oder dunkler
  * 

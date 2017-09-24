@@ -177,11 +177,40 @@ $(function() {
                 .on('click', selectDistrict);
         });
 
+    innerCarousel = document.getElementById('innerCarousel');
+    indicators = document.getElementById('indicators');
     createSzenarien();
 
     $('#szenarien-carousel').bind('slid.bs.carousel', function (e) {
         setScenario(e.relatedTarget.id);
     });
+
+    toolTip = document.getElementById('tool-tip'),
+        currentConstituencyNumber = null,
+        currentConstituencyObject = null,
+        xpos = 0,
+        ypos = 0;
+
+    /**
+     * Listener der schaut wo der User gerade mit der Maus ist
+     */
+    document.body.addEventListener('mousemove',function(mouseEvent){
+
+        // Prüfen ob der Brwoser das Objekt untersützt
+        if (mouseEvent) {
+            xpos = mouseEvent.clientX;
+            ypos = mouseEvent.clientY;
+        } else {
+            //IE
+            xpos = window.event.clientX;
+            ypos = window.event.clientY;
+        } // end if else
+
+        // Position von der Maus dem Div übergeben
+        toolTip.style.top   = (ypos - (toolTip.offsetHeight / 2))+'px';
+        toolTip.style.left  = (xpos + 25)+'px';
+    },false);
+
 
     Promise.all([stadtteilePromise, wahlbezirkePromise])
         .then(function() {
