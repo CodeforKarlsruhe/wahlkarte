@@ -1,3 +1,5 @@
+var currentAnalysis = {}; 
+
 /**
  * Baut das Mengen Diagramm
  */

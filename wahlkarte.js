@@ -159,6 +159,7 @@ function colorMapWinDistrict(szenario) {
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var analyse = szenario.getAnalyse(item.properties);
+            currentAnalysis[item.properties.statistik.wahlbezirksnummer] = analyse;
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
