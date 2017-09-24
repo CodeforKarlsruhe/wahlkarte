@@ -7,78 +7,7 @@ var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tiers
 
 const PartyColors = ["000","f40502","feed01","42a62a","8b1b62","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","009de0","ffffff","ffffff","ffffff","ffffff","ffffff"];
 
-
-const PARTIES = {
-    CDU: {
-        "name": "CDU",
-        "color": "#000",
-    },
-    SPD:{
-        "color": "#f40502",
-        "name": "SPD"
-    },
-    
-    AFD:{
-        "color": "#f40502",
-        "name": "AfD"
-    },
-    FDP:{
-        "color": "#feed01",
-        "name": "FDP"
-    },
-    GRUENE:{
-        "color": "#42a62a",
-        "name": "Grüne"
-    },
-    LINKE:{
-        "color": "#8b1b62",
-        "name": "Die Linke"
-    },
-    PIRATEN:{
-        "color": "#ff8800",
-        "name": "Piraten"
-    },
-    NPD:{
-        "name": "NPD"
-    },
-    REP:{
-        "name": "REP"
-    },
-    TIERSCHUTZPARTEI:{
-        "name": "Tierschutzpartei"
-    },
-    OEDP:{
-        "name": "ÖDP"
-    },
-    VOLKSABSTIMMUNG:{
-        "name": "Volksabstimmung"
-    },
-    MLPD:{
-        "name": "MLPD"
-    },
-    BUESO:{
-        "name": "BüSo"
-    },
-    BIG:{
-        "name": "BIG"
-    },
-    PBC: {
-        "name": "PBC"
-    },
-    PRODEUTSCHLAND:{
-        "name": "pro Deutschland"
-    },
-    FREIEWAEHLER:{
-        "name": "Freie Wähler"
-    },
-    PARTEIDERVERNUNFT:{
-        "name": "Partei der Vernunft"
-    },
-    RENTNER:{
-        "name": "Rentner"
-    }
-}
-var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
 
 var MAP_ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
@@ -169,6 +98,24 @@ pathsFromGeoJSON("bundestagswahl_2013_wahlbezirke.geojson", wahlbezirke, true, f
         .style('stroke-width', 1)
         .on('click', selectDistrict);
 });
+
+$('#szenarien-carousel').bind('slide.bs.carousel', function (e) {
+    colorMap();
+});
+
+function colorMapNeutrally() {
+
+    // Karte Reference setzten wenn nicht vorhanden
+    if(elemSvg === null){
+        getSVGMap();
+    } // end if
+
+    if (GEOJSON !== null) {
+        elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = '#fff';
+    } else {
+        console.error("GEOJSON null!")
+    }
+}
 
 function colorMap() {
 
