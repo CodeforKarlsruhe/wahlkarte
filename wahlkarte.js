@@ -129,7 +129,6 @@ function colorMap() {
             var win = maxPartie(item)
             var color = winnerColor(win[0])
             if (typeof color !== 'undefined'){
-                color = "#" + color;
                 elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
             }
         }
@@ -139,11 +138,18 @@ function colorMap() {
 }
 
 function winnerColor(partyName){
-    var index = Party.indexOf(partyName)
-    if (index >= 0 && PartyColors.length >= index){
-        return PartyColors[index]
+    let winner = null
+    Object.keys(PARTY).forEach(function(p){
+        found = PARTY[p]
+        if (found.name.toLowerCase() === partyName.toLowerCase()){
+            winner = found
+        } 
+    });
+    
+    if (winner !== null){
+        return winner.color;
     } else {
-        console.error("Party not found! ", partyName)
+        console.error("Party not found!")
     }
 }
 
