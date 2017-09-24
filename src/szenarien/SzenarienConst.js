@@ -57,7 +57,7 @@ const SZENARIEN = [
   },
   {
     "id": "kleinparteien",
-    "titel": "Größte Klein<wbr>parteien",
+    "titel": "Größte Kleine",
     "untertitel": "Die Zweitstimmen<wbr>ergebnisse ohne CDU und SPD",
     "beschreibung": "Hier haben wir die großen Parteien, also CDU und SPD, aus der Ansicht verbannt. So siehst du nur die \"Kleinparteien\", und wo sie abgestaubt haben.",
     "getAnalyse": getAnalyseForKleinparteien,
