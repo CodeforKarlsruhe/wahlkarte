@@ -3,7 +3,7 @@ const SZENARIEN = [
     "id": "zweitstimme",
     "titel": "Zweitstimme",
     "untertitel": "Hier findest du die Wahlergebnisse in der klassischen Ansicht",
-    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
+    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
     "getAnalyse": getAnalyseForWahlergebnisse,
   },
   {

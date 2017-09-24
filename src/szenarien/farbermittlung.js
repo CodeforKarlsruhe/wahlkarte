@@ -61,7 +61,7 @@ function getAnalyseForErststimmen(properties) {
         var color = getColorForParty(sieger.partei);
         return {
           "color": color,
-          "tooltipShowValue": "Sieger: " + sieger.name + " (" + sieger.partei + ")"+ " mit " + max + " Stimmen",
+          "tooltipShowValue": "Sieger: " + sieger.name + " (" + sieger.partei + ")"+ " mit " + max + " Erststimmen",
         }
       }
     } else {
@@ -116,9 +116,9 @@ function getAnalyseForErstVsZweit(properties) {
 
 
 function getAnalyseGroessteAenderung(properties) {
-  if (properties.btw2013.zweitstimme && properties.btw2017.zweitstimme) {
+  if (properties.btw2013.zweitstimme && properties.btw2017_dummy.zweitstimme) {
     var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
-    var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
+    var btw2017_zweitstimmen = properties.btw2017_dummy.zweitstimme;
     var winner_loser = {};
     btw2017_zweitstimmen.forEach(function(partei) {
       winner_loser[partei.partei] = partei.stimmen;
