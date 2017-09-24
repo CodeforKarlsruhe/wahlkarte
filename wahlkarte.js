@@ -7,7 +7,7 @@ var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tiers
 
 const PartyColors = ["000","f40502","feed01","42a62a","8b1b62","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","009de0","ffffff","ffffff","ffffff","ffffff","ffffff"];
 
-var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
 
 var MAP_ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
