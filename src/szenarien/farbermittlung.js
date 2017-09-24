@@ -159,7 +159,7 @@ function getAnalyseGroessteAenderung(properties) {
 
 function getAnalyseNichtWaehlerWin(properties) {
   if (properties.btw2017_dummy && properties.btw2017_dummy.wahlbeteiligung) {
-    if (properties.btw2017_dummy.wahlbeteiligung > 50) {
+    if (properties.btw2017_dummy.wahlbeteiligung < 50) {
       return {
         "color": "#1abc9c",
         "tooltipShowValue": "In diesem Wahlkreis hätten die Nichtwähler das Ergebnis ändern können"
