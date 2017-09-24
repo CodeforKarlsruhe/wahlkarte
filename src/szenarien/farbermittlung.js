@@ -100,3 +100,48 @@ function getAnalyseForErststimmen(properties) {
         console.error("Error in analysis");
     }
 }
+
+/**
+ *  Findet Wahlkreise in denen der Gewinner der Erststimme einer anderen Partei angehört als die Partei, die die Zweitstimme gewonnen hat.
+ * @param {Object} properties
+ */
+function getAnalyseForErstVsZweit(properties) {
+  if (properties.btw2013.erststimme !== 'undefined') {
+    var erststimmen = properties.btw2013.erststimme;
+    var erststimme_max = 0;
+    var erststimme_partyName = null;
+    erststimmen.forEach(function(kandidat) {
+      if (erststimme_max < kandidat.stimmen) {
+        erststimme_max = kandidat.stimmen;
+        erststimme_partyName = kandidat.partei;
+      }
+    });
+
+    var zweitstimmen = properties.btw2013.zweitstimme;
+    var zweitstimme_max = 0;
+    var zweitstimme_partyName = null;
+    zweitstimmen.forEach(function(kandidat) {
+      if (zweitstimme_max < kandidat.stimmen) {
+        zweitstimme_max = kandidat.stimmen;
+        zweitstimme_partyName = kandidat.partei;
+      }
+    });
+
+    if (erststimme_max >= 0 && erststimme_partyName !== null && zweitstimme_max >= 0 && zweitstimme_partyName !== null) {
+      var color = getColorForParty(erststimme_partyName);
+      if (erststimme_partyName != zweitstimme_partyName) {
+        return {
+          "color": color,
+          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Zweitstimmen: " + zweitstimme_max,
+        }
+      } else {
+        return {
+          "color": color,
+          "tooltipShowValue": "Die Partei '" + erststimme_partyName + "' hat sowohl die Erststimme als auch die Zweitstimme gewonnen.",
+        }
+      }
+    }
+  } else {
+    console.error("Error in analysis");
+  }
+}

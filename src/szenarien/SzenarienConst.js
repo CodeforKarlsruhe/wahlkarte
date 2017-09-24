@@ -32,7 +32,7 @@ const SZENARIEN = [
     "titel": "Erst- vs. Zweitstimme",
     "untertitel": "Wo unterscheiden sich die Sieger?",
     "beschreibung": "Hervorgehoben sind die Wahlbezirke, in denen sich die meistgewählte Partei von der Partei des meistegwählten Kandidaten unterscheiden.",
-    "getAnalyse": dummyAnalyse,
+    "getAnalyse": getAnalyseForErstVsZweit,
   },
   {
     "id": "migration",
