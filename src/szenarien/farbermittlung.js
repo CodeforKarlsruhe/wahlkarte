@@ -132,11 +132,11 @@ function getAnalyseForErstVsZweit(properties) {
       if (erststimme_partyName != zweitstimme_partyName) {
         return {
           "color": color,
-          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Zweitstimmen: " + zweitstimme_max,
+          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Partei der Erstimme: " + erststimme_partyName + "<br/>Zweitstimmen: " + zweitstimme_max + "<br/>Partei der Zweistimmen: " + zweitstimme_partyName,
         }
       } else {
         return {
-          "color": color,
+          "color": "#FFF",
           "tooltipShowValue": "Die Partei '" + erststimme_partyName + "' hat sowohl die Erststimme als auch die Zweitstimme gewonnen.",
         }
       }
