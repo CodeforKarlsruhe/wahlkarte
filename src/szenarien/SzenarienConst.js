@@ -21,25 +21,11 @@ const SZENARIEN = [
     "getAnalyse": getAnalyseForWechselwaehler,
   },
   {
-    "id": "hunde",
-    "titel": "Hundebesitzer",
-    "untertitel": "Wie haben Hundebesitzer gewählt?",
-    "beschreibung": "Die Wahlbezirke mit den meisten Hundebesitzern werden farblich hervorgehoben.",
-    "getAnalyse": dummyAnalyse,
-  },
-  {
     "id": "erst-vs-zweit",
     "titel": "Erst- vs. Zweitstimme",
     "untertitel": "Wo unterscheiden sich die Sieger?",
     "beschreibung": "Hervorgehoben sind die Wahlbezirke, in denen sich die meistgewählte Partei von der Partei des meistegwählten Kandidaten unterscheiden.",
     "getAnalyse": getAnalyseForErstVsZweit,
-  },
-  {
-    "id": "migration",
-    "titel": "Migrations<wbr>hintergrund",
-    "untertitel": "Wird in Wahlbezirken mit mehr Menschen mit Migrationshintergrund anders gewählt?",
-    "beschreibung": "Hervorgehoben sind die Wahlbezirke, in denen mehr Menschen mit Migrationshintergrund leben.",
-    "getAnalyse": dummyAnalyse,
   },
   {
     "id": "aenderung",
