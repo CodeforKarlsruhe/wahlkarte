@@ -1,5 +1,5 @@
 #extended-tooltip{
-    position: absolute;
+    position: fixed;
     display: none;
     width: 250px;
     height: 250px;
