@@ -62,4 +62,11 @@ const SZENARIEN = [
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Zweitstimmen gab es.",
     "getAnalyse": dummyAnalyse,
   },
+  {
+    "id": "nichtwaehler-win",
+    "titel": "Wahlbezirke in denen Nichtwähler gewonnen hätten",
+    "untertitel": "Hätten Nichtwähler das Ergebnis des Wahlbezirks ändern können?",
+    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler als der Ergebnis verändern können.",
+    "getAnalyse": getNichtWaehlerWin,
+  }
 ]
