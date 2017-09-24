@@ -336,8 +336,7 @@ function getAnalyseForKleinsterAbstand(properties) {
       return {
         "color": color,
         "tooltipShowValue": "Abstand von " +
-        erster.party.name + " (" + erster.stimmen + " Stimmen) zu " +
-        zweiter.party.name + " (" + zweiter.stimmen + " Stimmen): " +
+        erster.party.name + " zu " + zweiter.party.name + ": " +
         Math.round(prozentual * 100000) / 1000 + " % (" + differenz + " Stimmen)",
       }
     }
