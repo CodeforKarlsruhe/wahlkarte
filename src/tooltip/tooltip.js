@@ -51,6 +51,8 @@ function onMouseOverWahlbezirk(data){
             } // end if
         });
 
+
+
         // Verhältnis ermitteln
         Object.keys(data.properties).forEach(function(k, v){
             var index = Party.indexOf(k);
