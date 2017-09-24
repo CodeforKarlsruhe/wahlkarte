@@ -21,7 +21,7 @@
 }
 
 #extended-tooltip-detail-district-info{
-    font-size: 10px;
+    font-size: 14px;
     overflow-y: scroll;
     height: 198px;
 }
@@ -38,3 +38,15 @@
 
 .nav-pills .nav-link {color: #fff;}
 .nav-pills .nav-link.active {background-color: #fff; color: #000;}
+
+.table-erststimme {
+    width: 100%;
+}
+
+.table-zweitstimme {
+    width: 100%;
+}
+.table-sm td, .table-sm th {
+    /* overwrite bootstrap */
+    padding: 0;
+}

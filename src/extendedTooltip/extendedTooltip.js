@@ -22,7 +22,6 @@ function rgb2hex(rgba) {
     var regex = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/
         parsed = regex.exec(rgba);
     var red, green, blue, alpha, elems;
-    console.log(parsed);
     if (!parsed) {
         console.log(rgba);
         throw "Invalid format: " + rgba;
@@ -69,6 +68,7 @@ function selectDistrict(featureData) {
         // Neuer Stadtteil färben
         let oldColor = rgb2hex(elemSvg.getElementById(props.stadtteilnummer).style.fill)
         elemSvg.getElementById(props.stadtteilnummer).style.fill = lightenDarkenColor(oldColor, -20);
+
 
         // letzte ausgewählter Stadtteil speichern
         lastSelectetDistrictId = props.stadtteilnummer;
@@ -132,7 +132,7 @@ function addDetailDistrictInfo(districtInfo) {
     templateZweistimme += buildBar(data2013.zweitstimme, sumDistrict);
 
     templateZweistimme += 'Zweitstimmen (Parteien)' +
-        '<table class="table-sm">' +
+        '<table class="table-sm table-zweitstimme">' +
         '<tbody>' +
         '<colgroup>' +
         '   <col style="width: 100px">' +
@@ -175,7 +175,7 @@ function addDetailDistrictInfo(districtInfo) {
 
 
     var templateErststimme = 'Erststimmen (Kandidaten)' +
-        '<table class="table-sm">' +
+        '<table class="table-sm table-erststimme">' +
         '<tbody>' +
         '<colgroup>' +
         '   <col style="width: 100px">' +
