@@ -83,6 +83,9 @@ function closeInfoPanel() {
  */
 function addDetailDistrictInfo(districtInfo) {
 
+    var data2013 = districtInfo.properties.btw2013,
+        sumDistrict = districtInfo.sumDistrict;
+
     var template = 'Zweitstimmen (Parteien)' +
         '<table class="table-sm">' +
         '<tbody>' +
@@ -93,14 +96,14 @@ function addDetailDistrictInfo(districtInfo) {
         '</colgroup>';
 
     // Array Sortieren
-    districtInfo.properties.btw2013.zweitstimme = districtInfo.properties.btw2013.zweitstimme.sort(function (a, b) {
+    data2013.zweitstimme = data2013.zweitstimme.sort(function (a, b) {
         return b.stimmen - a.stimmen;
     });
 
     // Verhältnis ermitteln
-    for(var index in districtInfo.properties.btw2013.zweitstimme){
+    for(var index in data2013.zweitstimme){
 
-        var partyItem = PARTY[(districtInfo.properties.btw2013.zweitstimme[index].partei).toUpperCase()];
+        var partyItem = PARTY[(data2013.zweitstimme[index].partei).toUpperCase()];
 
         if( typeof partyItem === 'undefined'){
             partyItem = {
@@ -110,9 +113,9 @@ function addDetailDistrictInfo(districtInfo) {
 
         template += '<tr>';
         //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-        template += '<td>'+districtInfo.properties.btw2013.zweitstimme[index].partei+'</td>';
-        template += '<td align="right">'+((100 * districtInfo.properties.btw2013.zweitstimme[index].stimmen) / districtInfo.sumDistrict).toFixed(1)+'%</td>';
-        template += '<td align="right">'+districtInfo.properties.btw2013.zweitstimme[index].stimmen+' <small>Stimmen</small></td>';
+        template += '<td>'+data2013.zweitstimme[index].partei+'</td>';
+        template += '<td align="right">'+((100 * data2013.zweitstimme[index].stimmen) / sumDistrict).toFixed(1)+'%</td>';
+        template += '<td align="right">'+data2013.zweitstimme[index].stimmen+' <small>Stimmen</small></td>';
 
         template += '</tr>';
 
@@ -134,14 +137,14 @@ function addDetailDistrictInfo(districtInfo) {
         '</colgroup>';
 
     // Array Sortieren
-    districtInfo.properties.btw2013.erststimme = districtInfo.properties.btw2013.erststimme.sort(function (a, b) {
+    data2013.erststimme = data2013.erststimme.sort(function (a, b) {
         return b.stimmen - a.stimmen;
     });
 
     // Verhältnis ermitteln
-    for(var index in districtInfo.properties.btw2013.erststimme){
+    for(var index in data2013.erststimme){
 
-        var partyItem = PARTY[(districtInfo.properties.btw2013.erststimme[index].partei).toUpperCase()];
+        var partyItem = PARTY[(data2013.erststimme[index].partei).toUpperCase()];
 
         if( typeof partyItem === 'undefined'){
             partyItem = {
@@ -151,9 +154,9 @@ function addDetailDistrictInfo(districtInfo) {
 
         template += '<tr>';
         //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-        template += '<td>'+districtInfo.properties.btw2013.erststimme[index].name+' <small>('+districtInfo.properties.btw2013.erststimme[index].partei+')</small></td>';
-        template += '<td align="right">'+((100 * districtInfo.properties.btw2013.erststimme[index].stimmen) / districtInfo.sumDistrict).toFixed(1)+'%</td>';
-        template += '<td align="right">'+districtInfo.properties.btw2013.erststimme[index].stimmen+' <small>Stimmen</small></td>';
+        template += '<td>'+data2013.erststimme[index].name+' <small>('+data2013.erststimme[index].partei+')</small></td>';
+        template += '<td align="right">'+((100 * data2013.erststimme[index].stimmen) / sumDistrict).toFixed(1)+'%</td>';
+        template += '<td align="right">'+data2013.erststimme[index].stimmen+' <small>Stimmen</small></td>';
 
         template += '</tr>';
 

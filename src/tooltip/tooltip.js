@@ -49,6 +49,11 @@ function onMouseOverWahlbezirk(data){
             summe += data.properties.btw2013.zweitstimme[index].stimmen;
         } // end for
 
+        // Array Sortieren
+        data.properties.btw2013.zweitstimme = data.properties.btw2013.zweitstimme.sort(function (a, b) {
+            return b.stimmen - a.stimmen;
+        });
+
         // Verhältnis ermitteln
         for(var index in data.properties.btw2013.zweitstimme){
 
