@@ -42,7 +42,7 @@ const PARTIES = {
         "name": "NPD"
     },
     REP:{
-        "name": "Die Republikaner"
+        "name": "REP"
     },
     TIERSCHUTZPARTEI:{
         "name": "Tierschutzpartei"
@@ -61,6 +61,9 @@ const PARTIES = {
     },
     BIG:{
         "name": "BIG"
+    },
+    PBC: {
+        "name": "PBC"
     },
     PRODEUTSCHLAND:{
         "name": "pro Deutschland"
