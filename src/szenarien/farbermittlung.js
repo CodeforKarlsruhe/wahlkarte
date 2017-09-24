@@ -69,7 +69,7 @@ function getAnalyseForErststimmen(properties) {
       var erststimmen = properties.btw2013.erststimme;
       var max = 0;
       var partyName = null;
-      zweitstimmen.forEach(function(kandidat) {
+      erststimmen.forEach(function(kandidat) {
          if (max < kandidat.stimmen) {
              max = kandidat.stimmen;
              partyName = kandidat.partei;

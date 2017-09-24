@@ -111,13 +111,14 @@ function setScenario(scenarioId) {
     var currentSlideIndex = $('#szenarien-carousel div.active').index();
     for (var i = 0; i < SZENARIEN.length; i++) {
         if (SZENARIEN[i].id === scenarioId) {
+            var szenario = SZENARIEN[i];
             if (i !== currentSlideIndex) {
                 $("#szenarien-carousel").carousel(i);
             }
             break;
         }
     }
-    colorMapWinDistrict();
+    colorMapWinDistrict(szenario);
 }
 
 function colorMapNeutrally() {
@@ -138,7 +139,7 @@ function colorMapNeutrally() {
  * Faerbt die Karte nach dem Gewinner fuer jeden Wahlbezirk. Falls keine
  * Farbe fuer die Partei gesetzt, so wird eine 'DefaultColor' gewaehlt.
  */
-function colorMapWinDistrict() {
+function colorMapWinDistrict(szenario) {
     // Karte Reference setzten wenn nicht vorhanden
     if(elemSvg === null){
         getSVGMap();
@@ -146,7 +147,7 @@ function colorMapWinDistrict() {
 
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            var analyse = getAnalyseForWahlergebnisse(item.properties);
+            var analyse = szenario.colorMap(item.properties);
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
