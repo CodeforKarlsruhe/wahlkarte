@@ -67,12 +67,15 @@ function onMouseOverWahlbezirk(data){
         template += '<hr>';
 
         if(typeof currentAnalysis[currentConstituencyNumber] !== 'undefined'){
-            console.log(data.properties, currentAnalysis[currentConstituencyNumber]);
 
+            // Prüfen ob ein vor definierter Text mit gegebene wurde
             if(typeof currentAnalysis[currentConstituencyNumber].tooltipShowValue !== 'undefined'){
                 template += currentAnalysis[currentConstituencyNumber].tooltipShowValue;
             } // end if
+
             template += '<br>';
+
+            // Prüfen ob ein Statistik Wert ausgelsen werden soll
             if(
                 typeof currentAnalysis[currentConstituencyNumber].tooltipShowKey !== 'undefined'
                 &&
