@@ -10,7 +10,7 @@ const SZENARIEN = [
     "id": "erststimme",
     "titel": "Erststimme",
     "untertitel": "Übersicht der gewählten Kandidaten",
-    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei des meistegwählten Kandidaten gefärbt.",
+    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei des meistgewählten Kandidaten gefärbt.",
     "getAnalyse": getAnalyseForErststimmen,
   },
   {
