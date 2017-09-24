@@ -4,6 +4,8 @@
 var infoPanelDistrictName = document.getElementById('extended-tooltip-district-name'),
     infoPanel = document.getElementById('extended-tooltip'),
     extendedTooltipDetailDistrictInfo = document.getElementById('extended-tooltip-detail-district-info');
+    extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme');
+    extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme');
     lastSelectedConstituencyNumber = null;
 
 /**
@@ -92,10 +94,10 @@ function addDetailDistrictInfo(districtInfo) {
         return b.stimmen - a.stimmen;
     });
 
-    template += '2013 Wahlbeteiligung '+((100 * data2013['wähler/-innen']) / data2013.wahlberechtigte).toFixed(1) +'%';
-    template += buildBar(data2013.zweitstimme, sumDistrict);
+    templateZweistimme = '2013 Wahlbeteiligung '+((100 * data2013['wähler/-innen']) / data2013.wahlberechtigte).toFixed(1) +'%';
+    templateZweistimme += buildBar(data2013.zweitstimme, sumDistrict);
 
-    template += 'Zweitstimmen (Parteien)' +
+    templateZweistimme += 'Zweitstimmen (Parteien)' +
         '<table class="table-sm">' +
         '<tbody>' +
         '<colgroup>' +
@@ -122,23 +124,23 @@ function addDetailDistrictInfo(districtInfo) {
                 }
             } // end if
 
-            template += '<tr>';
+            templateZweistimme += '<tr>';
             //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-            template += '<td>' + data2013.zweitstimme[index].partei + '</td>';
-            template += '<td align="right">' + ((100 * data2013.zweitstimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
-            template += '<td align="right">' + data2013.zweitstimme[index].stimmen + ' <small>Stimmen</small></td>';
+            templateZweistimme += '<td>' + data2013.zweitstimme[index].partei + '</td>';
+            templateZweistimme += '<td align="right">' + ((100 * data2013.zweitstimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
+            templateZweistimme += '<td align="right">' + data2013.zweitstimme[index].stimmen + ' <small>Stimmen</small></td>';
 
-            template += '</tr>';
+            templateZweistimme += '</tr>';
         }
     } // end for
 
-    template += '</tbody>';
-    template += '</table>';
+    templateZweistimme += '</tbody>';
+    templateZweistimme += '</table>';
 
-    template += '<br>';
+    templateZweistimme += '<br>';
 
 
-    template += 'Erststimmen (Kandidaten)' +
+    var templateErststimme = 'Erststimmen (Kandidaten)' +
         '<table class="table-sm">' +
         '<tbody>' +
         '<colgroup>' +
@@ -165,19 +167,20 @@ function addDetailDistrictInfo(districtInfo) {
                 }
             } // end if
 
-            template += '<tr>';
+            templateErststimme += '<tr>';
             //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-            template += '<td>' + data2013.erststimme[index].name + ' <small>(' + data2013.erststimme[index].partei + ')</small></td>';
-            template += '<td align="right">' + ((100 * data2013.erststimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
-            template += '<td align="right">' + data2013.erststimme[index].stimmen + ' <small>Stimmen</small></td>';
+            templateErststimme += '<td>' + data2013.erststimme[index].name + ' <small>(' + data2013.erststimme[index].partei + ')</small></td>';
+            templateErststimme += '<td align="right">' + ((100 * data2013.erststimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
+            templateErststimme += '<td align="right">' + data2013.erststimme[index].stimmen + ' <small>Stimmen</small></td>';
 
-            template += '</tr>';
+            templateErststimme += '</tr>';
         } // end if
     } // end for
 
-    template += '</tbody>';
-    template += '</table>';
+    templateErststimme += '</tbody>';
+    templateErststimme += '</table>';
 
 
-    extendedTooltipDetailDistrictInfo.innerHTML = template;
+    extendedTooltipDetailDistrictInfoErststimme.innerHTML = templateErststimme;
+    extendedTooltipDetailDistrictInfoZweitstimme.innerHTML = templateZweistimme;
 } // end function

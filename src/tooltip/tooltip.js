@@ -41,7 +41,7 @@ function onMouseOverWahlbezirk(data){
 
         currentConstituencyNumber = data.properties.wahlbezirksnummer;
 
-        var template = 'Wahlbezirksnummer: '+currentConstituencyNumber;
+        var template = '<span id="tool-tip-district-name">'+data.properties.wahlbezirksname+"<small> (" + data.properties.stadtteilname + ")</small></span>";
         var summe = 0;
 
         // Stimme von diesem Wahlkreis zusammen rechnen
@@ -53,7 +53,6 @@ function onMouseOverWahlbezirk(data){
         data.properties.btw2013.zweitstimme = data.properties.btw2013.zweitstimme.sort(function (a, b) {
             return b.stimmen - a.stimmen;
         });
-
 
         template += buildBar(data.properties.btw2013.zweitstimme, summe);
         data.properties.btw2013.zweitstimme.slice(0,3).forEach(function(element) {
@@ -68,7 +67,6 @@ function onMouseOverWahlbezirk(data){
         toolTip.innerHTML = template;
 
         // Infos an das extended Tooltip weiter geben
-
         currentConstituencyObject = {
             sumDistrict:    summe,
             properties:     data.properties
