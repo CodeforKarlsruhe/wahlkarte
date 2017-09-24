@@ -5,6 +5,7 @@
 
 var toolTip = document.getElementById('tool-tip'),
     currentConstituencyNumber = null,
+    currentConstituencyObject = null,
     xpos = 0,
     ypos = 0;
 
@@ -64,6 +65,13 @@ function onMouseOverWahlbezirk(data){
 
         // HTML hinzufügen
         toolTip.innerHTML = template;
+
+        // Infos an das extended Tooltip weiter geben
+
+        currentConstituencyObject = {
+            sumDistrict:    summe,
+            properties:     data.properties
+        };
     } // end if
 
     toolTip.style.display = 'block';
