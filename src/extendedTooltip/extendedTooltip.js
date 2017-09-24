@@ -86,6 +86,7 @@ function closeInfoPanel() {
 function addDetailDistrictInfo(districtInfo) {
 
     var data2013 = districtInfo.properties.btw2013,
+        //data2017 = districtInfo.properties.btw2017,
         sumDistrict = districtInfo.sumDistrict,
         template = '';
 
@@ -94,8 +95,16 @@ function addDetailDistrictInfo(districtInfo) {
         return b.stimmen - a.stimmen;
     });
 
+<<<<<<< HEAD
     templateZweistimme = '2013 Wahlbeteiligung '+((100 * data2013['wähler/-innen']) / data2013.wahlberechtigte).toFixed(1) +'%';
     templateZweistimme += buildBar(data2013.zweitstimme, sumDistrict);
+=======
+    //template += '2017 Wahlbeteiligung '+((100 * data2017['wähler/-innen']) / data2017.wahlberechtigte).toFixed(1) +'%';
+    //template += buildBar(data2017.zweitstimme, sumDistrict2017);
+
+    templateZweistimme += '2013 Wahlbeteiligung '+((100 * data2013['wähler/-innen']) / data2013.wahlberechtigte).toFixed(1) +'%';
+    templateZweistimme += buildBar(data2013.zweitstimme, sumDistrict);
+>>>>>>> origin/gh-pages
 
     templateZweistimme += 'Zweitstimmen (Parteien)' +
         '<table class="table-sm">' +
