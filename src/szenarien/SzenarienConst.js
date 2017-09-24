@@ -15,7 +15,7 @@ const SZENARIEN = [
   },
   {
     "id": "wechselwaehler",
-    "titel": "Wechselwähler*innen",
+    "titel": "Wechsel&shy;wähler*innen",
     "untertitel": "Welche Wahlbezirke haben die Farbe gewechselt?",
     "beschreibung": "Die Wahlbezirke, in denen die meistgewählte Partei im Vergleich zur Bundestagswahl 2013 gewechselt ist, sind hier hervorgehoben.",
     "getAnalyse": getAnalyseForWechselwaehler,
