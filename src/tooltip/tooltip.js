@@ -62,7 +62,7 @@ function onMouseOverWahlbezirk(data){
             template += '<br \>'
         }, this);
 
-        template += 'Summe der Stimmen: '+summe;
+        template += '<small>Summe der Stimmen: '+summe+'</small>';
 
         // HTML hinzufügen
         toolTip.innerHTML = template;
