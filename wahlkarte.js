@@ -142,7 +142,8 @@ function color() {
             var color = winnerColor(win[0])
             // console.log("Data", item)
             // console.log("Party ", win)
-            if (color !== undefined){
+            if (typeof color !== 'undefined'){
+                color = "#" + color;
                 elemSvg.getElementById(item.properties.Wahlbezirksnummer).style.fill = color
             }
         }
