@@ -92,21 +92,26 @@ function addDetailDistrictInfo(districtInfo) {
         '   <col style="width: 60px">' +
         '</colgroup>';
 
-
     // Verhältnis ermitteln
-    Object.keys(districtInfo.properties).forEach(function(k, v){
-        var index = Party.indexOf(k);
-        if (index >= 0 && v > 0 && districtInfo.properties[k] > 0) {
+    for(var index in districtInfo.properties.btw2013.zweitstimme){
 
-            template += '<tr>';
-            //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-                template += '<td>'+k+'</td>';
-                template += '<td align="right">'+((100 * districtInfo.properties[k]) / districtInfo.sumDistrict).toFixed(1)+'%</td>';
-                template += '<td align="right">'+districtInfo.properties[k]+' <small>Stimmen</small></td>';
+        var partyItem = PARTY[(districtInfo.properties.btw2013.zweitstimme[index].partei).toUpperCase()];
 
-            template += '</tr>'
+        if( typeof partyItem === 'undefined'){
+            partyItem = {
+                color: '#808080'
+            }
         } // end if
-    });
+
+        template += '<tr>';
+        //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
+        template += '<td>'+districtInfo.properties.btw2013.zweitstimme[index].partei+'</td>';
+        template += '<td align="right">'+((100 * districtInfo.properties.btw2013.zweitstimme[index].stimmen) / districtInfo.sumDistrict).toFixed(1)+'%</td>';
+        template += '<td align="right">'+districtInfo.properties.btw2013.zweitstimme[index].stimmen+' <small>Stimmen</small></td>';
+
+        template += '</tr>';
+
+    } // end for
 
     template += '</tbody>';
 

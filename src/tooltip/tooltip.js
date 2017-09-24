@@ -43,22 +43,29 @@ function onMouseOverWahlbezirk(data){
 
         var template = 'Wahlbezirksnummer: '+currentConstituencyNumber+' <div class="flex">';
         var summe = 0;
-        // Stimme von diesem Wahlkreis zusammen rechnen
-        Object.keys(data.properties).forEach(function(k, v){
 
-            var index = Party.indexOf(k);
-            if (index >= 0) {
-                summe += data.properties[k];
-            } // end if
-        });
+        // Stimme von diesem Wahlkreis zusammen rechnen
+        for(var index in data.properties.btw2013.zweitstimme){
+            summe += data.properties.btw2013.zweitstimme[index].stimmen;
+        } // end for
 
         // Verhältnis ermitteln
-        Object.keys(data.properties).forEach(function(k, v){
-            var index = Party.indexOf(k);
-            if (index >= 0 && v > 0) {
-                template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
+        for(var index in data.properties.btw2013.zweitstimme){
+
+            var partyItem = PARTY[(data.properties.btw2013.zweitstimme[index].partei).toUpperCase()];
+
+            if( typeof partyItem === 'undefined'){
+                partyItem = {
+                    color: '#808080'
+                }
             } // end if
-        });
+
+            template += '<div style="' +
+                'height: 25px;' +
+                'width: '+(100 * data.properties.btw2013.zweitstimme[index].stimmen) / summe+'%;' +
+                'background-color: '+partyItem.color+'"' +
+                '></div>';
+        } // end for
 
         template += '</div>' +
             'Summe der Stimmen: '+summe;
