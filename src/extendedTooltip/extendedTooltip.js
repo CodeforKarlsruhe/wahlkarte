@@ -83,7 +83,6 @@ function closeInfoPanel() {
  */
 function addDetailDistrictInfo(districtInfo) {
 
-    console.log(districtInfo);
     var template = 'Zweitstimmen (Parteien)' +
         '<table class="table-sm">' +
         '<tbody>' +
