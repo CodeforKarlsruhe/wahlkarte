@@ -159,6 +159,7 @@ function colorMapWinDistrict(szenario) {
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var analyse = szenario.getAnalyse(item.properties);
+            currentAnalysis[item.properties.statistik.wahlbezirksnummer] = analyse;
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
@@ -169,29 +170,6 @@ function colorMapWinDistrict(szenario) {
     }
 }
 
-/**
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
- * @param {String} name
- */
-function findParty(name){
-    let winner = null
-    Object.keys(PARTY).forEach(function(p){
-        found = PARTY[p]
-        if (found.name.toLowerCase() === name.toLowerCase()){
-            winner = found
-        }
-    });
-
-    if (winner !== null){
-        return winner;
-    } else {
-        console.error("Can't find party ", name)
-    }
-}
-
-function getSVGMap() {
-    return elemSvg = document.getElementById("karte");
-}
 
 /**
  * Initialisierung wenn die Seite vollständig geladen ist.
@@ -207,22 +185,3 @@ $(function() {
     $(window).on('hashchange', onHashChange);
     onHashChange();
 });
-
-
-/**
- * Liefert die aktuelle Szenarien-ID aus der Browser-URL zurück.
- *
- * Wenn keine oder eine ungültige Szenarien-ID gesetzt ist wird die ID
- * des ersten Szenarios zurückgeliefert.
- */
-function getScenarioIdFromUrl() {
-    if (window.location.hash) {
-        var hash = window.location.hash.slice(1);
-        for(var i = 0; i < SZENARIEN.length; i++) {
-            if (SZENARIEN[i].id === hash) {
-                return hash;
-            }
-        }
-    }
-    return SZENARIEN[0].id;
-}
