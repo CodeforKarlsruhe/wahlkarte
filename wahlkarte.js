@@ -3,7 +3,7 @@ var KA_LNG  = 8.45003951;
 var elemSvg = null;
 
 var GEOJSON = null;
-var TILES_URL = '//a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
+var TILES_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png';
 
 var MAP_ATTRIBUTION = 'Map data &copy; <a href="//openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
