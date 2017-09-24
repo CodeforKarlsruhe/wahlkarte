@@ -3,8 +3,8 @@ const SZENARIEN = [
     "id": "zweitstimme",
     "titel": "Zweitstimme",
     "untertitel": "Hier findest du die Wahlergebnisse in der klassischen Ansicht",
-    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
-    "getAnalyse": getAnalyseForWahlergebnisse,
+    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Klaienparteien</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
+    "getAnalyse": getAnalyseForKleinparteien,
   },
   {
     "id": "erststimme",
@@ -61,5 +61,12 @@ const SZENARIEN = [
     "untertitel": "In welchen Wahlbezirken war das Ergebnis am knappsten?",
     "beschreibung": "Gezeigt werden die Wahlbezirke, in denen der Abstand zwischen dem Erst- und Zweitplatzierten am geringsten ist. Ausgewertet werden die Zweitstimmen der Parteien in Relation zur Gesamtzahl der Wähler.",
     "getAnalyse": getAnalyseForKleinsterAbstand,
-  }
+  },
+  {
+    "id": "kleinparteien",
+    "titel": "Größte Klein<wbr>parteien",
+    "untertitel": "Die Zweitstimmen<wbr>ergebnisse ohne CDU und SPD",
+    "beschreibung": "Hier haben wir die großen Parteien, also CDU und SPD, aus der Ansicht verbannt. So siehst du nur die \"Kleinparteien\", und wo sie abgestaubt haben.",
+    "getAnalyse": getAnalyseForKleinparteien,
+  },
 ]
