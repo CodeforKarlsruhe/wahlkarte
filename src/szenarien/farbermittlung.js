@@ -237,26 +237,29 @@ function getParteiMitMeistenStimmen(zweitstimmen) {
 }
 
 /**
- *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
  * @param {Object} properties
  */
-function getAnalyseForUngueltigeErststimmen(properties) {
+function getAnalyseForUngueltigeStimmen(properties) {
     if (properties.btw2017_dummy.erststimme !== 'undefined') {
       var erststimmen = properties.btw2017_dummy.erststimme;
-      var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
+      var zweitstimmen = properties.btw2017_dummy.zweitstimme;
 
-      var tooltip = "Kein Wechsel";
+      var gesamtstimmen = 2 * properties.btw2017_dummy["waehler/-innen"];
       var gueltigeStimmen = 0;
       erststimmen.forEach(function(kandidat) {
            gueltigeStimmen += kandidat.stimmen;
       });
+      zweitstimmen.forEach(function(partei) {
+           gueltigeStimmen += partei.stimmen;
+      });
       var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
+
       var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
       var opacity = prozentualUngueltigeStimmen * 50;
       var color = 'rgba(26, 188, 156, ' + opacity + ')';
       return {
         "color": color,
-        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Erststimmen (" + ungueltigeStimmen + " Stimmen)",
+        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Stimmen (" + ungueltigeStimmen + " Stimmen)",
       }
     } else {
         console.error("Error in analysis");
