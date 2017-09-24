@@ -36,8 +36,19 @@
     color: rgba(255,255,255,1);
 }
 
-.nav-pills .nav-link {color: #fff;}
-.nav-pills .nav-link.active {background-color: #fff; color: #000;}
+.nav-pills {
+    margin: 0 5px;
+}
+
+.nav-pills .nav-link {
+    background-color: #fff;
+    color: #000;
+}
+
+.nav-pills .nav-link.active {
+    color: #fff;
+    background-color:#1abc9c;
+}
 
 .table-erststimme {
     width: 100%;
