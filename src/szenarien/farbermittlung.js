@@ -157,7 +157,7 @@ function getAnalyseGroessteAenderung(properties) {
   } 
 }
 
-function getNichtWaehlerWin(properties) {
+function getAnalyseNichtWaehlerWin(properties) {
   if (properties.btw2017_dummy && properties.btw2017_dummy.wahlbeteiligung) {
     if (properties.btw2017_dummy.wahlbeteiligung > 50) {
       return {
