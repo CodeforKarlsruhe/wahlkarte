@@ -55,6 +55,7 @@ function onMouseOverWahlbezirk(data){
         });
 
         template += buildBar(data.properties.btw2013.zweitstimme, summe);
+        // ersten 3 Parteien im Tooltip anzeigen
         data.properties.btw2013.zweitstimme.slice(0,3).forEach(function(element) {
             var party = findParty(element.partei);
             template += party.name;
