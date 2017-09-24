@@ -50,9 +50,9 @@ const SZENARIEN = [
   },
   {
     "id": "nichtwaehler-win",
-    "titel": "Wahlbezirke in denen Nichtwähler gewonnen hätten",
-    "untertitel": "Hätten Nichtwähler das Ergebnis des Wahlbezirks ändern können?",
-    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler als der Ergebnis verändern können.",
+    "titel": "Wahlbezirke in denen Nichtwähler die absolute Mehrheit hätten",
+    "untertitel": "Hätten Nichtwähler in diesem Wahlbezirk gewonnen?",
+    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt.",
     "getAnalyse": getAnalyseNichtWaehlerWin,
   }
 ]
