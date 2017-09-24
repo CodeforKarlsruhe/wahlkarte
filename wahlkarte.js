@@ -162,7 +162,7 @@ function colorMapWinDistrict() {
  * @param {String} partyName 
  */
 function winnerColor(partyName){
-    let winner = findPartie(partyName)
+    let winner = findParty(partyName)
     
     if (winner !== null){
         return winner.color;
@@ -175,7 +175,7 @@ function winnerColor(partyName){
  * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
  * @param {String} name 
  */
-function findPartie(name){
+function findParty(name){
     let winner = null
     Object.keys(PARTY).forEach(function(p){
         found = PARTY[p]
