@@ -40,6 +40,30 @@ function getAnalyseForWahlergebnisse(properties) {
     }
 }
 
+function getAnalyseForKleinparteien(properties) {
+    if (properties.btw2013.zweitstimme !== 'undefined') {
+      var zweitstimmen = properties.btw2013.zweitstimme;
+      var zweitstimmenOhneCDUSPD = zweitstimmen.filter(parteiergebnis => parteiergebnis.partei.toLowerCase() != "cdu" && parteiergebnis.partei.toLowerCase() != "spd");
+      var max = 0;
+      var partyName = null;
+      zweitstimmenOhneCDUSPD.forEach(function(party) {
+         if (max < party.stimmen) {
+             max = party.stimmen;
+             partyName = party.partei;
+         }
+      });
+
+      if (max >= 0 && partyName !== null) {
+        var color = getColorForParty(partyName);
+        return {
+          "color": color,
+          "tooltipShowValue": "Größte Kleinpartei: " + partyName + " mit " + max + " Stimmen",
+        }
+      }
+    } else {
+        console.error("Error in analysis");
+    }
+}
 
 /**
  *  Ermittelt die Partei des Kandidaten mit den meisten Stimmen im Wahlkreis
