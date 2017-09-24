@@ -83,13 +83,19 @@ function selectDistrict(featureData) {
     // Hat sich der Wahlbezirk begeändert?
     if(lastSelectedConstituencyNumber !== featureData.properties.wahlbezirksnummer){
 
+        // Ruecksetzen der alten Selektion
         if(lastSelectedConstituencyNumber !== null) {
             elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = currentAnalysis[lastSelectedConstituencyNumber].color;
+            elemSvg.getElementById(lastSelectedConstituencyNumber).style.stroke = '#000';
+            elemSvg.getElementById(lastSelectedConstituencyNumber).style.strokeWidth = '1px';
         } // end if
 
         lastSelectedConstituencyNumber = featureData.properties.wahlbezirksnummer;
         lastSelectetDistrictColor = elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill;
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#57bdeb';
+        // elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#57bdeb';
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.stroke = '#fff';
+        elemSvg.getElementById(lastSelectedConstituencyNumber).style.strokeWidth = '5px';
     } // end if
 
     // Info vom aktullen ausgewählen Wahlbezirk weiter an das ExtendedToolTip geben.
