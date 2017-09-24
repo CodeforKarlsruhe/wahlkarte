@@ -41,7 +41,7 @@ function onMouseOverWahlbezirk(data){
 
         currentConstituencyNumber = data.properties.wahlbezirksnummer;
 
-        var template = '<span id="tool-tip-district-name">'+data.properties.wahlbezirksname+"<small> (" + data.properties.stadtteilname + ")</small></span>";
+        var template = 'Wahlbezirksnummer: '+currentConstituencyNumber;
         var summe = 0;
 
         // Stimme von diesem Wahlkreis zusammen rechnen
