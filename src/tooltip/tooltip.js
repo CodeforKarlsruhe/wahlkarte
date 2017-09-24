@@ -36,10 +36,11 @@ function onMouseOverWahlbezirk(data){
             var party = findParty(element.partei);
             template += party.name;
             template += " mit " + element.stimmen + " Stimmen";
-            template += '<br \>'
+            template += '<br/>'
         }, this);
 
-        template += '<small>Summe der Stimmen: '+summe+'</small>';
+        template += '<small>Summe der Stimmen: '+summe+'</small><br/>';
+        template += '<small>Klicken für alle Ergebnisse</small>';
 
         template += '<hr>';
 
