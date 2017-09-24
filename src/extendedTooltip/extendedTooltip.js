@@ -77,24 +77,25 @@ function selectDistrict(featureData) {
     } // end if
 
     // In das HTML schreiben
-    infoPanelDistrictName.innerHTML = currentConstituencyObject.properties.wahlbezirksname+"<small> (" + props.stadtteilname + ")</small>";
+    console.log(featureData);
+    infoPanelDistrictName.innerHTML = featureData.properties.wahlbezirksname+"<small> (" + props.stadtteilname + ")</small>";
 
     // Hat sich der Wahlbezirk begeändert?
-    if(lastSelectedConstituencyNumber !== currentConstituencyObject.properties.wahlbezirksnummer){
+    if(lastSelectedConstituencyNumber !== featureData.properties.wahlbezirksnummer){
 
         if(lastSelectedConstituencyNumber !== null) {
             elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = currentAnalysis[lastSelectedConstituencyNumber].color;
         } // end if
 
-        lastSelectedConstituencyNumber = currentConstituencyObject.properties.wahlbezirksnummer;
+        lastSelectedConstituencyNumber = featureData.properties.wahlbezirksnummer;
         lastSelectetDistrictColor = elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill;
         elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#57bdeb';
     } // end if
 
     // Info vom aktullen ausgewählen Wahlbezirk weiter an das ExtendedToolTip geben.
-    // currentConstituencyObject wird in der Funktion onMouseOverWahlbezirk gefüllt.
+    // featureData wird in der Funktion onMouseOverWahlbezirk gefüllt.
 
-    addDetailDistrictInfo(currentConstituencyObject);
+    addDetailDistrictInfo(featureData);
     infoPanel.classList.add('isOpen');
 } // end function
 
