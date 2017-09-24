@@ -135,7 +135,3 @@ function colorMapWinDistrict() {
         console.error("GEOJSON null!")
     }
 }
-
-function getSVGMap() {
-    return elemSvg = document.getElementById("karte");
-}

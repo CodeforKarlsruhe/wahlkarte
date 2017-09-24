@@ -41,7 +41,7 @@ function onMouseOverWahlbezirk(data){
 
         currentConstituencyNumber = data.properties.wahlbezirksnummer;
 
-        var template = 'Wahlbezirksnummer: '+currentConstituencyNumber+' <div class="flex">';
+        var template = 'Wahlbezirksnummer: '+currentConstituencyNumber;
         var summe = 0;
 
         // Stimme von diesem Wahlkreis zusammen rechnen
@@ -54,29 +54,11 @@ function onMouseOverWahlbezirk(data){
             return b.stimmen - a.stimmen;
         });
 
-        // Verhältnis ermitteln
-        for(var index in data.properties.btw2013.zweitstimme){
-            // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind
-            if(data.properties.btw2013.zweitstimme[index].stimmen > 0) {
 
-                var partyItem = PARTY[(data.properties.btw2013.zweitstimme[index].partei).toUpperCase()];
+        template += buildBar(data.properties.btw2013.zweitstimme, summe);
 
-                if (typeof partyItem === 'undefined') {
-                    partyItem = {
-                        color: '#808080'
-                    }
-                } // end if
 
-                template += '<div style="' +
-                    'height: 25px;' +
-                    'width: ' + (100 * data.properties.btw2013.zweitstimme[index].stimmen) / summe + '%;' +
-                    'background-color: ' + partyItem.color + '"' +
-                    '></div>';
-            } // end if
-        } // end for
-
-        template += '</div>' +
-            'Summe der Stimmen: '+summe;
+        template += 'Summe der Stimmen: '+summe;
 
         // HTML hinzufügen
         toolTip.innerHTML = template;
