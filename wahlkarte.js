@@ -3,7 +3,7 @@ var KA_LNG  = 8.45003951;
 var elemSvg = null;
 
 var GEOJSON = null;
-var TILES_URL = '//a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
+var TILES_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png';
 
 var MAP_ATTRIBUTION = 'Map data &copy; <a href="//openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
@@ -121,13 +121,14 @@ function setScenario(scenarioId) {
     var currentSlideIndex = $('#szenarien-carousel div.active').index();
     for (var i = 0; i < SZENARIEN.length; i++) {
         if (SZENARIEN[i].id === scenarioId) {
+            var szenario = SZENARIEN[i];
             if (i !== currentSlideIndex) {
                 $("#szenarien-carousel").carousel(i);
             }
             break;
         }
     }
-    colorMapWinDistrict();
+    colorMapWinDistrict(szenario);
     updateSharingLinks();
 }
 
@@ -149,7 +150,7 @@ function colorMapNeutrally() {
  * Faerbt die Karte nach dem Gewinner fuer jeden Wahlbezirk. Falls keine
  * Farbe fuer die Partei gesetzt, so wird eine 'DefaultColor' gewaehlt.
  */
-function colorMapWinDistrict() {
+function colorMapWinDistrict(szenario) {
     // Karte Reference setzten wenn nicht vorhanden
     if(elemSvg === null){
         getSVGMap();
@@ -157,8 +158,8 @@ function colorMapWinDistrict() {
 
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            var win = maxPartie(item.properties.btw2013.zweitstimme)
-            var color = winnerColor(win)
+            var analyse = szenario.getAnalyse(item.properties);
+            var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
             }
@@ -169,24 +170,10 @@ function colorMapWinDistrict() {
 }
 
 /**
- *  Ermittelt die Farbe fuer gegeben Parteinamen 
- * @param {String} partyName 
+ * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
+ * @param {String} name
  */
-function winnerColor(partyName){
-    let winner = findPartie(partyName)
-    
-    if (winner !== null){
-        return winner.color;
-    } else {
-        console.error("Party not found!")
-    }
-}
-
-/**
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
- * @param {String} name 
- */
-function findPartie(name){
+function findParty(name){
     let winner = null
     Object.keys(PARTY).forEach(function(p){
         found = PARTY[p]
@@ -199,28 +186,6 @@ function findPartie(name){
         return winner;
     } else {
         console.error("Can't find party ", name)
-    }
-}
-
-/**
- * Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
- * @param {Object} bezirkZweitstimmen 
- */
-function maxPartie(bezirkZweitstimmen){
-    if (bezirkZweitstimmen !== 'undefined'){
-        var max = 0;
-        var partyName = null;
-        bezirkZweitstimmen.forEach(function(par){
-           if (max < par.stimmen) {
-               max = par.stimmen;
-               partyName = par;
-           }
-        });
-
-        if (max >= 0 && partyName !== null)
-        return partyName.partei;
-    } else {
-        console.error("No data")
     }
 }
 
@@ -261,4 +226,3 @@ function getScenarioIdFromUrl() {
     }
     return SZENARIEN[0].id;
 }
-
