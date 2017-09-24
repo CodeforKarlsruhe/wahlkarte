@@ -114,6 +114,44 @@ function addDetailDistrictInfo(districtInfo) {
     } // end for
 
     template += '</tbody>';
+    template += '</table>';
+
+    template += '<br>';
+
+
+    template += 'Erststimmen (Kandidaten)' +
+        '<table class="table-sm">' +
+        '<tbody>' +
+        '<colgroup>' +
+        '   <col style="width: 100px">' +
+        '   <col style="width: 25px">' +
+        '   <col style="width: 60px">' +
+        '</colgroup>';
+
+    // Verhältnis ermitteln
+    for(var index in districtInfo.properties.btw2013.erststimme){
+
+        var partyItem = PARTY[(districtInfo.properties.btw2013.erststimme[index].partei).toUpperCase()];
+
+        if( typeof partyItem === 'undefined'){
+            partyItem = {
+                color: '#808080'
+            }
+        } // end if
+
+        template += '<tr>';
+        //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
+        template += '<td>'+districtInfo.properties.btw2013.erststimme[index].name+' <small>('+districtInfo.properties.btw2013.erststimme[index].partei+')</small></td>';
+        template += '<td align="right">'+((100 * districtInfo.properties.btw2013.erststimme[index].stimmen) / districtInfo.sumDistrict).toFixed(1)+'%</td>';
+        template += '<td align="right">'+districtInfo.properties.btw2013.erststimme[index].stimmen+' <small>Stimmen</small></td>';
+
+        template += '</tr>';
+
+    } // end for
+
+    template += '</tbody>';
+    template += '</table>';
+
 
     extendedTooltipDetailDistrictInfo.innerHTML = template;
 } // end function
