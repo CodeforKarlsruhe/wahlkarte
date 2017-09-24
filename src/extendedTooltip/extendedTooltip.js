@@ -15,6 +15,37 @@ var infoPanelDistrictName = document.getElementById('extended-tooltip-district-n
 var lastSelectetDistrictName = '',
     lastSelectetDistrictId = null;
 
+/*
+obvious
+*/
+function rgb2hex(rgba) {
+    var regex = /^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/
+        parsed = regex.exec(rgba);
+    var red, green, blue, alpha, elems;
+    console.log(parsed);
+    if (!parsed) {
+        console.log(rgba);
+        throw "Invalid format: " + rgba;
+    }
+    red   = parsed[1];
+    green = parsed[2];
+    blue  = parsed[3];
+    alpha = parsed[4];
+    elems = [hex(red), hex(green), hex(blue)];
+    if (alpha) {
+        // elems.push(hex(alpha));
+    }
+    return "#" + elems.join("");
+
+    function hex(number) {
+        if (number > 255) {
+            throw "'" + number + "'' is greater than 255(0xff);";
+        }
+        var str = Number(number).toString(16);
+        return ("0" + str).slice(-2);
+    }
+}
+
 /**
  * Wird aufgerufen wenn der User auf eine Region klickt
  * @param featureData das aktuelle "feature"
