@@ -128,6 +128,11 @@ function addDetailDistrictInfo(districtInfo) {
         sumDistrict = districtInfo.sumDistrict,
         template = '';
 
+    sumDistrict = 0; // this code is redundant. took it from tooltip.js
+    for(var index in districtInfo.properties.btw2013.zweitstimme){
+        sumDistrict += districtInfo.properties.btw2013.zweitstimme[index].stimmen;
+    } // end for
+
     // Array Sortieren
     data2013.zweitstimme = data2013.zweitstimme.sort(function (a, b) {
         return b.stimmen - a.stimmen;
