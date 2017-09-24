@@ -84,9 +84,18 @@ function closeInfoPanel() {
 function addDetailDistrictInfo(districtInfo) {
 
     var data2013 = districtInfo.properties.btw2013,
-        sumDistrict = districtInfo.sumDistrict;
+        sumDistrict = districtInfo.sumDistrict,
+        template = '';
 
-    var template = 'Zweitstimmen (Parteien)' +
+    // Array Sortieren
+    data2013.zweitstimme = data2013.zweitstimme.sort(function (a, b) {
+        return b.stimmen - a.stimmen;
+    });
+
+    template += '2013 Wahlbeteiligung '+((100 * data2013['wähler/-innen']) / data2013.wahlberechtigte).toFixed(1) +'%';
+    template += buildBar(data2013.zweitstimme, sumDistrict);
+
+    template += 'Zweitstimmen (Parteien)' +
         '<table class="table-sm">' +
         '<tbody>' +
         '<colgroup>' +

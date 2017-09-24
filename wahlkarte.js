@@ -177,7 +177,3 @@ function maxPartie(bezirkZweitstimmen){
         console.error("No data")
     }
 }
-
-function getSVGMap() {
-    return elemSvg = document.getElementById("karte");
-}
