@@ -66,8 +66,7 @@ function onMouseOverWahlbezirk(data){
 
         template += '<hr>';
 
-        console.log(data.properties.statistik);
-
+        // Analyse auswertung prüfen ob was vorhanden ist, wenn ja anzeigen
         if(typeof currentAnalysis[currentConstituencyNumber] !== 'undefined'){
 
             // Prüfen ob ein vor definierter Text mit gegebene wurde
@@ -93,7 +92,6 @@ function onMouseOverWahlbezirk(data){
                 } // end if
                 //template += data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
             } // end if
-
         } // end if
 
         // HTML hinzufügen
