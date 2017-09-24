@@ -3,10 +3,11 @@
  */
 var infoPanelDistrictName = document.getElementById('extended-tooltip-district-name'),
     infoPanel = document.getElementById('extended-tooltip'),
-    extendedTooltipDetailDistrictInfo = document.getElementById('extended-tooltip-detail-district-info');
-    extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme');
-    extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme');
-    lastSelectedConstituencyNumber = null;
+    extendedTooltipDetailDistrictInfo = document.getElementById('extended-tooltip-detail-district-info'),
+    extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme'),
+    extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme'),
+    lastSelectedConstituencyNumber = null,
+    lastSelectetDistrictColor = '';
 
 /**
  * Globale Variabeln
@@ -50,10 +51,11 @@ function selectDistrict(featureData) {
     if(lastSelectedConstituencyNumber !== currentConstituencyObject.properties.wahlbezirksnummer){
 
         if(lastSelectedConstituencyNumber !== null) {
-            elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#fff';
+            elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
         } // end if
 
         lastSelectedConstituencyNumber = currentConstituencyObject.properties.wahlbezirksnummer;
+        lastSelectetDistrictColor = elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill;
         elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#57bdeb';
     } // end if
 
