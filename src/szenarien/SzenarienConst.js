@@ -53,14 +53,14 @@ const SZENARIEN = [
     "titel": "Ungültige Erststimmen",
     "untertitel": "Wie viele ungültige Erststimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Erststimmen gab es.",
-    "getAnalyse": dummyAnalyse,
+    "getAnalyse": getAnalyseForUngueltigeErststimmen,
   },
   {
     "id": "ungueltig-zweit",
     "titel": "Ungültige Zweitstimme",
     "untertitel": "Wie viele ungültige Zweitstimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Zweitstimmen gab es.",
-    "getAnalyse": dummyAnalyse,
+    "getAnalyse": getAnalyseForUngueltigeZweitstimmen,
   },
   {
     "id": "nichtwaehler-win",
