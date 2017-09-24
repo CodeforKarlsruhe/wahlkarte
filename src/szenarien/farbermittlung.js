@@ -2,11 +2,11 @@
  *  Ermittelt die Farbe fuer gegeben Parteinamen
  * @param {String} partyName
  */
-function getColorForParty(partyName){
-    let winner = findPartie(partyName)
+function getColorForParty(partyName) {
+    let party = findParty(partyName)
 
-    if (winner !== null){
-        return winner.color;
+    if (party !== null){
+        return party.color;
     } else {
         console.error("Party not found!")
     }
@@ -16,7 +16,7 @@ function getColorForParty(partyName){
  * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
  * @param {String} name
  */
-function findPartie(name) {
+function findParty(name) {
     let winner = null
     Object.keys(PARTY).forEach(function(p){
         found = PARTY[p]
