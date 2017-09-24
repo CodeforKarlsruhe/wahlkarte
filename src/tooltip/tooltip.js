@@ -55,6 +55,7 @@ function onMouseOverWahlbezirk(data){
         });
 
         template += buildBar(data.properties.btw2013.zweitstimme, summe);
+        // ersten 3 Parteien im Tooltip anzeigen
         data.properties.btw2013.zweitstimme.slice(0,3).forEach(function(element) {
             var party = findParty(element.partei);
             template += party.name;
@@ -66,6 +67,7 @@ function onMouseOverWahlbezirk(data){
 
         template += '<hr>';
 
+        // Analyse auswertung prüfen ob was vorhanden ist, wenn ja anzeigen
         if(typeof currentAnalysis[currentConstituencyNumber] !== 'undefined'){
 
             // Prüfen ob ein vor definierter Text mit gegebene wurde
@@ -81,9 +83,16 @@ function onMouseOverWahlbezirk(data){
                 &&
                 typeof data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey] !== 'undefined'
             ){
-                template += data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
-            } // end if
 
+                var value = data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
+
+                template += translateStatisticsObject[currentAnalysis[currentConstituencyNumber].tooltipShowKey]+': ';
+                // Prüfen ob es ein Float ist wenn ja auf 1 Nachkommer stellen
+                if(isFloat(value)){
+                    template += value.toFixed(1);
+                } // end if
+                //template += data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
+            } // end if
         } // end if
 
         // HTML hinzufügen
