@@ -56,7 +56,7 @@ function onMouseOverWahlbezirk(data){
 
         template += buildBar(data.properties.btw2013.zweitstimme, summe);
 
-        template += 'Summe der Stimmen: '+summe;
+        template += '<small>Summe der Stimmen: '+summe+'</small>';
 
         // HTML hinzufügen
         toolTip.innerHTML = template;
