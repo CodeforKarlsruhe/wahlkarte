@@ -43,16 +43,23 @@ const SZENARIEN = [
   },
   {
     "id": "ungueltig-zweit",
-    "titel": "Ungültige Zweitstimme",
+    "titel": "Ungültige Zweitstimmen",
     "untertitel": "Wie viele ungültige Zweitstimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Zweitstimmen gab es.",
     "getAnalyse": getAnalyseForUngueltigeZweitstimmen,
   },
   {
     "id": "nichtwaehler-win",
-    "titel": "Wahlbezirke in denen Nichtwähler die absolute Mehrheit hätten",
+    "titel": "Nichtwähler",
     "untertitel": "Hätten Nichtwähler in diesem Wahlbezirk gewonnen?",
-    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt.",
+    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt. Die entsprechenden Bezirke sind in türkis eingefärbt.",
+    "getAnalyse": getAnalyseNichtWaehlerWin,
+  },
+  {
+    "id": "kleinster-abstand",
+    "titel": "Kleinster Abstand",
+    "untertitel": "In welchen Wahlbezirken war das Ergebnis am knappsten?",
+    "beschreibung": "Gezeigt werden die Wahlbezirke, in denen der Abstand zwischen dem Erst- und Zweitplatzierten am geringsten ist. Ausgewertet werden die Zweitstimmen der Parteien in Relation zur Gesamtzahl der Wähler.",
     "getAnalyse": getAnalyseNichtWaehlerWin,
   }
 ]
