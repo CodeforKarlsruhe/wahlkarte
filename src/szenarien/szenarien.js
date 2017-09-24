@@ -3,31 +3,48 @@
  */
 
 var innerCarousel = document.getElementById('innerCarousel');
+var indicators = document.getElementById('indicators');
 
 for(var i = 0; i < SZENARIEN.length; i++) {
-   var szenario = document.createElement('div');
-   szenario.id = SZENARIEN[i].id;
-   if (i === 0)
-   {
-     szenario.className = 'carousel-item active';
-   } else {
-     szenario.className = 'carousel-item';
-   }
-   innerCarousel.appendChild(szenario);
+  createSzenario(i);
+  createIndicator(i);
+}
 
-   var szenarioContent = document.createElement('div');
-   szenarioContent.className = 'wahl-carousel-caption d-block';
-   szenario.appendChild(szenarioContent);
+function createSzenario(index) {
+  var szenario = document.createElement('div');
+  szenario.id = SZENARIEN[index].id;
+  if (index === 0)
+  {
+    szenario.className = 'carousel-item active';
+  } else {
+    szenario.className = 'carousel-item';
+  }
+  innerCarousel.appendChild(szenario);
 
-   var titel = document.createElement('h3');
-   titel.innerHTML = SZENARIEN[i].titel;
-   szenarioContent.appendChild(titel);
+  var szenarioContent = document.createElement('div');
+  szenarioContent.className = 'wahl-carousel-caption d-block';
+  szenario.appendChild(szenarioContent);
 
-   var untertitel = document.createElement('h6');
-   untertitel.innerHTML = SZENARIEN[i].untertitel;
-   szenarioContent.appendChild(untertitel);
+  var titel = document.createElement('h3');
+  titel.innerHTML = SZENARIEN[index].titel;
+  szenarioContent.appendChild(titel);
 
-   var beschreibung = document.createElement('p');
-   beschreibung.innerHTML = SZENARIEN[i].beschreibung;
-   szenarioContent.appendChild(beschreibung);
+  var untertitel = document.createElement('h6');
+  untertitel.innerHTML = SZENARIEN[index].untertitel;
+  szenarioContent.appendChild(untertitel);
+
+  var beschreibung = document.createElement('p');
+  beschreibung.innerHTML = SZENARIEN[index].beschreibung;
+  szenarioContent.appendChild(beschreibung);
+}
+
+function createIndicator(index) {
+  var indicator = document.createElement('li');
+  if (index === 0)
+  {
+    indicator.className = 'active';
+  }
+  indicator.setAttribute('data-target', '#szenarien-carousel');
+  indicator.setAttribute('data-slide-to', index);
+  indicators.appendChild(indicator);
 }
