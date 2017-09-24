@@ -152,7 +152,7 @@ function getAnalyseGroessteAenderung(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + max + "%";
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + max + " Stimmen";
     }
   } 
 }
