@@ -258,7 +258,7 @@ function getAnalyseForUngueltigeErststimmen(properties) {
       var color = 'rgba(26, 188, 156, ' + opacity + ')';
       return {
         "color": color,
-        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Erststimmen (" + ungueltigeStimmen + " Stimmen)",
+        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Erststimmen (" + ungueltigeStimmen + " Stimmen)",
       }
     } else {
         console.error("Error in analysis");
@@ -296,24 +296,27 @@ function getAnalyseForUngueltigeZweitstimmen(properties) {
  * @param {Object} properties
  */
 function getAnalyseForKleinsterAbstand(properties) {
-    if (properties.btw2017_dummy.zweitstimme !== 'undefined') {
-      var zweitstimmen = properties.btw2017_dummy.zweitstimme;
-      var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
+  if (properties.btw2017_dummy.zweitstimme !== 'undefined') {
+    var zweitstimmen = properties.btw2017_dummy.zweitstimme;
+    var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
+    var erster = getParteiMitMeistenStimmen(zweitstimmen);
+    var zweitstimmenOhneErsten = zweitstimmen.filter(parteiergebnis => parteiergebnis.partei.toLowerCase() !== erster.party.name.toLowerCase());
+    var zweiter = getParteiMitMeistenStimmen(zweitstimmenOhneErsten);
+    var differenz = erster.stimmen - zweiter.stimmen;
 
-      var tooltip = "Kein Wechsel";
-      var gueltigeStimmen = 0;
-      zweitstimmen.forEach(function(party) {
-           gueltigeStimmen += party.stimmen;
-      });
-      var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
-      var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
-      var opacity = prozentualUngueltigeStimmen * 50;
+    if (differenz >= 0) {
+      var prozentual = differenz / gesamtstimmen;
+      var opacity = 1 - (prozentual * 10);
       var color = 'rgba(26, 188, 156, ' + opacity + ')';
       return {
         "color": color,
-        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Zweitstimmen (" + ungueltigeStimmen + " Stimmen)",
+        "tooltipShowValue": "Abstand von " +
+        erster.party.name + " (" + erster.stimmen + " Stimmen) zu " +
+        zweiter.party.name + " (" + zweiter.stimmen + " Stimmen): " +
+        Math.round(prozentual * 100000) / 1000 + " % (" + differenz + " Stimmen)",
       }
-    } else {
-        console.error("Error in analysis");
     }
+  } else {
+      console.error("Error in analysis");
+  }
 }

@@ -60,6 +60,6 @@ const SZENARIEN = [
     "titel": "Kleinster Abstand",
     "untertitel": "In welchen Wahlbezirken war das Ergebnis am knappsten?",
     "beschreibung": "Gezeigt werden die Wahlbezirke, in denen der Abstand zwischen dem Erst- und Zweitplatzierten am geringsten ist. Ausgewertet werden die Zweitstimmen der Parteien in Relation zur Gesamtzahl der Wähler.",
-    "getAnalyse": getAnalyseNichtWaehlerWin,
+    "getAnalyse": getAnalyseForKleinsterAbstand,
   }
 ]
