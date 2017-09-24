@@ -158,13 +158,10 @@ function getAnalyseGroessteAenderung(properties) {
 }
 
 function getNichtWaehlerWin(properties) {
-  if (properties.btw2017_test) {
-    console.log("2017 ist da");
-  }
-  if (properties.btw2017_test && properties.btw2017_test.wahlbeteiligung) {
-    if (properties.btw2017_test.wahlbeteiligung > 50) {
+  if (properties.btw2017_dummy && properties.btw2017_dummy.wahlbeteiligung) {
+    if (properties.btw2017_dummy.wahlbeteiligung > 50) {
       return {
-        "color": "#FFFFFF",
+        "color": "#1abc9c",
         "tooltipShowValue": "In diesem Wahlkreis hätten die Nichtwähler das Ergebnis ändern können"
       }
     } else {
