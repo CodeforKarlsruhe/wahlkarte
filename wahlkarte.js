@@ -75,6 +75,7 @@ function updateSharingLinks() {
     var param = encodeURIComponent(window.location.href);
     $('#facebookButton').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + param);
     $('#twitterButton').attr('href', 'https://twitter.com/home?status=' + param);
+    $('#whatsappButton').attr('href', 'whatsapp://send?text=' + param);
 }
 
 

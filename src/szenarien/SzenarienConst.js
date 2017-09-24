@@ -3,7 +3,7 @@ const SZENARIEN = [
     "id": "zweitstimme",
     "titel": "Zweitstimmen",
     "untertitel": "Hier findest du die Wahlergebnisse in der klassischen Ansicht",
-    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Kleinparteien</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
+    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Kleinparteien</a>, <a href=\"#nichtwaehler-win\">Nicht&shy;wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel&shy;wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
     "getAnalyse": getAnalyseForWahlergebnisse,
   },
   {
@@ -15,7 +15,7 @@ const SZENARIEN = [
   },
   {
     "id": "wechselwaehler",
-    "titel": "Wechselwähler*innen",
+    "titel": "Wechsel&shy;wähler*innen",
     "untertitel": "Welche Wahlbezirke haben die Farbe gewechselt?",
     "beschreibung": "Die Wahlbezirke, in denen die meistgewählte Partei im Vergleich zur Bundestagswahl 2013 gewechselt ist, sind hier hervorgehoben.",
     "getAnalyse": getAnalyseForWechselwaehler,
@@ -43,7 +43,7 @@ const SZENARIEN = [
   },
   {
     "id": "nichtwaehler-win",
-    "titel": "Nichtwähler*innen",
+    "titel": "Nicht&shy;wähler*innen",
     "untertitel": "Wo haben Nichtwähler*innen die absolute Mehrheit?",
     "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt. Die entsprechenden Bezirke sind in türkis eingefärbt.",
     "getAnalyse": getAnalyseNichtWaehlerWin,
@@ -58,7 +58,7 @@ const SZENARIEN = [
   {
     "id": "kleinparteien",
     "titel": "Größte Kleine",
-    "untertitel": "Die Zweitstimmen<wbr>ergebnisse ohne CDU und SPD",
+    "untertitel": "Die Zweitstimmen&shy;ergebnisse ohne CDU und SPD",
     "beschreibung": "Hier haben wir die großen Parteien, also CDU und SPD, aus der Ansicht verbannt. So siehst du nur die \"Kleinparteien\", und wo sie abgestaubt haben.",
     "getAnalyse": getAnalyseForKleinparteien,
   },
