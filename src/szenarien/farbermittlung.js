@@ -52,7 +52,8 @@ function getAnalyseForWahlergebnisse(properties) {
         var color = getColorForParty(partyName);
         return {
           "color": color,
-          "stimmzahlSieger": max,
+          "tooltipShowValue": "Stimmen des Siegers: " + max,
+          "tooltipShowKey": "zuzuege"
         }
       }
     } else {
@@ -80,7 +81,7 @@ function getAnalyseForErststimmen(properties) {
         var color = getColorForParty(partyName);
         return {
           "color": color,
-          "stimmzahlSieger": max,
+          "tooltipShowValue": "Stimmen des Siegers: " + max,
         }
       }
     } else {

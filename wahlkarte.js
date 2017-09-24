@@ -3,7 +3,7 @@ var KA_LNG  = 8.45003951;
 var elemSvg = null;
 
 var GEOJSON = null;
-var TILES_URL = '//a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
+var TILES_URL = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png';
 
 var MAP_ATTRIBUTION = 'Map data &copy; <a href="//openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
@@ -147,7 +147,7 @@ function colorMapWinDistrict(szenario) {
 
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            var analyse = szenario.colorMap(item.properties);
+            var analyse = szenario.getAnalyse(item.properties);
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
@@ -159,8 +159,28 @@ function colorMapWinDistrict(szenario) {
 }
 
 /**
+<<<<<<< HEAD
  * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
  * @param {String} name 
+=======
+<<<<<<< HEAD
+ *  Ermittelt die Farbe fuer gegeben Parteinamen
+ * @param {String} partyName
+ */
+function winnerColor(partyName){
+    let winner = findParty(partyName)
+
+    if (winner !== null){
+        return winner.color;
+    } else {
+        console.error("Party not found!")
+    }
+}
+
+/**
+ * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
+ * @param {String} name
+>>>>>>> 4391a85baf9feaadd496281bb354700b9e1ef5d4
  */
 function findParty(name){
     let winner = null
