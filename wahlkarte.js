@@ -3,15 +3,11 @@ var KA_LNG  = 8.45003951;
 var elemSvg = null;
 
 var GEOJSON = null;
-var Party = ["CDU","SPD","FDP","GRÜNE","DIE LINKE","PIRATEN","NPD","REP","Tierschutzpartei","ÖDP","PBC","Volksabstimmung","MLPD ","BüSo","AfD","BIG","pro Deutschland","FREIE WÄHLER","PARTEI DER VERNUNFT","RENTNER"];
+var TILES_URL = '//a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
 
-const PartyColors = ["000","f40502","feed01","42a62a","8b1b62","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","ffffff","009de0","ffffff","ffffff","ffffff","ffffff","ffffff"];
-
-var TILES_URL = 'http://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png';
-
-var MAP_ATTRIBUTION = 'Map data &copy; <a href="http://openstreetmap.org">' +
+var MAP_ATTRIBUTION = 'Map data &copy; <a href="//openstreetmap.org">' +
                       'OpenStreetMap</a> contributors | Tiles &copy; ' +
-                      '<a href="http://carto.com/attribution">Carto</a>';
+                      '<a href="//carto.com/attribution">Carto</a>';
 
 var map = new L.Map("map", {center: [KA_LAT, KA_LNG], zoom: 12})
     .addLayer(new L.TileLayer(TILES_URL, {attribution: MAP_ATTRIBUTION}));
@@ -140,14 +136,12 @@ function colorMapWinDistrict() {
     }
 }
 
+/**
+ *  Ermittelt die Farbe fuer gegeben Parteinamen 
+ * @param {String} partyName 
+ */
 function winnerColor(partyName){
-    let winner = null
-    Object.keys(PARTY).forEach(function(p){
-        found = PARTY[p]
-        if (found.name.toLowerCase() === partyName.toLowerCase()){
-            winner = found
-        } 
-    });
+    let winner = findPartie(partyName)
     
     if (winner !== null){
         return winner.color;
@@ -157,7 +151,27 @@ function winnerColor(partyName){
 }
 
 /**
- *  Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
+ * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
+ * @param {String} name 
+ */
+function findPartie(name){
+    let winner = null
+    Object.keys(PARTY).forEach(function(p){
+        found = PARTY[p]
+        if (found.name.toLowerCase() === name.toLowerCase()){
+            winner = found
+        } 
+    });
+
+    if (winner !== null){
+        return winner;
+    } else {
+        console.error("Can't find party ", name)
+    }
+}
+
+/**
+ * Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
  * @param {Object} bezirkZweitstimmen 
  */
 function maxPartie(bezirkZweitstimmen){

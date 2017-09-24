@@ -84,23 +84,3 @@ const PARTY = {
         "color": "#C0C0C0"
     }
 }
-
-var erststimmen = [
-    {
-        "firstName": "Ingo",
-        "lastName": "Muster",
-        "party": PARTY,
-        "votes": 123
-    }
-]
-
-var parties = [
-    {
-        "partie": PARTY.AFD,
-        "votes": 1234,
-    },{
-        "partie": PARTY.CDU,
-        "votes": 1234,
-    }
-
-]
