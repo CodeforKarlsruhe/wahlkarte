@@ -3,7 +3,7 @@ const SZENARIEN = [
     "id": "zweitstimme",
     "titel": "Zweitstimme",
     "untertitel": "Hier findest du die Wahlergebnisse in der klassischen Ansicht",
-    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
+    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#nichtwaehler-win\">Nicht<wbr>wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel<wbr>wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
     "getAnalyse": getAnalyseForWahlergebnisse,
   },
   {
@@ -43,16 +43,23 @@ const SZENARIEN = [
   },
   {
     "id": "ungueltig-zweit",
-    "titel": "Ungültige Zweitstimme",
+    "titel": "Ungültige Zweitstimmen",
     "untertitel": "Wie viele ungültige Zweitstimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Zweitstimmen gab es.",
     "getAnalyse": getAnalyseForUngueltigeZweitstimmen,
   },
   {
     "id": "nichtwaehler-win",
-    "titel": "Wahlbezirke in denen Nichtwähler die absolute Mehrheit hätten",
+    "titel": "Nichtwähler",
     "untertitel": "Hätten Nichtwähler in diesem Wahlbezirk gewonnen?",
-    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt.",
+    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt. Die entsprechenden Bezirke sind in türkis eingefärbt.",
+    "getAnalyse": getAnalyseNichtWaehlerWin,
+  },
+  {
+    "id": "kleinster-abstand",
+    "titel": "Kleinster Abstand",
+    "untertitel": "In welchen Wahlbezirken war das Ergebnis am knappsten?",
+    "beschreibung": "Gezeigt werden die Wahlbezirke, in denen der Abstand zwischen dem Erst- und Zweitplatzierten am geringsten ist. Ausgewertet werden die Zweitstimmen der Parteien in Relation zur Gesamtzahl der Wähler.",
     "getAnalyse": getAnalyseNichtWaehlerWin,
   }
 ]

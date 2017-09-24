@@ -32,8 +32,7 @@ function getAnalyseForWahlergebnisse(properties) {
         var color = getColorForParty(partyName);
         return {
           "color": color,
-          "tooltipShowValue": "Stimmen des Siegers: " + max,
-          "tooltipShowKey": "zuzuege"
+          "tooltipShowValue": "Sieger: " + partyName + " mit " + max + " Stimmen",
         }
       }
     } else {
@@ -50,19 +49,19 @@ function getAnalyseForErststimmen(properties) {
     if (properties.btw2013.erststimme !== 'undefined') {
       var erststimmen = properties.btw2013.erststimme;
       var max = 0;
-      var partyName = null;
+      var sieger = null;
       erststimmen.forEach(function(kandidat) {
          if (max < kandidat.stimmen) {
              max = kandidat.stimmen;
-             partyName = kandidat.partei;
+             sieger = kandidat;
          }
       });
 
-      if (max >= 0 && partyName !== null) {
-        var color = getColorForParty(partyName);
+      if (max >= 0 && sieger !== null) {
+        var color = getColorForParty(sieger.partei);
         return {
           "color": color,
-          "tooltipShowValue": "Stimmen des Siegers: " + max,
+          "tooltipShowValue": "Sieger: " + sieger.name + " (" + sieger.partei + ")"+ " mit " + max + " Erststimmen",
         }
       }
     } else {
@@ -101,7 +100,7 @@ function getAnalyseForErstVsZweit(properties) {
       if (erststimme_partyName != zweitstimme_partyName) {
         return {
           "color": color,
-          "tooltipShowValue": "Erststimmen: " + erststimme_max + "<br/>Partei der Erstimme: " + erststimme_partyName + "<br/>Zweitstimmen: " + zweitstimme_max + "<br/>Partei der Zweistimmen: " + zweitstimme_partyName,
+          "tooltipShowValue": "Sieger der Erststimmen: " + erststimme_partyName + " mit " + erststimme_max + " Stimmen</br>Sieger der Zweitstimmen: " + zweitstimme_partyName + " mit " + zweitstimme_max + " Stimmen",
         }
       } else {
         return {
@@ -271,6 +270,32 @@ function getAnalyseForUngueltigeErststimmen(properties) {
  * @param {Object} properties
  */
 function getAnalyseForUngueltigeZweitstimmen(properties) {
+    if (properties.btw2017_dummy.zweitstimme !== 'undefined') {
+      var zweitstimmen = properties.btw2017_dummy.zweitstimme;
+      var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
+
+      var tooltip = "Kein Wechsel";
+      var gueltigeStimmen = 0;
+      zweitstimmen.forEach(function(party) {
+           gueltigeStimmen += party.stimmen;
+      });
+      var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
+      var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
+      var opacity = prozentualUngueltigeStimmen * 50;
+      var color = 'rgba(26, 188, 156, ' + opacity + ')';
+      return {
+        "color": color,
+        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Zweitstimmen (" + ungueltigeStimmen + " Stimmen)",
+      }
+    } else {
+        console.error("Error in analysis");
+    }
+}
+/**
+ *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
+ * @param {Object} properties
+ */
+function getAnalyseForKleinsterAbstand(properties) {
     if (properties.btw2017_dummy.zweitstimme !== 'undefined') {
       var zweitstimmen = properties.btw2017_dummy.zweitstimme;
       var gesamtstimmen = properties.btw2017_dummy["waehler/-innen"];
