@@ -126,6 +126,7 @@ function getAnalyseForErstVsZweit(properties) {
   }
 }
 
+
 function getAnalyseGroessteAenderung(properties) {
   if (properties.btw2013.zweitstimme && properties.btw2017.zweitstimme) {
     var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
@@ -151,7 +152,7 @@ function getAnalyseGroessteAenderung(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "#TODO"
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + max + "%";
     }
   } 
 }
