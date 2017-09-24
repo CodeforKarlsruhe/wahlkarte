@@ -2,71 +2,86 @@
 const PARTY = {
     CDU: {
         "name": "CDU",
-        "color": "#000",
+        "color": "#000"
     },
     SPD:{
-        "color": "#f40502",
-        "name": "SPD"
+        "name": "SPD",
+        "color": "#f40502"
     },
-    
+
     AFD:{
-        "color": "#f40502",
-        "name": "AfD"
+        "name": "AfD",
+        "color": "#009de0"
+
     },
     FDP:{
-        "color": "#feed01",
-        "name": "FDP"
+        "name": "FDP",
+        "color": "#feed01"
     },
     GRUENE:{
-        "color": "#42a62a",
-        "name": "Grüne"
+        "name": "Grüne",
+        "color": "#42a62a"
     },
     LINKE:{
-        "color": "#8b1b62",
-        "name": "Die Linke"
+        "name": "Die Linke",
+        "color": "#8b1b62"
+
     },
     PIRATEN:{
-        "color": "#ff8800",
-        "name": "Piraten"
+        "name": "Piraten",
+        "color": "#ff8800"
     },
     NPD:{
-        "name": "NPD"
+        "name": "NPD",
+        "color": "#C0C0C0"
     },
     REP:{
-        "name": "REP"
+        "name": "REP",
+        "color": "#C0C0C0"
     },
     TIERSCHUTZPARTEI:{
-        "name": "Tierschutzpartei"
+        "name": "Tierschutzpartei",
+        "color": "#C0C0C0"
     },
     OEDP:{
-        "name": "ÖDP"
+        "name": "ÖDP",
+        "color": "#C0C0C0"
     },
     VOLKSABSTIMMUNG:{
-        "name": "Volksabstimmung"
+        "name": "Volksabstimmung",
+        "color": "#C0C0C0"
     },
     MLPD:{
-        "name": "MLPD"
+        "name": "MLPD",
+        "color": "#C0C0C0"
     },
     BUESO:{
-        "name": "BüSo"
+        "name": "BüSo",
+        "color": "#C0C0C0"
     },
     BIG:{
-        "name": "BIG"
+        "name": "BIG",
+        "color": "#C0C0C0"
     },
     PBC: {
-        "name": "PBC"
+        "name": "PBC",
+        "color": "#C0C0C0"
     },
     PRODEUTSCHLAND:{
-        "name": "pro Deutschland"
+        "name": "pro Deutschland",
+        "color": "#C0C0C0"
     },
     FREIEWAEHLER:{
-        "name": "Freie Wähler"
+        "name": "Freie Wähler",
+        "color": "#C0C0C0"
     },
     PARTEIDERVERNUNFT:{
-        "name": "Partei der Vernunft"
+        "name": "Partei der Vernunft",
+        "color": "#C0C0C0"
     },
     RENTNER:{
-        "name": "Rentner"
+        "name": "Rentner",
+        "color": "#C0C0C0"
     }
 }
 
