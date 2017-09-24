@@ -148,6 +148,9 @@
             #aboutButton {
                 margin-left: 15px;
             }
+            #whatsappButton {
+                visibility: hidden;
+            }
             @media (max-width: 575px) {
                 #navbar .navbar-brand {
                     font-size: 15px;
@@ -157,6 +160,9 @@
                 }
                 #aboutButton {
                     margin-left: 0;
+                }
+                #whatsappButton {
+                    visibility: visible;
                 }
             }
         </style>
@@ -168,19 +174,25 @@
         <span class="navbar-brand">Karlsruher Wahlanzeiger: Bundestagswahl 2017</span>
         <ul class="nav navbar-nav flex-row float-right">
             <li class="nav-item">
-                <a id="twitterButton" class="nav-link" href="#" target="_blank" title="Auf Twitter teilen">
+                <a id="twitterButton" class="nav-link ml-4" href="#" target="_blank" title="Auf Twitter teilen">
                   <span class="fa fa-lg fa-twitter" aria-hidden="true"></span>
                   <span class="sr-only">Auf Twitter teilen</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a id="facebookButton" class="nav-link" href="#" target="_blank" title="Auf Facebook teilen">
+                <a id="facebookButton" class="nav-link ml-4" href="#" target="_blank" title="Auf Facebook teilen">
                   <span class="fa fa-lg fa-facebook" aria-hidden="true"></span>
                   <span class="sr-only">Auf Facebook teilen</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a id="aboutButton" class="nav-link" data-toggle="modal" href="#aboutModal" title="Über diese Seite">
+                <a id="whatsappButton" class="nav-link ml-4" href="#" target="_blank" title="Auf WhatsApp teilen">
+                  <span class="fa fa-lg fa-whatsapp" aria-hidden="true"></span>
+                  <span class="sr-only">Auf WhatsApp teilen</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="aboutButton" class="nav-link ml-4" data-toggle="modal" href="#aboutModal" title="Über diese Seite">
                   <span class="fa fa-lg fa-info-circle" aria-hidden="true"></span>
                   <span class="sr-only">Info</span>
                 </a>
