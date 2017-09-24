@@ -66,6 +66,8 @@ function onMouseOverWahlbezirk(data){
 
         template += '<hr>';
 
+        console.log(data.properties.statistik);
+
         if(typeof currentAnalysis[currentConstituencyNumber] !== 'undefined'){
 
             // Prüfen ob ein vor definierter Text mit gegebene wurde
@@ -81,7 +83,15 @@ function onMouseOverWahlbezirk(data){
                 &&
                 typeof data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey] !== 'undefined'
             ){
-                template += data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
+
+                var value = data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
+
+                template += translateStatisticsObject[currentAnalysis[currentConstituencyNumber].tooltipShowKey]+': ';
+                // Prüfen ob es ein Float ist wenn ja auf 1 Nachkommer stellen
+                if(isFloat(value)){
+                    template += value.toFixed(1);
+                } // end if
+                //template += data.properties.statistik[currentAnalysis[currentConstituencyNumber].tooltipShowKey];
             } // end if
 
         } // end if

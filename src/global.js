@@ -1,4 +1,35 @@
-var currentAnalysis = {}; 
+var currentAnalysis = {};
+
+var translateStatisticsObject = {
+    'alter_0-19':                               'Alter zwischen 0-19',
+    'alter_0_19_pe':                            'Alter zwischen 0-19 pro Einheit',
+    'alter_20-64':                              'Alter zwischen 20-64',
+    'alter_20_64_pe':                           'Alter zwischen 20-64 pro Einheit',
+    anteiluebergaengegemeinschaftsschule:       'Anteil übergänge Gemeinschaftsschule',
+    anteiluebergaengegymnasium:                 'Anteil Übergänge Gymnasium',
+    anteiluebergaengehauptundwerkrealschule:    'Anteil Übergänge Hauptundwerkrealschule',
+    anteiluebergaengerealschule:                'Anteil Übergänge Realschule',
+    anteiluebergaengesonstige:                  'Anteil Übergänge Sonstige',
+    auslaenderinnen:                            'Ausländerinnen',
+    auslanderinnen_pe:                          'Ausländerinnen pro Einwohner',
+    deutschemitmigrationshintergrund:           'Deutsche mit Migrationshintergrund',
+    deutschemitmigrationshintergrund_pe:        'Deutsche mit Migrationshintergrund pro Einwohner',
+    einwohner:                                  'Einwohner',
+    geburten:                                   'Geburten',
+    geburten_pe:                                'Geburten pro Einwohner',
+    gestorbene:                                 'Gestorbene',
+    gestorbene_pe:                              'Gestorbene pro Einwohner',
+    wahlbezirksnummer:                          'Wahlbezirksnummer',
+    wegzuege:                                   'Wegzüge',
+    wegzuege_pe:                                'Wegzüge pro Einwohner',
+    zuzuege:                                    'Zuzüge',
+    zuzuege_pe:                                 'Zuzüge pro Einwohner'
+};
+
+
+
+
+
 
 /**
  * Baut das Mengen Diagramm
@@ -70,4 +101,12 @@ function getScenarioIdFromUrl() {
         }
     }
     return SZENARIEN[0].id;
+}
+
+function isInt(n){
+    return Number(n) === n && n % 1 === 0;
+}
+
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
 }
