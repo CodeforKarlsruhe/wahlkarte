@@ -143,7 +143,7 @@ function getAnalyseGroessteAenderung(properties) {
       "color": color,
       "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + max + " Stimmen"
     }
-  } 
+  }
 }
 
 function getAnalyseNichtWaehlerWin(properties) {
@@ -159,40 +159,40 @@ function getAnalyseNichtWaehlerWin(properties) {
   }
 }
 
-/** 
+/**
  * Farbe heller oder dunkler
- * 
- * @param {String} col 
- * @param {Number} amt 
+ *
+ * @param {String} col
+ * @param {Number} amt
  */
 function lightenDarkenColor(col, amt) {
-  
+
     var usePound = false;
-  
+
     if (col[0] == "#") {
         col = col.slice(1);
         usePound = true;
     }
- 
+
     var num = parseInt(col,16);
- 
+
     var r = (num >> 16) + amt;
- 
+
     if (r > 255) r = 255;
     else if  (r < 0) r = 0;
- 
+
     var b = ((num >> 8) & 0x00FF) + amt;
- 
+
     if (b > 255) b = 255;
     else if  (b < 0) b = 0;
- 
+
     var g = (num & 0x0000FF) + amt;
- 
+
     if (g > 255) g = 255;
     else if (g < 0) g = 0;
- 
+
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
-  
+
 }
 
 /**
@@ -254,11 +254,12 @@ function getAnalyseForUngueltigeErststimmen(properties) {
            gueltigeStimmen += kandidat.stimmen;
       });
       var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
-      var opacity = ungueltigeStimmen / gesamtstimmen * 50;
+      var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
+      var opacity = prozentualUngueltigeStimmen * 50;
       var color = 'rgba(26, 188, 156, ' + opacity + ')';
       return {
         "color": color,
-        "tooltipShowValue": ungueltigeStimmen + " ungültige Zweitstimmen",
+        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Erststimmen (" + ungueltigeStimmen + " Stimmen)",
       }
     } else {
         console.error("Error in analysis");
@@ -280,14 +281,14 @@ function getAnalyseForUngueltigeZweitstimmen(properties) {
            gueltigeStimmen += party.stimmen;
       });
       var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
-      var opacity = ungueltigeStimmen / gesamtstimmen * 50;
+      var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
+      var opacity = prozentualUngueltigeStimmen * 50;
       var color = 'rgba(26, 188, 156, ' + opacity + ')';
       return {
         "color": color,
-        "tooltipShowValue": ungueltigeStimmen + " ungültige Zweitstimmen",
+        "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Zweitstimmen (" + ungueltigeStimmen + " Stimmen)",
       }
     } else {
         console.error("Error in analysis");
     }
 }
-
