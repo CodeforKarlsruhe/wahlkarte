@@ -143,20 +143,50 @@
             }
 
             #navbar .nav-item {
-                margin-left: 15px;
+                margin-left: 20px;
             }
             #aboutButton {
-                margin-left: 15px;
+                margin-left: 20px;
             }
-            @media (max-width: 575px) {
+            @media (max-width: 670px) {
                 #navbar .navbar-brand {
                     font-size: 15px;
                 }
                 #navbar .nav-item {
-                    margin-left: 5px;
+                    margin-left: 12px;
                 }
                 #aboutButton {
                     margin-left: 0;
+                }
+                #navbar .subtitle {
+                    display: none;
+                }
+            }
+            #navbar .nav-item:first-child {
+                margin-left: 0;
+            }
+
+            @media (max-width: 991px) and (min-height: 425px) {
+                #extended-tooltip {
+                    position: absolute;
+                    right: 20px;
+                    left: auto;
+                    top: 70px;
+                    bottom: auto;
+                }
+            }
+            @media (max-width: 991px) and (max-height: 424px) {
+                #extended-tooltip {
+                    position: absolute;
+                    right: 110vw;
+                    left: auto;
+                }
+            }
+            @media (max-width: 524px) {
+                #extended-tooltip {
+                    position: absolute;
+                    right: 110vw;
+                    left: auto;
                 }
             }
         </style>
@@ -165,28 +195,28 @@
 
 <nav id="navbar" class="navbar navbar-light bg-light fixed-top justify-content-between flex-nowrap flex-row">
     <div class="container">
-        <span class="navbar-brand">Karlsruher Wahlanzeiger: Bundestagswahl 2017</span>
+        <span class="navbar-brand"><span class="title">Karlsruher Wahlanzeiger</span><span class="subtitle">: Bundestagswahl 2017</span></span>
         <ul class="nav navbar-nav flex-row float-right">
             <li class="nav-item">
-                <a id="twitterButton" class="nav-link ml-3" href="#" target="_blank" title="Auf Twitter teilen">
+                <a id="twitterButton" class="nav-link" href="#" target="_blank" title="Auf Twitter teilen">
                   <span class="fa fa-lg fa-twitter" aria-hidden="true"></span>
                   <span class="sr-only">Auf Twitter teilen</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a id="facebookButton" class="nav-link ml-3" href="#" target="_blank" title="Auf Facebook teilen">
+                <a id="facebookButton" class="nav-link" href="#" target="_blank" title="Auf Facebook teilen">
                   <span class="fa fa-lg fa-facebook" aria-hidden="true"></span>
                   <span class="sr-only">Auf Facebook teilen</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a id="whatsappButton" class="nav-link ml-3" title="Auf WhatsApp teilen">
+                <a id="whatsappButton" class="nav-link" title="Auf WhatsApp teilen">
                   <span class="fa fa-lg fa-whatsapp" aria-hidden="true"></span>
                   <span class="sr-only">Auf WhatsApp teilen</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a id="aboutButton" class="nav-link ml-3" data-toggle="modal" href="#aboutModal" title="Über diese Seite">
+                <a id="aboutButton" class="nav-link" data-toggle="modal" href="#aboutModal" title="Über diese Seite">
                   <span class="fa fa-lg fa-info-circle" aria-hidden="true"></span>
                   <span class="sr-only">Info</span>
                 </a>
