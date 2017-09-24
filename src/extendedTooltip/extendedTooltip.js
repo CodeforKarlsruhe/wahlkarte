@@ -83,7 +83,7 @@ function selectDistrict(featureData) {
     if(lastSelectedConstituencyNumber !== currentConstituencyObject.properties.wahlbezirksnummer){
 
         if(lastSelectedConstituencyNumber !== null) {
-            elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
+            elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = currentAnalysis[lastSelectedConstituencyNumber].color;
         } // end if
 
         lastSelectedConstituencyNumber = currentConstituencyObject.properties.wahlbezirksnummer;
