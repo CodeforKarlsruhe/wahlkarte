@@ -101,6 +101,16 @@ $('#szenarien-carousel').bind('slid.bs.carousel', function (e) {
 
 
 /**
+ * Aktualisiert die Twitter und Facebook Links.
+ */
+function updateSharingLinks() {
+    var param = encodeURIComponent(window.location.href);
+    $('#facebookButton').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + param);
+    $('#twitterButton').attr('href', 'https://twitter.com/home?status=' + param);
+}
+
+
+/**
  * Springt zum Szenario mit der angegebenen ID.
  */
 function setScenario(scenarioId) {
@@ -119,6 +129,7 @@ function setScenario(scenarioId) {
         }
     }
     colorMapWinDistrict(szenario);
+    updateSharingLinks();
 }
 
 function colorMapNeutrally() {
@@ -148,6 +159,7 @@ function colorMapWinDistrict(szenario) {
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var analyse = szenario.getAnalyse(item.properties);
+            currentAnalysis[item.properties.statistik.wahlbezirksnummer] = analyse;
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
@@ -158,49 +170,6 @@ function colorMapWinDistrict(szenario) {
     }
 }
 
-/**
-<<<<<<< HEAD
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
- * @param {String} name 
-=======
-<<<<<<< HEAD
- *  Ermittelt die Farbe fuer gegeben Parteinamen
- * @param {String} partyName
- */
-function winnerColor(partyName){
-    let winner = findParty(partyName)
-
-    if (winner !== null){
-        return winner.color;
-    } else {
-        console.error("Party not found!")
-    }
-}
-
-/**
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt
- * @param {String} name
->>>>>>> 4391a85baf9feaadd496281bb354700b9e1ef5d4
- */
-function findParty(name){
-    let winner = null
-    Object.keys(PARTY).forEach(function(p){
-        found = PARTY[p]
-        if (found.name.toLowerCase() === name.toLowerCase()){
-            winner = found
-        }
-    });
-
-    if (winner !== null){
-        return winner;
-    } else {
-        console.error("Can't find party ", name)
-    }
-}
-
-function getSVGMap() {
-    return elemSvg = document.getElementById("karte");
-}
 
 /**
  * Initialisierung wenn die Seite vollständig geladen ist.
@@ -216,22 +185,3 @@ $(function() {
     $(window).on('hashchange', onHashChange);
     onHashChange();
 });
-
-
-/**
- * Liefert die aktuelle Szenarien-ID aus der Browser-URL zurück.
- *
- * Wenn keine oder eine ungültige Szenarien-ID gesetzt ist wird die ID
- * des ersten Szenarios zurückgeliefert.
- */
-function getScenarioIdFromUrl() {
-    if (window.location.hash) {
-        var hash = window.location.hash.slice(1);
-        for(var i = 0; i < SZENARIEN.length; i++) {
-            if (SZENARIEN[i].id === hash) {
-                return hash;
-            }
-        }
-    }
-    return SZENARIEN[0].id;
-}

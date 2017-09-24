@@ -62,6 +62,18 @@ function getAnalyseForWahlergebnisse(properties) {
 }
 
 /**
+ * Dummy-Analyse als Platzhalter.
+ */
+function dummyAnalyse(properties) {
+    return {
+        "color": "#ff0",
+        "tooltipShowValue": "Ich bin ein Dummy!",
+        "tooltipShowKey": "zuzuege"
+    }
+}
+
+
+/**
  *  Ermittelt die Partei des Kandidaten mit den meisten Stimmen im Wahlkreis
  * @param {Object} properties
  */
