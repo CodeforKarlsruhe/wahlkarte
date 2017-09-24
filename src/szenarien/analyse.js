@@ -13,9 +13,9 @@ function getAnalyseForWechselwaehler(properties) {
 
       var color = '#fff';
       var tooltip = "Kein Wechsel";
-      if (sieger2013.partyName.toLowerCase() !== sieger2017.partyName.toLowerCase()) {
-        color = getColorForParty(sieger2017.partyName);
-        tooltip = "Wechsel von " + sieger2013.partyName + " (" + sieger2013.stimmen + ") zu " + sieger2017.partyName + " (" + sieger2013.stimmen + ")";
+      if (sieger2013.party.name.toLowerCase() !== sieger2017.party.name.toLowerCase()) {
+        color = getColorForParty(sieger2017.party.name);
+        tooltip = "Wechsel von " + sieger2013.party.name + " (" + sieger2013.stimmen + " Stimmen) zu " + sieger2017.party.name + " (" + sieger2013.stimmen + " Stimmen)";
       }
       return {
         "color": color,
@@ -35,8 +35,9 @@ function getParteiMitMeistenStimmen(zweitstimmen) {
          partyName = party.partei;
      }
   });
+  var gewinner = findParty(partyName);
   return {
-    "partyName": partyName,
+    "party": gewinner,
     "stimmen": max,
   };
 }
