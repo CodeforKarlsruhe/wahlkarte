@@ -125,9 +125,7 @@ function getAnalyseGroessteAenderung(properties) {
     });
     btw2013_zweitstimmen.forEach(function(partei) {
       if (winner_loser[partei.partei]) {
-        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen
-      } else {
-        delete winner_loser[partei.partei];
+        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen;
       }
     });
     var max = -1, parteiname_winner = '';
