@@ -125,70 +125,14 @@ function colorMapWinDistrict() {
 
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
-            var win = maxPartie(item.properties.btw2013.zweitstimme)
-            var color = winnerColor(win)
+            var analyse = getAnalyseForWahlergebnisse(item.properties);
+            var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
             }
         }
     } else {
         console.error("GEOJSON null!")
-    }
-}
-
-/**
- *  Ermittelt die Farbe fuer gegeben Parteinamen 
- * @param {String} partyName 
- */
-function winnerColor(partyName){
-    let winner = findPartie(partyName)
-    
-    if (winner !== null){
-        return winner.color;
-    } else {
-        console.error("Party not found!")
-    }
-}
-
-/**
- * Ermittel aus Konstante PARTY jenes Objekt welches mit dem Namen uebereinstimmt 
- * @param {String} name 
- */
-function findPartie(name){
-    let winner = null
-    Object.keys(PARTY).forEach(function(p){
-        found = PARTY[p]
-        if (found.name.toLowerCase() === name.toLowerCase()){
-            winner = found
-        } 
-    });
-
-    if (winner !== null){
-        return winner;
-    } else {
-        console.error("Can't find party ", name)
-    }
-}
-
-/**
- * Ermittelt die Parite mit den meisten Stimmen im Wahlkreist 
- * @param {Object} bezirkZweitstimmen 
- */
-function maxPartie(bezirkZweitstimmen){
-    if (bezirkZweitstimmen !== 'undefined'){
-        var max = 0;
-        var partyName = null;
-        bezirkZweitstimmen.forEach(function(par){
-           if (max < par.stimmen) {
-               max = par.stimmen;
-               partyName = par;
-           }
-        });
-
-        if (max >= 0 && partyName !== null)
-        return partyName.partei;
-    } else {
-        console.error("No data")
     }
 }
 
