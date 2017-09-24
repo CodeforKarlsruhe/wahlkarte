@@ -61,7 +61,7 @@ function getAnalyseForErststimmen(properties) {
         var color = getColorForParty(sieger.partei);
         return {
           "color": color,
-          "tooltipShowValue": "Sieger: " + sieger.name + " (" + sieger.partei + ")"+ " mit " + max + " Stimmen",
+          "tooltipShowValue": "Sieger: " + sieger.name + " (" + sieger.partei + ")"+ " mit " + max + " Erststimmen",
         }
       }
     } else {
