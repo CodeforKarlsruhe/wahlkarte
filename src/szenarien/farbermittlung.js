@@ -57,7 +57,7 @@ function getAnalyseForKleinparteien(properties) {
         var color = getColorForParty(partyName);
         return {
           "color": color,
-          "tooltipShowValue": "Sieger: " + partyName + " mit " + max + " Stimmen",
+          "tooltipShowValue": "Größte Kleinpartei: " + partyName + " mit " + max + " Stimmen",
         }
       }
     } else {
