@@ -9,3 +9,7 @@
     position: absolute;
     z-index: 1;
 }
+
+#tool-tip-district-name{
+    font-size: 12px;
+}
