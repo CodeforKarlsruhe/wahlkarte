@@ -219,6 +219,7 @@ $(function() {
     extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme');
     extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme');
 
+    alert('Leider haben wir noch keine Daten für die Wahl 2017, daher gibt es vorerst nur die Daten von 2013.');
 
     Promise.all([stadtteilePromise, wahlbezirkePromise])
         .then(function() {
