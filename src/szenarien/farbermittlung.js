@@ -256,39 +256,16 @@ function getAnalyseForUngueltigeStimmen(properties) {
   var ungueltigeStimmen = gesamtStimmen - gueltigeStimmen;
 
   var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtStimmen;
-  var opacity = prozentualUngueltigeStimmen * 20;
+  var opacity = prozentualUngueltigeStimmen * 40;
   var color = 'rgba(26, 188, 156, ' + opacity + ')';
   return {
     "color": color,
-    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
+    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 10000) / 100 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
   }
 }
 
 /**
- *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
- * @param {Object} properties
- */
-function getAnalyseForUngueltigeZweitstimmen(properties) {
-  var zweitstimmen = properties.btw2017.zweitstimme;
-  var gesamtstimmen = properties.btw2017["waehler/-innen"];
-
-  var tooltip = "Kein Wechsel";
-  var gueltigeStimmen = 0;
-  zweitstimmen.forEach(function(party) {
-       gueltigeStimmen += party.stimmen;
-  });
-  var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
-  var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
-  var opacity = prozentualUngueltigeStimmen * 50;
-  var color = 'rgba(26, 188, 156, ' + opacity + ')';
-  return {
-    "color": color,
-    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Zweitstimmen (" + ungueltigeStimmen + " Stimmen)",
-  }
-}
-
-/**
- *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
+ *  Ermittelt den Abstand zwischen der erst- und zweitplatzierten Partei
  * @param {Object} properties
  */
 function getAnalyseForKleinsterAbstand(properties) {
@@ -307,7 +284,7 @@ function getAnalyseForKleinsterAbstand(properties) {
       "color": color,
       "tooltipShowValue": "Abstand von " +
       erster.party.name + " zu " + zweiter.party.name + ": " +
-      Math.round(prozentual * 100000) / 1000 + " % (" + differenz + " Stimmen)",
+      Math.round(prozentual * 10000) / 100 + " % (" + differenz + " Stimmen)",
     }
   }
 }
