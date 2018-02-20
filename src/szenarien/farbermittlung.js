@@ -205,25 +205,17 @@ function getParteiMitMeistenStimmen(zweitstimmen) {
  * @param {Object} properties
  */
 function getAnalyseForUngueltigeStimmen(properties) {
-  var erststimmen = properties.btw2017.erststimme;
-  var zweitstimmen = properties.btw2017.zweitstimme;
+  var btw2017 = properties.btw2017;
+  var gesamtStimmen = 2 * btw2017["waehler/-innen"];
+  var gueltigeStimmen = btw2017.gueltige_erststimmen + btw2017.gueltige_zweitstimmen;
+  var ungueltigeStimmen = gesamtStimmen - gueltigeStimmen;
 
-  var gesamtstimmen = 2 * properties.btw2017["waehler/-innen"];
-  var gueltigeStimmen = 0;
-  erststimmen.forEach(function(kandidat) {
-       gueltigeStimmen += kandidat.stimmen;
-  });
-  zweitstimmen.forEach(function(partei) {
-       gueltigeStimmen += partei.stimmen;
-  });
-  var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
-
-  var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
-  var opacity = prozentualUngueltigeStimmen * 50;
+  var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtStimmen;
+  var opacity = prozentualUngueltigeStimmen * 20;
   var color = 'rgba(26, 188, 156, ' + opacity + ')';
   return {
     "color": color,
-    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Stimmen (" + ungueltigeStimmen + " Stimmen)",
+    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
   }
 }
 
