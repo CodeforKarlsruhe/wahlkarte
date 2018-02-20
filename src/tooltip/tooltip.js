@@ -17,22 +17,22 @@ function onMouseOverWahlbezirk(data){
 
         currentConstituencyNumber = data.properties.wahlbezirksnummer;
 
-        var template = '<span id="tool-tip-district-name">'+data.properties.wahlbezirksname+"<small> (" + data.properties.stadtteilname + ")</small></span>";
+        var template = '<span id="tool-tip-district-name">' + data.properties.wahlbezirksname + "</span>";
         var summe = 0;
 
         // Stimme von diesem Wahlkreis zusammen rechnen
-        for(var index in data.properties.btw2013.zweitstimme){
-            summe += data.properties.btw2013.zweitstimme[index].stimmen;
+        for(var index in data.properties.btw2017.zweitstimme){
+            summe += data.properties.btw2017.zweitstimme[index].stimmen;
         } // end for
 
         // Array Sortieren
-        data.properties.btw2013.zweitstimme = data.properties.btw2013.zweitstimme.sort(function (a, b) {
+        data.properties.btw2017.zweitstimme = data.properties.btw2017.zweitstimme.sort(function (a, b) {
             return b.stimmen - a.stimmen;
         });
 
-        template += buildBar(data.properties.btw2013.zweitstimme, summe);
+        template += buildBar(data.properties.btw2017.zweitstimme, summe);
         // ersten 3 Parteien im Tooltip anzeigen
-        data.properties.btw2013.zweitstimme.slice(0,3).forEach(function(element) {
+        data.properties.btw2017.zweitstimme.slice(0,3).forEach(function(element) {
             var party = findParty(element.partei);
             template += party.name;
             template += " mit " + element.stimmen + " Stimmen";

@@ -7,7 +7,6 @@ var extendedTooltipDetailDistrictInfo;
 var extendedTooltipDetailDistrictInfoErststimme;
 var extendedTooltipDetailDistrictInfoZweitstimme;
 var lastSelectedConstituencyNumber = null;
-var lastSelectetDistrictColor = '';
 
 /**
  * Globale Variabeln
@@ -50,52 +49,27 @@ function rgb2hex(rgba) {
  * @param featureData das aktuelle "feature"
  */
 function selectDistrict(featureData) {
-
-    var props = featureData.properties;
-
     // Karte Reference setzten wenn nicht vorhanden
     if(elemSvg === null){
         getSVGMap();
-    } // end if
-
-    if(lastSelectetDistrictId !== props.stadtteilnummer){
-
-        if(lastSelectetDistrictId !== null) {
-            // Letzer Stadtteil wieder zurück setzen
-            elemSvg.getElementById(lastSelectetDistrictId).style.fill = '#fff';
-        } // end if
-
-        // Neuer Stadtteil färben
-        let oldColor = rgb2hex(elemSvg.getElementById(props.stadtteilnummer).style.fill)
-        elemSvg.getElementById(props.stadtteilnummer).style.fill = lightenDarkenColor(oldColor, -20);
-
-
-        // letzte ausgewählter Stadtteil speichern
-        lastSelectetDistrictId = props.stadtteilnummer;
-
-
-    } // end if
-
-    // In das HTML schreiben
-    console.log(featureData);
-    infoPanelDistrictName.innerHTML = featureData.properties.wahlbezirksname+"<small> (" + props.stadtteilname + ")</small>";
+    }
 
     // Hat sich der Wahlbezirk begeändert?
-    if(lastSelectedConstituencyNumber !== featureData.properties.wahlbezirksnummer){
-
+    let constituencyNumber = featureData.properties.wahlbezirksnummer;
+    if(lastSelectedConstituencyNumber !== constituencyNumber) {
         // Ruecksetzen der alten Selektion
         if(lastSelectedConstituencyNumber !== null) {
-            elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = currentAnalysis[lastSelectedConstituencyNumber].color;
-            elemSvg.getElementById(lastSelectedConstituencyNumber).style.stroke = '#000';
-            elemSvg.getElementById(lastSelectedConstituencyNumber).style.strokeWidth = '1px';
+            let el = elemSvg.getElementById(lastSelectedConstituencyNumber);
+            el.style.stroke = '#000';
+            el.style.strokeWidth = '1px';
         } // end if
 
-        lastSelectedConstituencyNumber = featureData.properties.wahlbezirksnummer;
-        lastSelectetDistrictColor = elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill;
-        // elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = '#57bdeb';
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.stroke = '#fff';
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.strokeWidth = '5px';
+        lastSelectedConstituencyNumber = constituencyNumber;
+        let el = elemSvg.getElementById(lastSelectedConstituencyNumber);
+        el.style.stroke = 'rgb(26, 188, 156)';
+        el.style.strokeWidth = '5px';
+
+        infoPanelDistrictName.innerHTML = featureData.properties.wahlbezirksname;
     } // end if
 
     // Info vom aktullen ausgewählen Wahlbezirk weiter an das ExtendedToolTip geben.
@@ -109,18 +83,11 @@ function selectDistrict(featureData) {
  * Schließt das Infopanel
  */
 function closeInfoPanel() {
-
-    if(lastSelectetDistrictId !== null) {
-        // Letzer Stadtteil wieder zurück setzen
-        elemSvg.getElementById(lastSelectetDistrictId).style.fill = '#fff';
-    } // end if
-
     if (lastSelectedConstituencyNumber) {
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.fill = lastSelectetDistrictColor;
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.stroke = '#000';
-        elemSvg.getElementById(lastSelectedConstituencyNumber).style.strokeWidth = '1px';
+        let el = elemSvg.getElementById(lastSelectedConstituencyNumber);
+        el.style.stroke = '#000';
+        el.style.strokeWidth = '1px';
     }
-
     lastSelectetDistrictId = null;
     infoPanel.classList.remove('isOpen');
 } // end function
@@ -132,22 +99,21 @@ function closeInfoPanel() {
  */
 function addDetailDistrictInfo(districtInfo) {
 
-    var data2013 = districtInfo.properties.btw2013,
+    var data2017 = districtInfo.properties.btw2017,
         sumDistrict = districtInfo.sumDistrict,
         template = '';
 
     sumDistrict = 0; // this code is redundant. took it from tooltip.js
-    for(var index in districtInfo.properties.btw2013.zweitstimme){
-        sumDistrict += districtInfo.properties.btw2013.zweitstimme[index].stimmen;
+    for(var index in districtInfo.properties.btw2017.zweitstimme){
+        sumDistrict += districtInfo.properties.btw2017.zweitstimme[index].stimmen;
     } // end for
 
     // Array Sortieren
-    data2013.zweitstimme = data2013.zweitstimme.sort(function (a, b) {
+    data2017.zweitstimme = data2017.zweitstimme.sort(function (a, b) {
         return b.stimmen - a.stimmen;
     });
 
-    templateZweistimme = '2013 Wahlbeteiligung '+((100 * data2013['wähler/-innen']) / data2013.wahlberechtigte).toFixed(1) +'%';
-    templateZweistimme += buildBar(data2013.zweitstimme, sumDistrict);
+    templateZweistimme = buildBar(data2017.zweitstimme, sumDistrict);
 
     templateZweistimme += 'Zweitstimmen (Parteien)' +
         '<table class="table-sm table-zweitstimme">' +
@@ -159,16 +125,16 @@ function addDetailDistrictInfo(districtInfo) {
         '</colgroup>';
 
     // Array Sortieren
-    data2013.zweitstimme = data2013.zweitstimme.sort(function (a, b) {
+    data2017.zweitstimme = data2017.zweitstimme.sort(function (a, b) {
         return b.stimmen - a.stimmen;
     });
 
     // Verhältnis ermitteln
-    for(var index in data2013.zweitstimme){
+    for(var index in data2017.zweitstimme){
 
         // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind
-        if( data2013.zweitstimme[index].stimmen > 0) {
-            var partyItem = PARTY[(data2013.zweitstimme[index].partei).toUpperCase()];
+        if( data2017.zweitstimme[index].stimmen > 0) {
+            var partyItem = PARTY[(data2017.zweitstimme[index].partei).toUpperCase()];
 
             if (typeof partyItem === 'undefined') {
                 partyItem = {
@@ -178,9 +144,9 @@ function addDetailDistrictInfo(districtInfo) {
 
             templateZweistimme += '<tr>';
             //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-            templateZweistimme += '<td>' + data2013.zweitstimme[index].partei + '</td>';
-            templateZweistimme += '<td align="right">' + ((100 * data2013.zweitstimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
-            templateZweistimme += '<td align="right">' + data2013.zweitstimme[index].stimmen + ' <small>Stimmen</small></td>';
+            templateZweistimme += '<td>' + data2017.zweitstimme[index].partei + '</td>';
+            templateZweistimme += '<td align="right">' + ((100 * data2017.zweitstimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
+            templateZweistimme += '<td align="right">' + data2017.zweitstimme[index].stimmen + ' <small>Stimmen</small></td>';
 
             templateZweistimme += '</tr>';
         }
@@ -202,16 +168,16 @@ function addDetailDistrictInfo(districtInfo) {
         '</colgroup>';
 
     // Array Sortieren
-    data2013.erststimme = data2013.erststimme.sort(function (a, b) {
+    data2017.erststimme = data2017.erststimme.sort(function (a, b) {
         return b.stimmen - a.stimmen;
     });
 
     // Verhältnis ermitteln
-    for(var index in data2013.erststimme){
+    for(var index in data2017.erststimme){
 
         // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind
-        if( data2013.erststimme[index].stimmen > 0) {
-            var partyItem = PARTY[(data2013.erststimme[index].partei).toUpperCase()];
+        if( data2017.erststimme[index].stimmen > 0) {
+            var partyItem = PARTY[(data2017.erststimme[index].partei).toUpperCase()];
 
             if (typeof partyItem === 'undefined') {
                 partyItem = {
@@ -221,9 +187,9 @@ function addDetailDistrictInfo(districtInfo) {
 
             templateErststimme += '<tr>';
             //template += '<div style="height: 25px;width: '+(100 * data.properties[k]) / summe+'%;background-color: #'+PartyColors[index]+'"></div>';
-            templateErststimme += '<td>' + data2013.erststimme[index].name + ' <small>(' + data2013.erststimme[index].partei + ')</small></td>';
-            templateErststimme += '<td align="right">' + ((100 * data2013.erststimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
-            templateErststimme += '<td align="right">' + data2013.erststimme[index].stimmen + ' <small>Stimmen</small></td>';
+            templateErststimme += '<td>' + data2017.erststimme[index].name + ' <small>(' + data2017.erststimme[index].partei + ')</small></td>';
+            templateErststimme += '<td align="right">' + ((100 * data2017.erststimme[index].stimmen) / sumDistrict).toFixed(1) + '%</td>';
+            templateErststimme += '<td align="right">' + data2017.erststimme[index].stimmen + ' <small>Stimmen</small></td>';
 
             templateErststimme += '</tr>';
         } // end if

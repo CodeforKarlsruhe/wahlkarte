@@ -83,6 +83,42 @@ const PARTY = {
         "name": "Rentner",
         "color": "#C0C0C0"
     },
+    DiB:{
+        "name": "DiB",
+        "color": "#C0C0C0"
+    },
+    RECHTE:{
+        "name": "Die Rechte",
+        "color": "#C0C0C0"
+    },
+    VPARTEI:{
+        "name": "V-Partei³",
+        "color": "#C0C0C0"
+    },
+    MENSCHLICHEWELT:{
+        "name": "Menschliche Welt",
+        "color": "#C0C0C0"
+    },
+    TIERSCHUTZALLIANZ:{
+        "name": "Tierschutzallianz",
+        "color": "#C0C0C0"
+    },
+    DKP:{
+        "name": "DKP",
+        "color": "#C0C0C0"
+    },
+    BGE:{
+        "name": "BGE",
+        "color": "#C0C0C0"
+    },
+    DM:{
+        "name": "DM",
+        "color": "#C0C0C0"
+    },
+    DIEPARTEI:{
+        "name": "Die Partei",
+        "color": "#C0C0C0"
+    },
     SONSTIGE:{
         "name": "Sonstige",
         "color": "#C0C0C0"

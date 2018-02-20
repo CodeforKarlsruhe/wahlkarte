@@ -87,6 +87,7 @@ function setScenario(scenarioId) {
         window.location.hash = scenarioId;
         return;  // Function will be called a second time from onHashChange
     }
+    closeInfoPanel();
     var currentSlideIndex = $('#szenarien-carousel div.active').index();
     for (var i = 0; i < SZENARIEN.length; i++) {
         if (SZENARIEN[i].id === scenarioId) {
@@ -128,7 +129,7 @@ function colorMapWinDistrict(szenario) {
     if (GEOJSON !== null){
         for(var item of GEOJSON.features){
             var analyse = szenario.getAnalyse(item.properties);
-            currentAnalysis[item.properties.statistik.wahlbezirksnummer] = analyse;
+            currentAnalysis[item.properties.wahlbezirksnummer] = analyse;
             var color = analyse.color;
             if (typeof color !== 'undefined'){
                 elemSvg.getElementById(item.properties.wahlbezirksnummer).style.fill = color
@@ -218,8 +219,6 @@ $(function() {
     extendedTooltipDetailDistrictInfo = document.getElementById('extended-tooltip-detail-district-info');
     extendedTooltipDetailDistrictInfoErststimme = document.getElementById('pills-erststimme');
     extendedTooltipDetailDistrictInfoZweitstimme = document.getElementById('pills-zweitstimme');
-
-    alert('Leider haben wir noch keine Daten für die Wahl 2017, daher gibt es vorerst nur die Daten von 2013.');
 
     Promise.all([stadtteilePromise, wahlbezirkePromise])
         .then(function() {
