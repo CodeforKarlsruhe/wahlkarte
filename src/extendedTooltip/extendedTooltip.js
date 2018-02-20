@@ -103,7 +103,7 @@ function addDetailDistrictInfo(districtInfo) {
         sumDistrict = districtInfo.sumDistrict,
         template = '';
 
-    sumDistrict = data.properties.btw2017.gueltige_zweitstimmen;
+    sumDistrict = districtInfo.properties.btw2017.gueltige_zweitstimmen;
 
     // Array Sortieren
     data2017.zweitstimme = data2017.zweitstimme.sort(function (a, b) {
