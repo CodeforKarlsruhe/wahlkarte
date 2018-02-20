@@ -126,14 +126,19 @@ function getAnalyseForErstVsZweit(properties) {
 function getAnalyseGroessteAenderung(properties) {
   if (properties.btw2013.zweitstimme) {
     var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
+    var btw2013_zweitstimmen_summe = 0;
+    for(var index in btw2013_zweitstimmen){
+        btw2013_zweitstimmen_summe += btw2013_zweitstimmen[index].stimmen;
+    }
     var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
+    var btw2017_zweitstimmen_summe = properties.btw2017.gueltige_zweitstimmen;
     var winner_loser = {};
     btw2013_zweitstimmen.forEach(function(partei) {
-      winner_loser[partei.partei] = partei.stimmen;
+      winner_loser[partei.partei] = partei.stimmen / btw2013_zweitstimmen_summe;
     });
     btw2017_zweitstimmen.forEach(function(partei) {
       if (winner_loser[partei.partei]) {
-        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen;
+        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen / btw2017_zweitstimmen_summe;
       }
     });
     var max = -1, parteiname_winner = '';
@@ -146,7 +151,7 @@ function getAnalyseGroessteAenderung(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + max + " Stimmen"
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + (max * 100).toFixed(1) + " %"
     }
   } else {
     return {
