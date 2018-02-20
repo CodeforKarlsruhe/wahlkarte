@@ -3,7 +3,7 @@ const SZENARIEN = [
     "id": "zweitstimme",
     "titel": "Zweitstimmen",
     "untertitel": "Hier findest du die Wahlergebnisse in der klassischen Ansicht",
-    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Kleinparteien</a>, <a href=\"#nichtwaehler-win\">Nicht&shy;wähler*innen</a>, <a href=\"#wechselwaehler\">Wechsel&shy;wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
+    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Kleinparteien</a>, <a href=\"#wechselwaehler\">Wechsel&shy;wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
     "getAnalyse": getAnalyseForWahlergebnisse,
   },
   {
@@ -40,13 +40,6 @@ const SZENARIEN = [
     "untertitel": "Wie viele ungültige Stimmen gibt es in den jeweiligen Wahlbezirken?",
     "beschreibung": "Je dunkler die Farbe des Wahlbezirks ist, desto mehr ungültige Erst- und Zweitstimmen gab es.",
     "getAnalyse": getAnalyseForUngueltigeStimmen,
-  },
-  {
-    "id": "nichtwaehler-win",
-    "titel": "Nicht&shy;wähler*innen",
-    "untertitel": "Wo haben Nichtwähler*innen die absolute Mehrheit?",
-    "beschreibung": "In manchen Bezirken liegt die Wahlbeteiligung bei weniger als 50%. In diesen hätten die Nichtwähler also die absolute Mehrheit geholt. Die entsprechenden Bezirke sind in türkis eingefärbt.",
-    "getAnalyse": getAnalyseNichtWaehlerWin,
   },
   {
     "id": "kleinster-abstand",
