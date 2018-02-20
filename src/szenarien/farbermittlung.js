@@ -123,13 +123,45 @@ function getAnalyseForErstVsZweit(properties) {
 }
 
 
-function getAnalyseGroessteAenderung(properties) {
+function getAnalyseGroessterGewinner(properties) {
   if (properties.btw2013.zweitstimme) {
     var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
-    var btw2013_zweitstimmen_summe = 0;
-    for(var index in btw2013_zweitstimmen){
-        btw2013_zweitstimmen_summe += btw2013_zweitstimmen[index].stimmen;
+    var btw2013_zweitstimmen_summe = getGueltigeStimmen2013(btw2013_zweitstimmen);
+    var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
+    var btw2017_zweitstimmen_summe = properties.btw2017.gueltige_zweitstimmen;
+    var winner_loser = {};
+    btw2017_zweitstimmen.forEach(function(partei) {
+      winner_loser[partei.partei] = partei.stimmen / btw2017_zweitstimmen_summe;
+    });
+    btw2013_zweitstimmen.forEach(function(partei) {
+      if (winner_loser[partei.partei]) {
+        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen / btw2013_zweitstimmen_summe;
+      }
+    });
+    var max = 0, parteiname_winner = '';
+    Object.keys(winner_loser).forEach(function(parteiname){
+      if (winner_loser[parteiname] > max) {
+        max = winner_loser[parteiname];
+        parteiname_winner = parteiname;
+      }
+    });
+    var color = getColorForParty(parteiname_winner);
+    return {
+      "color": color,
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größten Gewinne mit " + (max * 100).toFixed(1) + " %"
     }
+  } else {
+    return {
+      "color": "#ccc",
+      "tooltipShowValue": "In diesem Gebiet wurden die Wahlbezirke im Vergleich zur Bundestagswahl 2013 stark umstrukturiert, so dass kein Vergleich möglich ist"
+    }
+  }
+}
+
+function getAnalyseGroessterVerlierer(properties) {
+  if (properties.btw2013.zweitstimme) {
+    var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
+    var btw2013_zweitstimmen_summe = getGueltigeStimmen2013(btw2013_zweitstimmen);
     var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
     var btw2017_zweitstimmen_summe = properties.btw2017.gueltige_zweitstimmen;
     var winner_loser = {};
@@ -141,9 +173,9 @@ function getAnalyseGroessteAenderung(properties) {
         winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen / btw2017_zweitstimmen_summe;
       }
     });
-    var max = -1, parteiname_winner = '';
+    var max = 0, parteiname_winner = '';
     Object.keys(winner_loser).forEach(function(parteiname){
-      if (Math.abs(winner_loser[parteiname]) > max) {
+      if (winner_loser[parteiname] > max) {
         max = winner_loser[parteiname];
         parteiname_winner = parteiname;
       }
@@ -151,7 +183,7 @@ function getAnalyseGroessteAenderung(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + (max * 100).toFixed(1) + " %"
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte den größten Verlust mit " + (max * 100).toFixed(1) + " %"
     }
   } else {
     return {
@@ -159,6 +191,14 @@ function getAnalyseGroessteAenderung(properties) {
       "tooltipShowValue": "In diesem Gebiet wurden die Wahlbezirke im Vergleich zur Bundestagswahl 2013 stark umstrukturiert, so dass kein Vergleich möglich ist"
     }
   }
+}
+
+function getGueltigeStimmen2013(btw2013_stimmen) {
+  var btw2013_stimmen_summe = 0;
+  for(var index in btw2013_stimmen){
+      btw2013_stimmen_summe += btw2013_stimmen[index].stimmen;
+  }
+  return btw2013_stimmen_summe;
 }
 
 /**

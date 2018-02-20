@@ -3,7 +3,7 @@ const SZENARIEN = [
     "id": "zweitstimme",
     "titel": "Zweitstimmen",
     "untertitel": "Hier findest du die Wahlergebnisse in der klassischen Ansicht",
-    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Kleinparteien</a>, <a href=\"#wechselwaehler\">Wechsel&shy;wähler*innen</a>, <a href=\"#aenderung\">größte Änderung</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
+    "beschreibung": "In der klassischen Ansicht sind die Wahlbezirke in der Farbe der meistgewählten Partei eingefärbt.<br><br><b>Weitere Analysen:</b> Zum Beispiel die <a href=\"#erststimme\">Erststimmen</a>, <a href=\"#kleinparteien\">Kleinparteien</a>, <a href=\"#wechselwaehler\">Wechsel&shy;wähler*innen</a>, <a href=\"#gewinner\">größter Gewinner</a>, <a href=\"#verlierer\">größter Verlierer</a> und eine Analyse zu <a href=\"#erst-vs-zweit\">Erststimmen vs. Zweitstimmen</a>. Klick dich einfach mit den Pfeilen durch! :)",
     "getAnalyse": getAnalyseForWahlergebnisse,
   },
   {
@@ -28,11 +28,18 @@ const SZENARIEN = [
     "getAnalyse": getAnalyseForErstVsZweit,
   },
   {
-    "id": "aenderung",
-    "titel": "Größte Änderung",
+    "id": "gewinner",
+    "titel": "Größter Gewinner",
     "untertitel": "Welche Partei hat am meisten zugelegt?",
-    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl absolut betrachtet die größten Stimmgewinne hat.",
-    "getAnalyse": getAnalyseGroessteAenderung,
+    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl relativ betrachtet die größten Stimmgewinne hat.",
+    "getAnalyse": getAnalyseGroessterGewinner,
+  },
+  {
+    "id": "verlierer",
+    "titel": "Größter Verlierer",
+    "untertitel": "Welche Partei hat am meisten verloren?",
+    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl relativ betrachtet die größten Stimmverluste hat.",
+    "getAnalyse": getAnalyseGroessterVerlierer,
   },
   {
     "id": "ungueltig",
