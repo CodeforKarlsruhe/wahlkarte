@@ -1,8 +1,8 @@
-#extended-tooltip{
+#extended-tooltip {
     position: fixed;
     display: none;
-    width: 350px;
-    height: 250px;
+    width: 400px;
+    height: 265px;
     background-color: #1abc9c;
     color: #fff;
     left: 20px;
@@ -10,17 +10,21 @@
     z-index: 100;
 }
 
-#extended-tooltip.isOpen{
+#extended-tooltip.isOpen {
     display: block;
 }
 
-#extended-tooltip-detail-district-info{
+#extended-tooltip-detail-district-info {
     font-size: 14px;
     overflow-y: scroll;
-    height: 198px;
+    height: 160px;
 }
 
 .extended-tooltip-close-button {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 5px;
     cursor: pointer;
     cursor: hand;
     color: rgba(255,255,255,0.7);
@@ -30,36 +34,51 @@
     color: rgba(255,255,255,1);
 }
 
-.nav-pills {
-    margin: 0 5px;
+#pills-tab {
+    border-bottom: 1px solid #fff;
+    margin: 0 10px;
 }
 
-.nav-pills .nav-link {
-    background-color: #fff;
-    color: #000;
-}
-
-.nav-pills .nav-link.active {
+#pills-tab .nav-link {
+    background-color: transparent;
+    font-weight: normal;
+    text-decoration: underline;
     color: #fff;
-    background-color:#1abc9c;
+    width: 120px;
+}
+
+#pills-tab .nav-link.active {
+    background-color: transparent;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: default;
 }
 
 #extended-tooltip-detail-district-info {
-  padding: 10px 20px 10px 20px;
+  padding: 0 20px 10px 20px;
 }
 
 #extended-tooltip-district-name {
   padding: 20px 0 0 20px;
 }
 
-.table-erststimme {
+.table-stimmen {
     width: 100%;
 }
 
-.table-zweitstimme {
-    width: 100%;
+.table-stimmen td {
+    white-space: nowrap;
 }
+
+.table-stimmen td:nth-child(2) {
+    padding: 0 1em;
+}
+
 .table-sm td, .table-sm th {
     /* overwrite bootstrap */
     padding: 0;
+}
+
+#extended-tooltip .bar {
+    margin-bottom: 5px;
 }
