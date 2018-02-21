@@ -148,7 +148,7 @@ function getAnalyseGroessterGewinner(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größten Gewinne mit " + (max * 100).toFixed(1) + " %"
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größten Gewinne mit " + (max * 100).toFixed(1) + " Prozentpunkten"
     }
   } else {
     return {
@@ -183,7 +183,7 @@ function getAnalyseGroessterVerlierer(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte den größten Verlust mit " + (max * 100).toFixed(1) + " %"
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte den größten Verlust mit " + (max * 100).toFixed(1) + " Prozentpunkten"
     }
   } else {
     return {
@@ -260,7 +260,7 @@ function getAnalyseForUngueltigeStimmen(properties) {
   var color = 'rgba(26, 188, 156, ' + opacity + ')';
   return {
     "color": color,
-    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 10000) / 100 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
+    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 1000) / 10 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
   }
 }
 
@@ -284,7 +284,7 @@ function getAnalyseForKleinsterAbstand(properties) {
       "color": color,
       "tooltipShowValue": "Abstand von " +
       erster.party.name + " zu " + zweiter.party.name + ": " +
-      Math.round(prozentual * 10000) / 100 + " % (" + differenz + " Stimmen)",
+      Math.round(prozentual * 1000) / 10 + " Prozentpunkte (" + differenz + " Stimmen)",
     }
   }
 }

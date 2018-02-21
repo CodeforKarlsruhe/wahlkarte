@@ -31,14 +31,14 @@ const SZENARIEN = [
     "id": "gewinner",
     "titel": "Größter Gewinner",
     "untertitel": "Welche Partei hat am meisten zugelegt?",
-    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl relativ betrachtet die größten Stimmgewinne hat.",
+    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl relativ betrachtet die meisten Zweitstimmen hinzugewonnen hat.",
     "getAnalyse": getAnalyseGroessterGewinner,
   },
   {
     "id": "verlierer",
     "titel": "Größter Verlierer",
     "untertitel": "Welche Partei hat am meisten verloren?",
-    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl relativ betrachtet die größten Stimmverluste hat.",
+    "beschreibung": "Die Wahlbezirke sind in der Farbe der Partei eingefärbt, die im Vergleich zur letzten Bundestagswahl relativ betrachtet die meisten Zweitstimmen verloren hat.",
     "getAnalyse": getAnalyseGroessterVerlierer,
   },
   {
