@@ -6,7 +6,7 @@ var currentAnalysis = {};
  */
 function buildBar(data, summe) {
 
-    var template = '<div class="flex">';
+    var template = '<div class="flex bar">';
 
     for(var index in data) {
         // Nur anzeigen, wenn mehr als 0 Stimmen vorhanden sind

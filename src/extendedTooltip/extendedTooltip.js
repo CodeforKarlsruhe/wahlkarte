@@ -8,6 +8,8 @@ var extendedTooltipDetailDistrictInfoErststimme;
 var extendedTooltipDetailDistrictInfoZweitstimme;
 var lastSelectedConstituencyNumber = null;
 
+var EXTENDED_TOOLTIP_TABLE_HEADER_TEMPLATE = '<table class="table-sm table-stimmen">';
+
 /**
  * Globale Variabeln
  */
@@ -114,15 +116,7 @@ function addDetailDistrictInfo(districtInfo) {
     });
 
     templateZweistimme = buildBar(data2017.zweitstimme, sumDistrict);
-
-    templateZweistimme += 'Zweitstimmen (Parteien)' +
-        '<table class="table-sm table-zweitstimme">' +
-        '<tbody>' +
-        '<colgroup>' +
-        '   <col style="width: 100px">' +
-        '   <col style="width: 25px">' +
-        '   <col style="width: 60px">' +
-        '</colgroup>';
+    templateZweistimme += EXTENDED_TOOLTIP_TABLE_HEADER_TEMPLATE;
 
     // Array Sortieren
     data2017.zweitstimme = data2017.zweitstimme.sort(function (a, b) {
@@ -152,20 +146,11 @@ function addDetailDistrictInfo(districtInfo) {
         }
     } // end for
 
-    templateZweistimme += '</tbody>';
     templateZweistimme += '</table>';
 
     templateZweistimme += '<br>';
 
-
-    var templateErststimme = 'Erststimmen (Kandidaten)' +
-        '<table class="table-sm table-erststimme">' +
-        '<tbody>' +
-        '<colgroup>' +
-        '   <col style="width: 100px">' +
-        '   <col style="width: 25px">' +
-        '   <col style="width: 60px">' +
-        '</colgroup>';
+    var templateErststimme = EXTENDED_TOOLTIP_TABLE_HEADER_TEMPLATE;
 
     // Array Sortieren
     data2017.erststimme = data2017.erststimme.sort(function (a, b) {
@@ -195,9 +180,7 @@ function addDetailDistrictInfo(districtInfo) {
         } // end if
     } // end for
 
-    templateErststimme += '</tbody>';
     templateErststimme += '</table>';
-
 
     extendedTooltipDetailDistrictInfoErststimme.innerHTML = templateErststimme;
     extendedTooltipDetailDistrictInfoZweitstimme.innerHTML = templateZweistimme;
