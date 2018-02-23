@@ -18,12 +18,7 @@ function onMouseOverWahlbezirk(data){
         currentConstituencyNumber = data.properties.wahlbezirksnummer;
 
         var template = '<span id="tool-tip-district-name">' + data.properties.wahlbezirksname + "</span>";
-        var summe = 0;
-
-        // Stimme von diesem Wahlkreis zusammen rechnen
-        for(var index in data.properties.btw2017.zweitstimme){
-            summe += data.properties.btw2017.zweitstimme[index].stimmen;
-        } // end for
+        var summe = data.properties.btw2017.gueltige_zweitstimmen;
 
         // Array Sortieren
         data.properties.btw2017.zweitstimme = data.properties.btw2017.zweitstimme.sort(function (a, b) {

@@ -123,22 +123,24 @@ function getAnalyseForErstVsZweit(properties) {
 }
 
 
-function getAnalyseGroessteAenderung(properties) {
+function getAnalyseGroessterGewinner(properties) {
   if (properties.btw2013.zweitstimme) {
     var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
+    var btw2013_zweitstimmen_summe = getGueltigeStimmen2013(btw2013_zweitstimmen);
     var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
+    var btw2017_zweitstimmen_summe = properties.btw2017.gueltige_zweitstimmen;
     var winner_loser = {};
-    btw2013_zweitstimmen.forEach(function(partei) {
-      winner_loser[partei.partei] = partei.stimmen;
-    });
     btw2017_zweitstimmen.forEach(function(partei) {
+      winner_loser[partei.partei] = partei.stimmen / btw2017_zweitstimmen_summe;
+    });
+    btw2013_zweitstimmen.forEach(function(partei) {
       if (winner_loser[partei.partei]) {
-        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen;
+        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen / btw2013_zweitstimmen_summe;
       }
     });
-    var max = -1, parteiname_winner = '';
+    var max = 0, parteiname_winner = '';
     Object.keys(winner_loser).forEach(function(parteiname){
-      if (Math.abs(winner_loser[parteiname]) > max) {
+      if (winner_loser[parteiname] > max) {
         max = winner_loser[parteiname];
         parteiname_winner = parteiname;
       }
@@ -146,7 +148,7 @@ function getAnalyseGroessteAenderung(properties) {
     var color = getColorForParty(parteiname_winner);
     return {
       "color": color,
-      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größte Veränderung mit " + max + " Stimmen"
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte die größten Gewinne mit " + (max * 100).toFixed(1) + " Prozentpunkten"
     }
   } else {
     return {
@@ -154,6 +156,49 @@ function getAnalyseGroessteAenderung(properties) {
       "tooltipShowValue": "In diesem Gebiet wurden die Wahlbezirke im Vergleich zur Bundestagswahl 2013 stark umstrukturiert, so dass kein Vergleich möglich ist"
     }
   }
+}
+
+function getAnalyseGroessterVerlierer(properties) {
+  if (properties.btw2013.zweitstimme) {
+    var btw2013_zweitstimmen = properties.btw2013.zweitstimme;
+    var btw2013_zweitstimmen_summe = getGueltigeStimmen2013(btw2013_zweitstimmen);
+    var btw2017_zweitstimmen = properties.btw2017.zweitstimme;
+    var btw2017_zweitstimmen_summe = properties.btw2017.gueltige_zweitstimmen;
+    var winner_loser = {};
+    btw2013_zweitstimmen.forEach(function(partei) {
+      winner_loser[partei.partei] = partei.stimmen / btw2013_zweitstimmen_summe;
+    });
+    btw2017_zweitstimmen.forEach(function(partei) {
+      if (winner_loser[partei.partei]) {
+        winner_loser[partei.partei] = winner_loser[partei.partei] - partei.stimmen / btw2017_zweitstimmen_summe;
+      }
+    });
+    var max = 0, parteiname_winner = '';
+    Object.keys(winner_loser).forEach(function(parteiname){
+      if (winner_loser[parteiname] > max) {
+        max = winner_loser[parteiname];
+        parteiname_winner = parteiname;
+      }
+    });
+    var color = getColorForParty(parteiname_winner);
+    return {
+      "color": color,
+      "tooltipShowValue" : "Die Partei '" + parteiname_winner + "' hatte den größten Verlust mit " + (max * 100).toFixed(1) + " Prozentpunkten"
+    }
+  } else {
+    return {
+      "color": "#ccc",
+      "tooltipShowValue": "In diesem Gebiet wurden die Wahlbezirke im Vergleich zur Bundestagswahl 2013 stark umstrukturiert, so dass kein Vergleich möglich ist"
+    }
+  }
+}
+
+function getGueltigeStimmen2013(btw2013_stimmen) {
+  var btw2013_stimmen_summe = 0;
+  for(var index in btw2013_stimmen){
+      btw2013_stimmen_summe += btw2013_stimmen[index].stimmen;
+  }
+  return btw2013_stimmen_summe;
 }
 
 /**
@@ -211,39 +256,16 @@ function getAnalyseForUngueltigeStimmen(properties) {
   var ungueltigeStimmen = gesamtStimmen - gueltigeStimmen;
 
   var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtStimmen;
-  var opacity = prozentualUngueltigeStimmen * 20;
+  var opacity = prozentualUngueltigeStimmen * 40;
   var color = 'rgba(26, 188, 156, ' + opacity + ')';
   return {
     "color": color,
-    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 1000 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
+    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 1000) / 10 + " % ungültige Stimmen (" + ungueltigeStimmen + " von " + gueltigeStimmen + " Stimmen)",
   }
 }
 
 /**
- *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
- * @param {Object} properties
- */
-function getAnalyseForUngueltigeZweitstimmen(properties) {
-  var zweitstimmen = properties.btw2017.zweitstimme;
-  var gesamtstimmen = properties.btw2017["waehler/-innen"];
-
-  var tooltip = "Kein Wechsel";
-  var gueltigeStimmen = 0;
-  zweitstimmen.forEach(function(party) {
-       gueltigeStimmen += party.stimmen;
-  });
-  var ungueltigeStimmen = gesamtstimmen - gueltigeStimmen;
-  var prozentualUngueltigeStimmen = ungueltigeStimmen / gesamtstimmen;
-  var opacity = prozentualUngueltigeStimmen * 50;
-  var color = 'rgba(26, 188, 156, ' + opacity + ')';
-  return {
-    "color": color,
-    "tooltipShowValue": Math.round(prozentualUngueltigeStimmen * 100000) / 100000 + " % ungültige Zweitstimmen (" + ungueltigeStimmen + " Stimmen)",
-  }
-}
-
-/**
- *  Ermittelt die Partei mit den meisten Stimmen im Wahlkreis
+ *  Ermittelt den Abstand zwischen der erst- und zweitplatzierten Partei
  * @param {Object} properties
  */
 function getAnalyseForKleinsterAbstand(properties) {
@@ -262,7 +284,7 @@ function getAnalyseForKleinsterAbstand(properties) {
       "color": color,
       "tooltipShowValue": "Abstand von " +
       erster.party.name + " zu " + zweiter.party.name + ": " +
-      Math.round(prozentual * 100000) / 1000 + " % (" + differenz + " Stimmen)",
+      Math.round(prozentual * 1000) / 10 + " Prozentpunkte (" + differenz + " Stimmen)",
     }
   }
 }
